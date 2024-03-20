@@ -16,6 +16,9 @@ devDependencies:
   tailwindcss-animated:
     specifier: ^1.0.1
     version: 1.0.1(tailwindcss@3.4.1)
+  tailwindcss-intersect:
+    specifier: ^1.0.5
+    version: 1.0.5(tailwindcss@3.4.1)
 
 packages:
 
@@ -664,6 +667,14 @@ packages:
     resolution: {integrity: sha512-u5wusj89ZwP8I+s8WZlaAd7aZTWBN/XEG6QgMKpkIKmAf3xP1A6WYf7oYIKmGaB10UAQaSqWopi/i1ozzZEs8Q==}
     peerDependencies:
       tailwindcss: '>=3.1.0'
+    dependencies:
+      tailwindcss: 3.4.1
+    dev: true
+
+  /tailwindcss-intersect@1.0.5(tailwindcss@3.4.1):
+    resolution: {integrity: sha512-2Ac6TEKg/sJ3RXi0DKR80ZCwk+NHtkoKyWVQN6wDe4xD5rwn1lZsKKxdq2sMFOUAOFoMjCLA7ADUyQPLRtHzQg==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0'
     dependencies:
       tailwindcss: 3.4.1
     dev: true

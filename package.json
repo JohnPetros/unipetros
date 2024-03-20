@@ -5,7 +5,8 @@
 	},
 	"devDependencies": {
 		"tailwindcss": "^3.4.1",
-		"tailwindcss-animated": "^1.0.1"
+		"tailwindcss-animated": "^1.0.1",
+		"tailwindcss-intersect": "^1.0.5"
 	},
 	"dependencies": {
 		"flowbite": "^2.3.0"
