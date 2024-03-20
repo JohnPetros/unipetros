@@ -1,0 +1,20 @@
+{% from 'components/section_heading.html' import section_heading %}
+{% from 'components/post-card.html' import post_card %}
+
+<section id="posts" class="container">
+  {{ section_heading(title='Veja mais', subtitle='Últimas novidades do nosso Campus') }}
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-12 mt-12">
+    {% for post in posts %}
+    <li>
+      {{ post_card(
+      title=post['title'],
+      preview=post['description'],
+      image=post['image'],
+      author=post['author'],
+      created_at=post['created_at'],
+      reading_minutes=post['reading_minutes']
+      ) }}
+    </li>
+    {% endfor %}
+  </ul>
+</section>

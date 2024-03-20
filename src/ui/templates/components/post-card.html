@@ -1,0 +1,25 @@
+{% macro post_card(title, preview, image, author, created_at, reading_minutes) %}
+
+<article class="shadow-lg rounded-md">
+  <img class="w-full h-48" src="{{ image }}" alt="">
+  <div class="space-y-3 p-6">
+    <small class="text-blue-500 font-bold">Artigo</small>
+    <h3>{{ title }}</h3>
+    <p>{{ preview }}...</p>
+    <div class="flex items-center gap-2">
+      <img class="rounded-full size-10" src="https://randomuser.me/api/portraits/men/58.jpg" width="40" height="40"
+        alt="">
+      <div class="space-y-1 text-petros-300 text-sm">
+        <strong class="text-petros-900">Felipe Dechamps</strong>
+        <div class="text-xs">
+          <time>{{ created_at }}</time>
+          <span>.
+            {{ reading_minutes }} min. de leitura</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+{% endmacro %}
