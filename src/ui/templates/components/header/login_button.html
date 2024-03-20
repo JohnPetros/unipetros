@@ -1,0 +1,5 @@
+{% from 'components/button.html' import button %}
+
+{% macro login_button() %}
+{{ button(title='Login', as='link', href='/login')}}
+{% endmacro %}
