@@ -1,0 +1,17 @@
+{% from 'pages/home/landing/advantages_section/card.html' import card %}
+{% from 'components/section_heading.html' import section_heading %}
+
+<section id="advantages" class="container">
+  <div
+    class="invisible intersect:visible intersect:animate-fade-up intersect:animate-duration-1000 intersect:animate-delay-[200ms]">
+    {{ section_heading(title='Vantagens de estudar conosco', subtitle='Tudo que você precisa') }}
+  </div>
+
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-12 mt-16">
+    {% for advantage in advantages %}
+    <li>
+      {{ card(title=advantage['title'], description=advantage['description'], icon=advantage['icon']) }}
+    </li>
+    {% endfor %}
+  </ul>
+</section>
