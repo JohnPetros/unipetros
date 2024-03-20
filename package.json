@@ -1,0 +1,13 @@
+{
+	"scripts": {
+		"dev": "flask --app ./src/app/main.py run --debug",
+		"style:watch": "tailwindcss -i ./src/ui/static/styles/global.css -o ./src/ui/static/build/styles/global.css --watch"
+	},
+	"devDependencies": {
+		"tailwindcss": "^3.4.1",
+		"tailwindcss-animated": "^1.0.1"
+	},
+	"dependencies": {
+		"flowbite": "^2.3.0"
+	}
+}
