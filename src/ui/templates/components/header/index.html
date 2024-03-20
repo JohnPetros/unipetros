@@ -1,0 +1,30 @@
+{% from 'components/drawer.html' import drawer %}
+
+{% from 'components/header/navigation.html' import navigation %}
+{% from 'components/header/login_button.html' import login_button %}
+
+<header>
+  <div class="bg-gradient-to-r from-petros-900 via-petros-800 to-petros-700 py-6">
+    <div class="container flex items-center justify-between">
+      {% include 'components/logo.html' %}
+
+      <div class="hidden md:block">
+        {{ navigation() }}
+      </div>
+
+      <div class="hidden md:block">
+        {{ login_button() }}
+      </div>
+
+
+      <div class="block md:hidden">
+        {% call drawer() %}
+        <div class="flex items-center flex-col w-max mx-auto space-y-12">
+          {{ navigation() }}
+          {{ login_button() }}
+        </div>
+        {% endcall %}
+      </div>
+    </div>
+  </div>
+</header>
