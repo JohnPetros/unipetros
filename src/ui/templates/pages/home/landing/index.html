@@ -1,0 +1,18 @@
+{% extends 'layouts/root.html' %}
+
+{% block body %}
+
+{% include 'components/header/index.html' %}
+{% include 'pages/home/landing/hero.html' %}
+
+<main class="mt-24 space-y-40">
+  {% include 'pages/home/landing/advantages_section/index.html' %}
+  {% include 'pages/home/landing/testimony_section.html' %}
+  {% include 'pages/home/landing/posts_section.html' %}
+</main>
+
+<div class="mt-40">
+  {% include 'components/footer/index.html' %}
+</div>
+
+{% endblock body %}
