@@ -2,7 +2,8 @@
 
 <header>
   <div class="flex items-center justify-between">
-    <img class="w-40 h-24" src="{{ url_for('static', filename='images/logo.png') }}" width="100" height="250" alt="">
+    {% include 'components/logo.html' %}
+
     <nav>
       <ul class="flex items-center gap-3">
         <li><a class="text-petros-50 hover:text-blue-100 focus:text-blue-100" href="/enrolment">Faça sua
