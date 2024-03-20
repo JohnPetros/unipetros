@@ -1,0 +1,15 @@
+{% macro card(title, description, icon) %}
+
+<div
+  class="relative rounded-md sm:h-64 p-6 bg-petros-100/50 invisible intersect:visible intersect:animate-fade-up intersect:animate-duration-1000 intersect:animate-delay-[500ms]">
+  <div
+    class="absolute -top-3 left-1/2 -translate-x-1/2 grid place-content-center rounded-md mx-auto size-10 bg-blue-600 shadow-md">
+    <i class="ph-bold ph-{{ icon }} text-xl text-petros-50"></i>
+  </div>
+  <strong class="block mt-6 text-petros-800 font-bold text-center text-lg">{{ title }}</strong>
+  <p class="mt-3 text-sm text-petros-700 leading-6">
+    {{ description }}
+  </p>
+</div>
+
+{% endmacro %}

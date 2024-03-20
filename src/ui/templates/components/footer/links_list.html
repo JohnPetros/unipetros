@@ -1,0 +1,14 @@
+{% macro links_list(title, links) %}
+
+<div class="flex-1">
+  <h5 class="text-petros-200 uppercase">{{ title }}</h5>
+  <ul class="mt-2 space-y-2">
+    {% for link in links %}
+    <li class="text-petros-100 capitalize -translate-x-2">
+      <a href="/">{{ link }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endmacro %}
