@@ -29,6 +29,18 @@ a:focus, button:focus {
   @apply ring-2 ring-blue-300 outline-none
 }
 
+a:hover, button:hover {
+  @apply opacity-75
+}
+
+q::before {
+  content: "";
+}
+
+q::after {
+  content: "";
+}
+
 .container {
-  @apply w-full max-w-[960px] mx-auto px-6 lg:px-0
+  @apply w-full max-w-[980px] mx-auto px-6 lg:px-0
 }
