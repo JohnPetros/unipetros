@@ -1,0 +1,41 @@
+{% from 'components/section_heading.html' import section_heading %}
+{% from 'pages/home/about/infra_section/infra_card.html' import infra_card %}
+
+<section id="infra" class="container">
+  {{ section_heading(title='Nossos equipamentos', subtitle='Infraestrutura de ponta') }}
+
+  <div class="flex flex-col md:flex-row items-center gap-12 mt-12">
+    <img
+      class="rounded-md w-[28rem] h-[24rem] invisible intersect:visible intersect:animate-fade-right intersect:animate-duration-1000 intersect-once"
+      src="{{ url_for('static', filename='images/lab.jpg') }}"
+      alt="Laboratório de informática com vários apetrechos descolados">
+
+    <ul class="grid sm:grid-cols-2 gap-3 w-full">
+      <li>
+        {{ infra_card(number='137', title='Salas de aula', icon='book-open', animation_delay='200') }}
+      </li>
+      <li>
+        {{ infra_card(number='44', title='Laboratórios', icon='desktop-tower', animation_delay='400') }}
+      </li>
+      <li>
+        {{ infra_card(number='8', title='Bibliotecas', icon='book', animation_delay='600') }}
+      </li>
+      <li>
+        {{ infra_card(number='3', title='Quadras poliesportivas', icon='football', animation_delay='800') }}
+      </li>
+      <li>
+        {{ infra_card(number='10', title='Espaços verdes', icon='tree', animation_delay='1000') }}
+      </li>
+      <li>
+        {{ infra_card(number='6', title='Área de jogos', icon='game-controll', animation_delay='1200') }}
+      </li>
+      <li>
+        {{ infra_card(number='92', title='Estacionamentos', icon='car', animation_delay='1400') }}
+      </li>
+      <li>
+        {{ infra_card(number='4', title='Restaurantes', icon='fork-knife', animation_delay='1600') }}
+      </li>
+    </ul>
+
+  </div>
+</section>

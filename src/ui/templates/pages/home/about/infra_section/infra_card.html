@@ -1,0 +1,14 @@
+{% macro infra_card(title, number, icon, animation_delay) %}
+
+<div
+  class="rounded-md border-2 border-petros-600 p-3 invisible intersect:visible intersect:animate-fade-down intersect:animate-duration-1000 intersect:animate-delay-[{{ animation_delay }}ms] intersect-once">
+  <span class="block text-lg font-bold text-petros-700">{{ number }}</span>
+  <div class="mt-3 flex items-center gap-2">
+    <i class="ph-bold ph-{{ icon }} text-petros-900 text-xl"></i>
+    <span class="text-md font-medium text-petros-500">
+      {{ title }}
+    </span>
+  </div>
+</div>
+
+{% endmacro %}
