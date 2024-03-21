@@ -1,0 +1,56 @@
+{% from 'components/section_heading.html' import section_heading %}
+{% from 'pages/home/about/students_section/student_card.html' import student_card %}
+
+<section id="students" class="container">
+  {{ section_heading(title='Nossos alunos', subtitle='Somos um ninho de mentes brilhantes') }}
+
+  <div
+    class="rounded-md mt-6 p-6 bg-petros-100/20 intersect:animate-fade-up intersect:animate-duration-1000 intersect-once">
+    <p class="text-medium text-petros-700 tracking-wider">
+      Ao longo de sua história, a Unipetros formou milhares de profissionais que hoje ocupam cargos de destaque em
+      empresas de tecnologia no Brasil e no exterior. A Unipetros se orgulha de ser uma parte fundamental do
+      desenvolvimento do Vale do Paraíba como um dos principais polos de tecnologia do país.
+    </p>
+  </div>
+
+  <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 w-full">
+    <li>
+      {{ student_card(
+      name='Thiago Martins',
+      image='https://randomuser.me/api/portraits/men/95.jpg',
+      occupation='Desenvolvedor Full Stack',
+      company={ 'name': 'Google', 'link': 'https://about.google/intl/ALL_br/' },
+      testimony='Sou grato por ter escolhido a Unipetros para iniciar minha jornada
+      na área de
+      tecnologia. Desde o primeiro dia, me
+      senti acolhido e desafiado por um ambiente acadêmico de excelência.'
+      ) }}
+    </li>
+    <li>
+      {{ student_card(
+      name='Gabriel Banana',
+      image='https://randomuser.me/api/portraits/men/51.jpg',
+      occupation='Analista de dados',
+      company={ 'name': 'Amazon', 'link':
+      'https://www.amazon.com.br/?&tag=hydrbrabk-20&ref=pd_sl_7rwd1q78df_e&adgrpid=155790195778&hvpone=&hvptwo=&hvadid=677606588104&hvpos=&hvnetw=g&hvrand=6471702163476347137&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9100207&hvtargid=kwd-10573980&hydadcr=26346_11691057&gad_source=1'
+      },
+      testimony='A Unipetros não é apenas uma faculdade, é uma ponte que conecta o conhecimento teórico à prática
+      profissional. Através de um currículo atualizado e professores experientes, pude aprender as habilidades e
+      ferramentas mais relevantes para o mercado de trabalho de TI.'
+      ) }}
+    </li>
+    <li>
+      {{ student_card(
+      name='João Du Pão 🍞',
+      occupation='Especialista em Segurança',
+      image='https://randomuser.me/api/portraits/men/98.jpg',
+      company={ 'name': 'Nubank', 'link':
+      'https://nubank.com.br/pedir/nu/?utm_source=google&utm_medium=cpc&utm_campaign=1784086961&utm_term=118905407472&utm_word=nubank&utm_content=502413793352&ad_position=&match_type=b&location=9100207&device=c&utm_keyword_id=aud-942446695090:kwd-488984618592&utm_placement=&extension=&geolocation=9100207&google_channel=google_brand&gad_source=1&gclid=CjwKCAjwkuqvBhAQEiwA65XxQCIQ1OcbHqF6jGhKHH3Cf8yYmRJmwOZROjKRjnOvdpAHcxMbaf20JxoCtCIQAvD_BwE'
+      },
+      testimony='Minha jornada na Unipetros foi transformadora. Desde o início, me senti acolhido e motivado por um
+      ambiente acadêmico de excelência.'
+      ) }}
+    </li>
+  </ul>
+
+</section>

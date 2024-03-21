@@ -1,0 +1,24 @@
+{% macro student_card(name, image, occupation, testimony, company) %}
+
+<div
+  class="shadow-md rounded-md p-6 intersect:animate-fade-up intersect:animate-duration-1000 intersect:animate-delay-[200ms] intersect-once">
+  <div class="flex items-center gap-4">
+    <img class="rounded-md" src="{{ image }}" width="64" height="64" alt="">
+    <div class="flex flex-col">
+      <strong class="text-petros-800 font-bold">{{ name }}</strong>
+      <small class="text-xs text-petros-400">
+        {{ occupation }} na
+        <a class="block -translate-x-2 text-blue-500 font-semibold" href="{{ company['link'] }}">
+          @{{ company['name'] }}
+        </a>
+      </small>
+    </div>
+  </div>
+  <p class="mt-3 text-sm text-petros-800 tracking-wider">Sou grato por ter escolhido a Unipetros para iniciar minha
+    jornada
+    na área de
+    tecnologia. Desde o primeiro dia, me
+    senti acolhido e desafiado por um ambiente acadêmico de excelência.</p>
+</div>
+
+{% endmacro %}
