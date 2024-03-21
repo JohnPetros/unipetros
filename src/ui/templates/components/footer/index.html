@@ -1,16 +1,16 @@
 {% from 'components/footer/links_list.html' import links_list %}
 
-<footer class="bg-petros-800">
-  <div class="container flex items-center py-12">
-    <div class="space-y-4 max-w-md">
+<footer class="bg-petros-800 mt-40">
+  <div class="container flex flex-col md:flex-row items-center gap-6 md:gap-0 py-12">
+    <div class="flex flex-col items-center gap-6 md:max-w-md">
       {% include 'components/logo.html' %}
 
-      <p class="text-blue-100 font-medium">Fazendo o mundo um lugar melhor formando pessoas brilhantes.</p>
+      <p class="text-blue-100 font-medium text-center">Fazendo o mundo um lugar melhor formando pessoas brilhantes.</p>
 
       {% include 'components/footer/social_media.html' %}
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 w-full md:gap-y-12">
+    <div class="grid grid-cols-2 lg:grid-cols-4 justify-items-center w-full gap-y-12">
       {{ links_list('Soluções', ['Marketing', 'Análise', 'Comércio', 'Ideias']) }}
       {{ links_list('Universidade', ['Sobre', 'Blog', 'Estágios', 'Jornal', 'Parceiros']) }}
       {{ links_list('Campus', ['Atlética', 'BAJA', 'Proatec', 'Cybers']) }}
