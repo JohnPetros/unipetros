@@ -1,0 +1,41 @@
+{% from 'components/section_heading.html' import section_heading %}
+{% from 'pages/home/about/extensions_section/extension_card.html' import extension_card %}
+
+<section id="extensions" class="container">
+  {{ section_heading(title='Programas de extenção', subtitle='Atividades que vão além da sala de aula') }}
+
+  <ul class="grid md:grid-cols-2 w-full gap-6 mt-12">
+    <li>
+      {{ extension_card(
+      image="robot.svg",
+      title='Campeonato de robótica',
+      description='Coloque suas habilidades de engenharia à prova! Projete, construa e programe seu próprio robô para
+      competir em desafios emocionantes',
+      ) }}
+    </li>
+    <li>
+      {{ extension_card(
+      image="sport.svg",
+      title='Atlética',
+      description='Entre para o clube de atletismo e dispute diversos esportes com outros alunos. Mantenha-se ativo,
+      saudável e, sobretudo, divirta-se!',
+      ) }}
+    </li>
+    <li>
+      {{ extension_card(
+      image="programming.svg",
+      title='Olimpíada de programação',
+      description='Chamando todos os programadores! Aprimore suas habilidades de programação e compita contra outros
+      alunos neste desafio de algoritmos.',
+      ) }}
+    </li>
+    <li>
+      {{ extension_card(
+      image="plane.svg",
+      title='Torneio de aviação',
+      description='Já sonhou em voar pelos céus? Projete, construa e pilote sua própria aeronave modelo nesta competição
+      emocionante.',
+      ) }}
+    </li>
+  </ul>
+</section>
