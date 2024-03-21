@@ -1,0 +1,14 @@
+{% extends 'layouts/root.html' %}
+
+{% block body %}
+
+{% include 'components/header/index.html' %}
+
+<main class="container grid lg:grid-cols-2 justify-center gap-12 mt-12">
+  {% include 'pages/home/contact/information/index.html' %}
+  {% include 'pages/home/contact/form.html' %}
+</main>
+
+{% include 'components/footer/index.html' %}
+
+{% endblock body %}
