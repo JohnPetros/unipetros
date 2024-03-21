@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+ database:
+    image: 'bitnami/mysql:latest'
+    container_name: 'mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=unipetros
+      - MYSQL_PASSWORD=unipetros
+      - MYSQL_DATABASE=unipetros
+      - MYSQL_USER=unipetros
+    networks:
+      - app-tier
+    volumes:
+      - mysql_data:/bitnami/mysql/data
+      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
+    ports:
+      - '3306:3306'
+ app:
+    build: .
+    container_name: 'unipetros'
+    networks:
+      - app-tier
+    volumes: 
+      - .:/home/pn/unipetros
+    ports:
+      - '5000:5000'
+
+networks:
+ app-tier:
+    driver: bridge
+
+volumes:
+ mysql_data:
+    driver: local
