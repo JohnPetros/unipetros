@@ -1,0 +1,24 @@
+{% from 'components/section_heading.html' import section_heading %}
+{% from 'pages/home/contact/information/info_card.html' import info_card %}
+
+<div class="max-w-sm">
+  {{ section_heading(title='Entre em contato com a gente', subtitle='Alguma dúvida ou sugestão?') }}
+
+  <p class="mt-12 text-petros-600 animate-fade-up animate-duration-1000">
+    Entre em contato com a Unipetros e dê o primeiro passo para o seu futuro na tecnologia!
+    Precisa de mais informações sobre nossos cursos, vestibular, bolsas de estudo ou outros serviços?
+  </p>
+
+  <ul class="space-y-6 mt-12 animate-fade-up animate-duration-1000">
+    <li>
+      {{ info_card(title='Nossa localização', description='Avenida Cesare Monsueto Giulio Lattes, 1350 Distrito -
+      Eugênio de Melo, São José dos Campos', icon='house') }}
+    </li>
+    <li>
+      {{ info_card(title='Número de telefone', description='(12) 4402-89922', icon='phone') }}
+    </li>
+    <li>
+      {{ info_card(title='E-mail', description='unipetros@contato.com', icon='envelope') }}
+    </li>
+  </ul>
+</div>

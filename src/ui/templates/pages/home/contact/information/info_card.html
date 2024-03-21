@@ -1,0 +1,14 @@
+{% macro info_card(title, description, icon) %}
+
+<div class="grid grid-cols-[max-content_1fr] items-center gap-6">
+  <div class="grid place-content-center size-12 rounded-md bg-blue-400">
+    <i class="ph-bold ph-{{ icon }} text-petros-50 text-2xl"></i>
+  </div>
+
+  <div class="space-y-2 flex-1">
+    <strong class="text-petros-800 font-bold">{{ title }}</strong>
+    <p class="text-petros-600">{{ description }}</p>
+  </div>
+</div>
+
+{% endmacro %}
