@@ -1,0 +1,11 @@
+{% from 'components/input.html' import input %}
+{% from 'components/textarea.html' import textarea %}
+{% from 'components/button.html' import button %}
+
+<form action="" class="space-y-6 shadow-md rounded-md p-8 bg-petros-100/70 animate-fade-left animate-duration-1000">
+  {{ input(id='name', label='Nome', type='text', placeholder='John Petros da Silva') }}
+  {{ input(id='email', label='E-mail', type='email', placeholder='petros@pmail.com') }}
+  {{ input(id='phone', label='Telefone', type='text', placeholder='(12) 9999-9999') }}
+  {{ textarea(id='message', label='Mensagem', placeholder='(12) 9999-9999') }}
+  {{ button(title='Enviar', class='w-full') }}
+</form>
