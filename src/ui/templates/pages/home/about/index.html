@@ -1,0 +1,17 @@
+{% extends 'layouts/root.html' %}
+
+{% block body %}
+
+{% include 'components/header/index.html' %}
+
+<main class="space-y-24">
+  {% include 'pages/home/about/history_section.html' %}
+  {% include 'pages/home/about/location_section.html' %}
+  {% include 'pages/home/about/infra_section/index.html' %}
+  {% include 'pages/home/about/extensions_section/index.html' %}
+  {% include 'pages/home/about/students_section/index.html' %}
+</main>
+
+{% include 'components/footer/index.html' %}
+
+{% endblock body %}
