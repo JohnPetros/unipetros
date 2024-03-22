@@ -37,6 +37,7 @@ module.exports = {
   plugins: [
     require('flowbite/plugin'),
     require('tailwindcss-animated'),
+    require("tailwindcss-animate"),
     require('tailwindcss-intersect'),
   ],
 }
