@@ -1,5 +1,8 @@
+from os import getenv
+
 from flask import Flask
-from views import init_views
+
+from views import register_views
 
 
 def create_app() -> Flask:
@@ -7,6 +10,8 @@ def create_app() -> Flask:
         __name__, template_folder="../ui/templates", static_folder="../ui/static"
     )
 
-    init_views(app)
+    app.config["SECRET_KEY"] = getenv("SECRET_KEY")
+
+    register_views(app)
 
     return app
