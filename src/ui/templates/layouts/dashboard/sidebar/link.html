@@ -1,0 +1,11 @@
+{% macro link(icon, title, href) %}
+
+<div>
+  <a class="flex items-center gap-3 bg-transparenttext-petros-50 font-medium text-petros-100 hover:bg-blue-700/50 hover:text-white"
+    href="{{ href }}">
+    <i class="ph-bold ph-{{ icon }} text-petros-50 text-xl"></i>
+    {{ title }}
+  </a>
+</div>
+
+{% endmacro %}

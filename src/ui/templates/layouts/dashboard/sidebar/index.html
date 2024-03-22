@@ -1,0 +1,19 @@
+{% from 'layouts/dashboard/sidebar/link.html' import link %}
+{% from 'components/logo.html' import logo %}
+
+<aside class="fixed top-0 left-0 bottom-0 bg-petros-800 w-64">
+  <div class="grid place-content-center py-8 border-b-2 border-petros-200">
+    {{ logo('w-32 h-24') }}
+  </div>
+
+  <nav>
+    <ul class="w-full space-y-3 mt-6 px-6">
+      <li>{{ link(icon='house', title='Dashboard') }}</li>
+      <li>{{ link(icon='identification-badge', title='Professores') }}</li>
+      <li>{{ link(icon='student', title='Alunos') }}</li>
+      <li>{{ link(icon='book-bookmark', title='Disciplinas') }}</li>
+      <li>{{ link(icon='users-three', title='Disciplinas') }}</li>
+    </ul>
+  </nav>
+
+</aside>

@@ -1,0 +1,20 @@
+{% extends "layouts/root.html" %}
+
+{% block body %}
+
+<div>
+  {% include 'layouts/dashboard/sidebar/index.html' %}
+
+  <div>
+    {% include 'layouts/dashboard/header.html' %}
+
+    <main class="w-full h-full ml-64 px-6 py-12">
+      {% block dashboard_content %}
+      {% endblock dashboard_content %}
+    </main>
+  </div>
+</div>
+
+
+
+{% endblock body %}

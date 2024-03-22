@@ -1,0 +1,14 @@
+{% from "components/input.html" import input %}
+{% from "components/button.html" import button %}
+
+
+
+<div class="rounded-md p-6 bg-white mt-6">
+  <h2 class="text-center text-lg text-petros-500 font-semibold">É um grande prazer ter você a bordo!</h2>
+  <form action="/login" method="post" class="space-y-6 mt-6">
+    {{ login_form.csrf_token }}
+    {{ input(field=login_form.email, label=login_form.email.label, placeholder="john@unipetros.com") }}
+    {{ input(field=login_form.password, label=login_form.password.label, placeholder="********") }}
+    {{ login_form.submit_button(class="button") }}
+  </form>
+</div>
