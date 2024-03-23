@@ -10,20 +10,25 @@
 'icon': 'x',
 'inner_color': 'bg-red-700',
 'outer_color': 'bg-red-100'
+},
+'warn': {
+'icon': 'warning-circle',
+'inner_color': 'bg-yellow-500',
+'outer_color': 'bg-yellow-100'
 }
 } %}
 
 
 <div id="{{ id }}"
   class="toast-{{ category }} fixed top-12 right-12 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow animate-fade-down animate-once duration-500 animate-fill-forwards"
-  role="alert" _="on load wait 2s then remove .animate-fade-down from me then add .animate-out .fade-out-0 on me">
+  role="alert" _="on load wait 4s then remove .animate-fade-down from me then add .animate-out .fade-out-0 on me">
 
   <div class="grid place-content-center w-10 h-10 {{ categories[category]['outer_color'] }} rounded-lg">
     <div class="grid place-content-center rounded-full w-6 h-6 {{ categories[category]['inner_color'] }}">
       <i class="ph-bold ph-{{ categories[category]['icon'] }} text-white text-sm"></i>
     </div>
   </div>
-  <p class="ms-3 text-sm font-normal">{{ message }}</p>
+  <p class="ms-3 text-sm font-semibold">{{ message }}</p>
   <button type="button"
     class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
     aria-label="Fechar mensagem"
