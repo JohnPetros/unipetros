@@ -8,3 +8,6 @@ class AuthUser(UserModel):
 
     def get_id(self) -> UserModel:
         return self.id
+
+    def is_authenticated(self):
+        return self.is_active
