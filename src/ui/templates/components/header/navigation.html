@@ -1,11 +1,26 @@
 {% macro navigation() %}
+
 <nav>
   <ul class="flex items-center flex-col md:flex-row gap-3">
-    <li><a class="text-petros-50 hover:text-blue-100 focus:text-blue-100" href="/enrolment">Faça sua
-        matrícula</a></li>
-    <li><a class="text-petros-50 hover:text-blue-100 focus:text-blue-100" href="/contact">Contato</a></li>
-    <li><a class="text-petros-50 hover:text-blue-100 focus:text-blue-100" href="/about">Sobre a
-        universidade</a></li>
+    <li>
+      <a class="text-petros-50 hover:text-blue-100 focus:text-blue-100"
+        href="{{ url_for('home_views.get_about_page') }}">
+        Cursos
+      </a>
+    </li>
+    <li>
+      <a class="text-petros-50 hover:text-blue-100 focus:text-blue-100"
+        href="{{ url_for('home_views.get_contact_page') }}">
+        Contato
+      </a>
+    </li>
+    <li>
+      <a class="text-petros-50 hover:text-blue-100 focus:text-blue-100"
+        href="{{ url_for('home_views.get_about_page') }}">
+        Sobre a universidade
+      </a>
+    </li>
   </ul>
 </nav>
+
 {% endmacro %}
