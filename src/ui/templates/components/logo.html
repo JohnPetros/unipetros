@@ -1,4 +1,8 @@
+{% macro logo(class) %}
+
 <a href="/">
-  <img class="w-40 h-24 rounded-md shadow-sm" src="{{ url_for('static', filename='images/logo.png') }}" width="100"
-    height="250" alt="Unipetros">
+  <img class="w-40 h-24 rounded-md shadow-sm {{ class }}" src="{{ url_for('static', filename='images/logo.png') }}"
+    width="100" height="250" alt="Unipetros">
 </a>
+
+{% endmacro %}
