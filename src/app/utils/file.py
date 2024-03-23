@@ -1,5 +1,5 @@
 from pathlib import Path
-from .app_error import AppError
+from utils.app_error import AppError
 
 
 class File:
@@ -8,7 +8,7 @@ class File:
 
     def read(self) -> str:
         try:
-            return self.path.read_text()
+            return self.path.read_text(encoding="utf-8")
         except Exception as exception:
             raise AppError(
                 f"Failed to read {self.path.absolute()} file. Error: {exception}"
