@@ -1,5 +1,5 @@
 {% from 'components/button.html' import button %}
 
 {% macro login_button() %}
-{{ button(title='Login', as='link', href='/login')}}
+{{ button(title='Login', as='link', href=url_for('auth_views.login'), class='w-max')}}
 {% endmacro %}
