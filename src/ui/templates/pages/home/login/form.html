@@ -1,6 +1,6 @@
 {% from "components/input.html" import input %}
+{% from "components/checkbox.html" import checkbox %}
 {% from "components/button.html" import button %}
-
 
 
 <div class="rounded-md p-6 bg-white mt-6">
@@ -9,6 +9,7 @@
     {{ login_form.csrf_token }}
     {{ input(field=login_form.email, label=login_form.email.label, placeholder="john@unipetros.com") }}
     {{ input(field=login_form.password, label=login_form.password.label, placeholder="********") }}
+    {{ checkbox(label=login_form.remember_me.label, field=login_form.remember_me) }}
     {{ login_form.submit_button(class="button") }}
   </form>
 </div>
