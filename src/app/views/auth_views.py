@@ -3,7 +3,7 @@ from flask import Blueprint, request, render_template, flash, redirect, url_for
 from forms.login_form import LoginForm
 from controllers.users_controller import UsersController
 from models.user_model import UserModel
-from auth import AuthUser, login as login_user
+from auth import AuthUser, login as login_user, logout as logout_user
 
 auth_views = Blueprint("auth_views", __name__)
 
@@ -24,8 +24,18 @@ def login() -> str:
 
         if isinstance(user, UserModel):
             auth_user = AuthUser(user)
-            is_login_success = login_user(auth_user)
+            is_login_success = login_user(
+                auth_user, should_remember_user=login_form.remember_me.data
+            )
+
             if is_login_success:
+                next_page_param = request.args.get("next")
+
+                if next_page_param:
+                    print(next_page_param)
+                    return redirect(next_page_param)
+
+                flash(f"Bem-vindo, {user.name} 😁", "success")
                 return redirect(url_for("admin_views.get_analytics_page"))
 
     flash("E-mail ou senha incorretos", "error")
@@ -34,11 +44,6 @@ def login() -> str:
 
 @auth_views.route("/logout", methods=["GET", "POST"])
 def logout() -> str:
-    login_form = LoginForm()
+    logout_user()
 
-    flash("E-mail ou senha incorretos", "error")
-
-    if request.method == "GET":
-        return render_template("pages/home/login/index.html", login_form=login_form)
-
-    return render_template("pages/home/login/index.html", login_form=login_form)
+    return redirect(url_for("auth_views.login"))
