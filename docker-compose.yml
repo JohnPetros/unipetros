@@ -5,26 +5,34 @@ services:
     image: 'bitnami/mysql:latest'
     container_name: 'mysql'
     environment:
-      - MYSQL_ROOT_PASSWORD=unipetros
-      - MYSQL_PASSWORD=unipetros
-      - MYSQL_DATABASE=unipetros
-      - MYSQL_USER=unipetros
+      - MYSQL_ROOT_PASSWORD=${MYSQL_DATABASE_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_DATABASE_PASSWORD}
+      - MYSQL_USER=${MYSQL_DATABASE_USER}
+      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
     networks:
       - app-tier
     volumes:
       - mysql_data:/bitnami/mysql/data
-      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
     ports:
-      - '3306:3306'
- app:
-    build: .
-    container_name: 'unipetros'
-    networks:
-      - app-tier
-    volumes: 
-      - .:/home/pn/unipetros
-    ports:
-      - '5000:5000'
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+#  app:
+#     build: .
+#     container_name: 'unipetros'
+#     networks:
+#       - app-tier
+#     volumes: 
+#       - .:/home/pn/unipetros
+#     ports:
+#       - 5000:5000
+#     depends_on:
+#       database:
+#         condition: service_healthy
 
 networks:
  app-tier:
