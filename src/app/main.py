@@ -2,7 +2,8 @@ from os import getenv
 
 from flask import Flask
 
-from views import register_views
+from views import init_views
+from auth import init_auth
 
 
 def create_app() -> Flask:
@@ -12,6 +13,7 @@ def create_app() -> Flask:
 
     app.config["SECRET_KEY"] = getenv("SECRET_KEY")
 
-    register_views(app)
+    init_views(app)
+    init_auth(app)
 
     return app
