@@ -3,9 +3,10 @@ from typing import Union
 from database import mysql
 
 from models.student_model import StudentModel
+from .users_repository import UsersRepository
 
 
-class StudentsRepository:
+class StudentsRepository(UsersRepository):
     def get_student_by_id(self, id: str) -> Union[StudentModel, None]:
         student = mysql.query(sql="SELECT * FROM students WHERE id= %s", params=[id])
 

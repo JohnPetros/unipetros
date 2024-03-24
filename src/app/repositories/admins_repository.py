@@ -1,15 +1,13 @@
-from typing import Union, Dict
+from typing import Dict
 
 from database import mysql
 
 from models.admin_model import AdminModel
+from .users_repository import UsersRepository
 
 
-class AdminsRepository:
-    def __init__(self, should_get_password=False) -> None:
-        self.should_get_password = should_get_password
-
-    def get_admin_by_id(self, id: str) -> Union[AdminModel, None]:
+class AdminsRepository(UsersRepository):
+    def get_admin_by_id(self, id: str) -> AdminModel | None:
         admin = mysql.query(sql="SELECT * FROM admins WHERE id = %s", params=[id])
 
         if not admin:
@@ -17,7 +15,7 @@ class AdminsRepository:
 
         return self.__get_admin_model(admin)
 
-    def get_admin_by_email(self, email: str) -> Union[AdminModel, None]:
+    def get_admin_by_email(self, email: str) -> AdminModel | None:
         admin = mysql.query(sql="SELECT * FROM admins WHERE email = %s", params=[email])
 
         if not admin:
