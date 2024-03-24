@@ -1,0 +1,19 @@
+{% macro csv_button(action='import') %}
+
+{% set types = {
+'import': {
+'icon': 'file-arrow-down',
+'title': 'Importar'
+},
+'export': {
+'icon': 'export',
+'title': 'Exportar'
+}
+} %}
+
+<button class="flex items-center gap-1 bg-transparent text-sm text-green-500 font-semibold">
+  <i class="ph-bold ph-{{ types[action]['icon'] }} text-lg"></i>
+  {{ types[action]['title'] }} planilha
+</button>
+
+{% endmacro %}
