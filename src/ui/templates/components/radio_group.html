@@ -1,19 +1,23 @@
-{% macro radio_group(label, name, radios) %}
+{% from 'components/input_errors.html' import input_errors %}
+
+{% macro radio_group(label, name, radios, errors) %}
 
 <div>
-  <span class="text-sm font-semibold text-blue-700">{{ label }}</span>
+  <span class="label">{{ label }}</span>
   <div class="flex items-center gap-2 flex-wrap">
     {% for radio in radios %}
     <div class="flex items-center mt-2">
-      <input id="{{ radio['value'] }}" type="radio" value="{{ radio['value'] }}" name="{{ name }}"
-        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+      <input id="{{ radio[0] }}" type="radio" value="{{ radio[0] }}" name="{{ name }}"
+        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+        checked="{{ 'true' if loop.index0 == 0 else 'false' }}">
 
-      <label for="{{ radio['value'] }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-        {{ radio["label"] }}
+      <label for="{{ radio[0] }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+        {{ radio[1] }}
       </label>
     </div>
     {% endfor %}
   </div>
+  {{ input_errors(errors) }}
 </div>
 
 {% endmacro %}
