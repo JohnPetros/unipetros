@@ -1,7 +1,6 @@
 {% extends "layouts/dashboard/index.html" %}
 
-
-{% from 'components/button.html' import button %}
+{% from 'components/modal.html' import modal %}
 {% from 'components/csv_button.html' import csv_button %}
 {% from 'components/search.html' import search %}
 {% from 'components/badge.html' import badge %}
@@ -9,8 +8,14 @@
 {% block dashboard_content %}
 
 <div class="flex items-center gap-3">
-  {{ button(title='Adicionar professor') }}
-  {{ csv_button('export') }}
+  {% call modal(
+  id="professor-modal", title='Adicionar professor',
+  is_default_open=professor_form.errors | length
+  )
+  %}
+  {% include 'pages/admin/professors/professor_modal.html' %}
+  {% endcall %}
+  {{ csv_button(action='export') }}
 </div>
 
 <div class="mt-6">
@@ -52,9 +57,9 @@
           {{ professor.email }}
         </td>
         <td class="table-data flex-wrap w-96">
-          {{ badge('redes') }}
-          {{ badge('design digital') }}
-          {{ badge('banco de dados') }}
+          {% for subjects in professor.subjects %}
+          {{ badge(subjects.name) }}
+          {% endfor %}
         </td>
         <td class="table-data">
           {{ professor.age }}
