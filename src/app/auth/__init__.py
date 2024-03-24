@@ -1,7 +1,8 @@
-from typing import Callable
+from typing import Callable, Literal, Union
 from functools import wraps
+from dataclasses import asdict
 
-from flask import Flask
+from flask import Flask, redirect, url_for, flash
 from flask_login import (
     LoginManager,
     login_user,
@@ -11,21 +12,49 @@ from flask_login import (
 )
 from flask_bcrypt import Bcrypt
 
-from models.user_model import UserModel
-from repositories.users_repository import UsersRepository
+from models.admin_model import AdminModel
+from models.professor_model import ProfessorModel
+from models.student_model import StudentModel
+
+from repositories.admins_repository import AdminsRepository
+from repositories.professors_repository import ProfessorsRepository
+from repositories.students_repository import StudentsRepository
+
+from utils.console import Console
+
 from .auth_user import AuthUser
+
 
 login_manager = LoginManager()
 bcrypt = Bcrypt()
+console = Console()
 
 
-def get_user(id: str) -> UserModel:
-    users_repository = UsersRepository()
-    user = users_repository.get_user_by_id(id)
-    return AuthUser(user)
+def get_user(stored_user_data) -> AuthUser:
+    console.log(stored_user_data)
+    id = stored_user_data["id"]
+    role = stored_user_data["role"]
+
+    match role:
+        case "admin":
+            admins_repository = AdminsRepository()
+            user = admins_repository.get_admin_by_id(id)
+        case "professor":
+            professors_repository = ProfessorsRepository()
+            user = professors_repository.get_professor_by_id(id)
+        case "student":
+            students_repository = StudentsRepository()
+            user = students_repository.get_student_by_id(id)
+
+    if user is None:
+        return AuthUser(is_active=False)
+
+    return AuthUser(role=role, **asdict(user))
 
 
-def login(user: UserModel, should_remember_user) -> None:
+def login(
+    user: Union[AdminModel, ProfessorModel, StudentModel], should_remember_user
+) -> None:
     return login_user(user, remember=should_remember_user)
 
 
@@ -45,12 +74,34 @@ def login_checker(view: Callable) -> Callable:
     return check_login
 
 
-def logout():
+def logout() -> Literal[True]:
     return logout_user()
 
 
 def get_auth_user() -> AuthUser:
     return current_user
+
+
+def role_checker(role: Literal["admin", "professor", "student"]):
+    def role_checker_wrapper(view: Callable):
+        @wraps(view)
+        def check_role():
+            user = get_auth_user()
+
+            if user.role == role:
+                return view()
+
+            flash("Sua conta não tem o nível de permissão necessária", "error")
+
+            match role:
+                case "admin":
+                    view_back = "admin_views.get_analytics_page"
+
+            return redirect(url_for(view_back))
+
+        return check_role
+
+    return role_checker_wrapper
 
 
 def init_auth(app: Flask) -> None:
