@@ -1,0 +1,7 @@
+{% macro input_errors(errors) %}
+
+{% for error in errors %}
+<strong role="alert" class="input-error">{{ error }}.</strong>
+{% endfor %}
+
+{% endmacro %}
