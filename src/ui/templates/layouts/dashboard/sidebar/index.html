@@ -8,11 +8,31 @@
 
   <nav>
     <ul class="w-full space-y-3 mt-6 px-6">
-      <li>{{ link(icon='house', title='Dashboard') }}</li>
-      <li>{{ link(icon='identification-badge', title='Professores') }}</li>
-      <li>{{ link(icon='student', title='Alunos') }}</li>
-      <li>{{ link(icon='book-bookmark', title='Disciplinas') }}</li>
-      <li>{{ link(icon='users-three', title='Disciplinas') }}</li>
+      <li>{{ link(
+        icon='house',
+        title='Dashboard',
+        href=url_for("admin_views.get_analytics_page")) }}
+      </li>
+      <li>{{ link(
+        icon='identification-badge',
+        title='Professores',
+        href=url_for("admin_views.get_professors_page")) }}
+      </li>
+      <li>{{ link(
+        icon='student',
+        title='Alunos',
+        href=url_for("admin_views.get_professors_page")) }}
+      </li>
+      <li>{{ link(
+        icon='book-bookmark',
+        title='Disciplinas',
+        href=url_for("admin_views.get_professors_page")) }}
+      </li>
+      <li>{{ link(
+        icon='users-three',
+        title='Disciplinas',
+        href=url_for("admin_views.get_professors_page")) }}
+      </li>
     </ul>
   </nav>
 

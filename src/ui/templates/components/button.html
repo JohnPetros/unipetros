@@ -2,13 +2,15 @@
 
 {% if as == 'button' %}
 
-<button type="button" class="button {{ class }}">{{
-  title }}</button>
+<button type="button" class="button {{ class }}">
+  {{ title }}
+</button>
 
 {% elif as == 'link' %}
 
-<a href="{{ href }}" class="button {{ class }}">{{
-  title }}</a>
+<a href="{{ href }}" class="button {{ class }}">
+  {{ title }}
+</a>
 
 {% endif %}
 
