@@ -26,9 +26,9 @@ class MySQL:
                 should_abort=False,
             ) from error
 
-    def query(self, sql: str, params: List, is_single=True) -> Union[Dict, None]:
+    def query(self, sql: str, params: List = None, is_single=True) -> Union[Dict, None]:
         try:
-            self.__database.execute(sql, params)
+            self.__database.execute(sql, params=params if params is not None else [])
 
             if is_single:
                 return self.__database.fetchone()
@@ -43,7 +43,7 @@ class MySQL:
                 f"Failed to execute a query on the database. Error: {error}",
             )
 
-    def mutate(self, sql: str, params: List) -> Dict:
+    def mutate(self, sql: str, params) -> Dict:
         try:
             self.__database.execute(sql, params)
             self.__database.commit()
