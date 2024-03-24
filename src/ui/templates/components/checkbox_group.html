@@ -1,0 +1,14 @@
+{% from 'components/input_errors.html' import input_errors %}
+{% from 'components/checkbox.html' import checkbox as checkbox_field %}
+
+{% macro checkbox_group(label, name, checkboxes, errors) %}
+
+<div class="flex items-center gap-2">
+  <span>{{ label }}:</span>
+  {% for checkbox in checkboxes %}
+  {{ checkbox_field(label=checkbox.label, field=checkbox) }}
+  {% endfor %}
+  {{ input_errors(errors) }}
+</div>
+
+{% endmacro %}
