@@ -1,13 +1,19 @@
-from models.user_model import UserModel
+from typing import Literal
+from dataclasses import dataclass
+
+from models.admin_model import AdminModel
+from models.professor_model import ProfessorModel
+from models.student_model import StudentModel
 
 
-class AuthUser(UserModel):
-    def __init__(self, user: UserModel) -> None:
-        super().__init__(user.__dict__, user.id)
-        self.is_active = True
+@dataclass
+class AuthUser(AdminModel, ProfessorModel, StudentModel):
+    role: Literal["admin", "professor", "student"] = "admin"
+    is_active: bool = True
 
-    def get_id(self) -> UserModel:
-        return self.id
+    def get_id(self) -> str:
+        return {"id": self.id, "role": self.role}
 
+    @property
     def is_authenticated(self):
         return self.is_active
