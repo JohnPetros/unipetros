@@ -1,0 +1,72 @@
+{% extends "layouts/dashboard/index.html" %}
+
+
+{% from 'components/button.html' import button %}
+{% from 'components/csv_button.html' import csv_button %}
+{% from 'components/search.html' import search %}
+{% from 'components/badge.html' import badge %}
+
+{% block dashboard_content %}
+
+<div class="flex items-center gap-3">
+  {{ button(title='Adicionar professor') }}
+  {{ csv_button('export') }}
+</div>
+
+<div class="mt-6">
+  {{ search(label='Pesquisar professor por nome ou e-mail', placeholder='Girafalles da Nôbrega') }}
+</div>
+
+<div class="mt-12">
+  <table class="table">
+    <thead class="table-head">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Nome
+        </th>
+        <th scope="col" class="px-6 py-3">
+          E-mail
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Disciplinas
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Idade
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Gênero
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for professor in professors %}
+      <tr class="table-row">
+        <td class="table-data p-1">
+          <a href="" class="flex items-center gap-2 font-semibold">
+            <img class="rounded-md" src="https://randomuser.me/api/portraits/men/52.jpg" width="32" height="32" alt="">
+            {{ professor.name }}
+          </a>
+        </td>
+        <td class="table-data">
+          {{ professor.email }}
+        </td>
+        <td class="table-data flex-wrap w-96">
+          {{ badge('redes') }}
+          {{ badge('design digital') }}
+          {{ badge('banco de dados') }}
+        </td>
+        <td class="table-data">
+          {{ professor.age }}
+        </td>
+        <td class="table-data">
+          {{ professor.gender }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+</div>
+
+{% endblock dashboard_content %}
