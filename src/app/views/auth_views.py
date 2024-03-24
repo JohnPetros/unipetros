@@ -1,13 +1,12 @@
 from flask import Blueprint, request, render_template, flash, redirect, url_for
 
 from forms.login_form import LoginForm
-from controllers.users_controller import UsersController
-from models.user_model import UserModel
-from auth import AuthUser, login as login_user, logout as logout_user
+from controllers.auth_controller import AuthController
+from auth import AuthUser, logout as logout_user, login_checker
 
 auth_views = Blueprint("auth_views", __name__)
 
-users_controller = UsersController()
+auth_controller = AuthController()
 
 
 @auth_views.route("/login", methods=["GET", "POST"])
@@ -18,31 +17,29 @@ def login() -> str:
         return render_template("pages/home/login/index.html", login_form=login_form)
 
     if request.method == "POST" and login_form.validate_on_submit():
-        user = users_controller.handle_login(
-            email=login_form.email.data, password=login_form.password.data
+        auth_user = auth_controller.handle_login(
+            email=login_form.email.data,
+            password=login_form.password.data,
+            should_remember_user=login_form.remember_me.data,
+            role="admin",
         )
 
-        if isinstance(user, UserModel):
-            auth_user = AuthUser(user)
-            is_login_success = login_user(
-                auth_user, should_remember_user=login_form.remember_me.data
-            )
+        if isinstance(auth_user, AuthUser):
+            next_page_param = request.args.get("next")
 
-            if is_login_success:
-                next_page_param = request.args.get("next")
+            if next_page_param:
+                print(next_page_param)
+                return redirect(next_page_param)
 
-                if next_page_param:
-                    print(next_page_param)
-                    return redirect(next_page_param)
-
-                flash(f"Bem-vindo, {user.name} 😁", "success")
-                return redirect(url_for("admin_views.get_analytics_page"))
+            flash(f"Bem-vindo, {auth_user.name} 😁", "success")
+            return redirect(url_for("admin_views.get_analytics_page"))
 
     flash("E-mail ou senha incorretos", "error")
     return render_template("pages/home/login/index.html", login_form=login_form)
 
 
-@auth_views.route("/logout", methods=["GET", "POST"])
+@auth_views.route("/logout")
+@login_checker
 def logout() -> str:
     logout_user()
 
