@@ -3,7 +3,7 @@
 {% from 'components/modal.html' import modal %}
 {% from 'components/csv_button.html' import csv_button %}
 {% from 'components/search.html' import search %}
-{% from 'components/badge.html' import badge %}
+{% from 'pages/admin/professors/professor_row.html' import professor_row %}
 
 {% block dashboard_content %}
 
@@ -46,28 +46,7 @@
 
     <tbody>
       {% for professor in professors %}
-      <tr class="table-row">
-        <td class="table-data p-1">
-          <a href="" class="flex items-center gap-2 font-semibold">
-            <img class="rounded-md" src="https://randomuser.me/api/portraits/men/52.jpg" width="32" height="32" alt="">
-            {{ professor.name }}
-          </a>
-        </td>
-        <td class="table-data">
-          {{ professor.email }}
-        </td>
-        <td class="table-data flex-wrap w-96">
-          {% for subjects in professor.subjects %}
-          {{ badge(subjects.name) }}
-          {% endfor %}
-        </td>
-        <td class="table-data">
-          {{ professor.age }}
-        </td>
-        <td class="table-data">
-          {{ professor.gender }}
-        </td>
-      </tr>
+      {{ professor_row(professor) }}
       {% endfor %}
     </tbody>
 
