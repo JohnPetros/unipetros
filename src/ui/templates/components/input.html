@@ -1,12 +1,19 @@
-{% macro input(id, label, placeholder, field, type='text') %}
+{% from 'components/input_errors.html' import input_errors %}
+
+{% macro input(id, label, placeholder, field, errors, type='text', has_autofocus=False) %}
 
 <div>
-  <label for="{{ id }}" class="block mb-2 text-sm font-semibold text-blue-700">{{ label }}</label>
+  <label for="{{ id }}" class="block mb-2 text-sm font-semibold text-blue-700" hx-trigger="load"
+    _="{{ 'on load call htmx.find(\'input#{id}\').focus()'.format(id=id) if has_autofocus else '' }}">
+    {{ label }}
+  </label>
   {% if field %}
   {{ field(class='input', placeholder=placeholder) }}
   {% else %}
   <input type="{{ type }}" id="{{ id }}" name="{{ id }}" class="input" placeholder="{{ placeholder }}" required />
   {% endif %}
+
+  {{ input_errors(errors) }}
 </div>
 
 {% endmacro %}
