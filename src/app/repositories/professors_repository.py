@@ -54,17 +54,31 @@ class ProfessorsRepository(UsersRepository):
         mysql.mutate(
             sql="""
                 INSERT INTO professors (id, name, email, password, phone, birthdate, gender, avatar) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """,
             params=[
                 professor.id,
                 professor.name,
                 professor.email,
+                professor.password,
                 professor.phone,
+                professor.birthdate,
                 professor.gender,
                 professor.avatar,
             ],
         )
+
+        for subject in professor.subjects:
+            mysql.mutate(
+                sql="""
+                INSERT INTO professors_subjects (professor_id, subject_id)
+                VALUE (%s, %s)
+                """,
+                params=[
+                    professor.id,
+                    subject.id,
+                ],
+            )
 
     def __get_professor_model(self, professor: Dict) -> ProfessorModel:
         subjects_ids = professor["subjects_ids"].split(",")
