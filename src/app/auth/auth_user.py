@@ -14,5 +14,6 @@ class AuthUser(AdminModel, ProfessorModel, StudentModel):
     def get_id(self) -> str:
         return {"id": self.id, "role": self.role}
 
+    @property
     def is_authenticated(self):
         return self.is_active

@@ -85,11 +85,11 @@ def get_auth_user() -> AuthUser:
 def role_checker(role: Literal["admin", "professor", "student"]):
     def role_checker_wrapper(view: Callable):
         @wraps(view)
-        def check_role():
+        def check_role(*args, **kwargs):
             user = get_auth_user()
 
             if user.role == role:
-                return view()
+                return view(*args, **kwargs)
 
             flash("Sua conta não tem o nível de permissão necessária", "error")
 
