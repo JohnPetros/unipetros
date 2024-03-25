@@ -14,7 +14,7 @@
     {{ csv_button(action='import') }}
   </div>
 
-  <form method="post" class="space-y-6 w-full">
+  <form method="post" enctype="multipart/form-data" class="space-y-6 w-full">
     {{ professor_form.csrf_token }}
 
     {{
@@ -73,7 +73,7 @@
       }}
     </div>
 
-    {{ avatar_input() }}
+    {{ avatar_input(label=professor_form.avatar.label, control=professor_form.avatar) }}
 
     <div class="flex items-center gap-3 flex-wrap">
       {{
