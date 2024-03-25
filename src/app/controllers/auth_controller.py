@@ -1,9 +1,11 @@
-from typing import Literal, Union
+from typing import Literal
 from dataclasses import asdict
 
 from repositories.admins_repository import AdminsRepository
 from repositories.professors_repository import ProfessorsRepository
 from repositories.students_repository import StudentsRepository
+
+from utils.error import Error
 
 from auth import AuthUser, check_password, login
 
@@ -15,17 +17,19 @@ class AuthController:
         password: str,
         role: Literal["admin", "professor", "student"],
         should_remember_user: bool,
-    ) -> Union[AuthUser, None]:
+    ) -> AuthUser | None:
         match role:
             case "admin":
-                admins_repository = AdminsRepository()
+                admins_repository = AdminsRepository(should_get_password=True)
                 user = admins_repository.get_admin_by_email(email)
             case "professor":
-                professors_repository = ProfessorsRepository(True)
+                professors_repository = ProfessorsRepository(should_get_password=True)
                 user = professors_repository.get_professor_by_email(email)
             case "student":
-                students_repository = StudentsRepository()
+                students_repository = StudentsRepository(should_get_password=True)
                 user = students_repository.get_student_by_email(email)
+            case _:
+                raise Error(f"Invalid role: {role}")
 
         if not user or not check_password(user.password, password):
             return None
