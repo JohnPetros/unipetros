@@ -3,7 +3,7 @@ from typing import Union, Dict, List
 
 import mysql.connector
 
-from utils.app_error import AppError
+from utils.error import Error
 
 
 class MySQL:
@@ -21,7 +21,7 @@ class MySQL:
             self.__database = self.__connection.cursor(dictionary=True)
 
         except mysql.connector.Error as error:
-            raise AppError(
+            raise Error(
                 f"Failed to create a database connection. Error: {error}",
                 should_abort=False,
             ) from error
@@ -39,14 +39,14 @@ class MySQL:
             self.__connection.close()
             self.__database.close()
 
-            return AppError(
+            return Error(
                 f"Failed to execute a query on the database. Error: {error}",
             )
 
     def mutate(self, sql: str, params) -> Dict:
         try:
             self.__database.execute(sql, params)
-            self.__database.commit()
+            self.__connection.commit()
 
         except mysql.connector.Error as error:
             print(
