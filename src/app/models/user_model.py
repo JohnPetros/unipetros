@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import date
 
 from models.model import Model
 
@@ -13,6 +14,8 @@ class UserModel(Model):
     avatar: str = None
     phone: str = None
     gender: str = None
+    age: int = None
+    birthdate: date = None
 
     def __post_init__(self) -> None:
         super().__post_init__()

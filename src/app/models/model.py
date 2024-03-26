@@ -8,4 +8,3 @@ class Model:
 
     def __post_init__(self):
         self.id = str(generate_id()) if self.id is None else self.id
-        print(self.id)
