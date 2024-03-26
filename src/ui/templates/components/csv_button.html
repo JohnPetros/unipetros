@@ -1,4 +1,4 @@
-{% macro csv_button(action='import') %}
+{% macro csv_button(id, url, target, action='import') %}
 
 {% set types = {
 'import': {
@@ -11,9 +11,13 @@
 }
 } %}
 
-<button class="flex items-center gap-1 bg-transparent text-sm text-green-500 font-semibold">
-  <i class="ph-bold ph-{{ types[action]['icon'] }} text-lg"></i>
-  {{ types[action]['title'] }} planilha
-</button>
+<form method="post" enctype="multipart/form-data" hx-post="{{ url }}" hx-trigger="change" hx-target="{{ target }}">
+  <label for="{{ id }}"
+    class="flex items-center gap-1 bg-transparent text-sm text-green-500 font-semibold cursor-pointer">
+    <i class="ph-bold ph-{{ types[action]['icon'] }} text-lg"></i>
+    {{ types[action]["title"] }} planilha
+    <input type="file" id="{{ id }}" name="csv" hidden />
+  </label>
+</form>
 
 {% endmacro %}

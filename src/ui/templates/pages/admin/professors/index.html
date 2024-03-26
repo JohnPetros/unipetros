@@ -15,7 +15,15 @@
   %}
   {% include 'pages/admin/professors/professor_modal.html' %}
   {% endcall %}
-  {{ csv_button(action='export') }}
+
+  {{
+  csv_button(
+  id="professors_csv",
+  action='import',
+  url=url_for("admin_views.create_professors_by_csv"),
+  target="#professors"
+  )
+  }}
 </div>
 
 <div class="mt-6">
@@ -44,7 +52,7 @@
       </tr>
     </thead>
 
-    <tbody>
+    <tbody id="professors">
       {% for professor in professors %}
       {{ professor_row(professor) }}
       {% endfor %}
