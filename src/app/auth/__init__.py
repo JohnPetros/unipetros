@@ -20,18 +20,14 @@ from repositories.admins_repository import AdminsRepository
 from repositories.professors_repository import ProfessorsRepository
 from repositories.students_repository import StudentsRepository
 
-from utils.console import Console
-
 from .auth_user import AuthUser
 
 
 login_manager = LoginManager()
 bcrypt = Bcrypt()
-console = Console()
 
 
 def get_user(stored_user_data) -> AuthUser:
-    console.log(stored_user_data)
     id = stored_user_data["id"]
     role = stored_user_data["role"]
 
