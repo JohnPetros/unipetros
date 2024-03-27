@@ -36,8 +36,7 @@ class MySQL:
             return self.__database.fetchall()
 
         except mysql.connector.Error as error:
-            self.__connection.close()
-            self.__database.close()
+            self.__close_connection()
 
             return Error(
                 f"Failed to execute a query on the database. Error: {error}",
@@ -53,5 +52,9 @@ class MySQL:
                 f"Failed to execute a mutation on the database. Error: {error}",
                 flush=True,
             )
-            self.__connection.close()
-            self.__database.close()
+            self.__connection.rollback()
+            self.__close_connection()
+
+    def __close_connection(self):
+        self.__connection.close()
+        self.__database.close()
