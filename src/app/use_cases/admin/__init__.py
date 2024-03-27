@@ -3,7 +3,7 @@ from .create_professor_use_case import CreateProfessorUseCase
 from .get_professors_page_data_use_case import GetProfessorsPageDataUseCase
 from .get_professor_details_page_data_use_case import GetProfessorDetailsPageDataUseCase
 from .get_subjects_page_data_use_case import GetSubjectsPageDataUseCase
-from .create_subject_controller_use_case import CreateSubjectUseCase
+from .create_subject_use_case import CreateSubjectUseCase
 
 get_professor_details_page_data_use_case = GetProfessorDetailsPageDataUseCase()
 get_professors_page_data_use_case = GetProfessorsPageDataUseCase()

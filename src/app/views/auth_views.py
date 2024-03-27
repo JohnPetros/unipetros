@@ -2,13 +2,11 @@ from flask import Blueprint, request, render_template, flash, redirect, url_for
 
 from forms.login_form import LoginForm
 
-from controllers.auth.login_controller import LoginController
+from use_cases.auth import login_use_case
 
 from auth import AuthUser, logout as logout_user, login_checker
 
 auth_views = Blueprint("auth_views", __name__)
-
-login_controller = LoginController()
 
 
 @auth_views.route("/login", methods=["GET", "POST"])
@@ -19,7 +17,7 @@ def login() -> str:
         return render_template("pages/home/login/index.html", login_form=login_form)
 
     if request.method == "POST" and login_form.validate_on_submit():
-        auth_user = login_controller.execute(
+        auth_user = login_use_case.execute(
             email=login_form.email.data,
             password=login_form.password.data,
             should_remember_user=login_form.remember_me.data,
