@@ -3,7 +3,6 @@
 {% from 'components/modal.html' import modal %}
 {% from 'components/csv_button.html' import csv_button %}
 {% from 'components/search.html' import search %}
-{% from 'pages/admin/professors/professor_row.html' import professor_row %}
 
 {% block dashboard_content %}
 
@@ -21,7 +20,7 @@
   id="professors_csv",
   action='import',
   url=url_for("admin_views.create_professors_by_csv"),
-  target="#professors"
+  target="#professors-table"
   )
   }}
 </div>
@@ -31,34 +30,7 @@
 </div>
 
 <div class="mt-12">
-  <table class="table">
-    <thead class="table-head">
-      <tr>
-        <th scope="col" class="px-6 py-3">
-          Nome
-        </th>
-        <th scope="col" class="px-6 py-3">
-          E-mail
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Disciplinas
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Idade
-        </th>
-        <th scope="col" class="px-6 py-3">
-          Gênero
-        </th>
-      </tr>
-    </thead>
-
-    <tbody id="professors">
-      {% for professor in professors %}
-      {{ professor_row(professor) }}
-      {% endfor %}
-    </tbody>
-
-  </table>
+  {% include 'pages/admin/professors/table/index.html' %}
 </div>
 
 {% endblock dashboard_content %}

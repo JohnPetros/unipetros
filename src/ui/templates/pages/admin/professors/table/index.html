@@ -1,0 +1,40 @@
+{% from 'pages/admin/professors/table/row.html' import row %}
+
+<table id="professors-table" class="table">
+  <thead class="table-head">
+    <tr>
+      <th scope="col" class="px-6 py-3">
+        Nome
+      </th>
+      <th scope="col" class="px-6 py-3">
+        E-mail
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Disciplinas
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Idade
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Gênero
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="space-y-4">
+    {% for professor in professors %}
+    {{ row(professor) }}
+    {% endfor %}
+
+    {% for _ in range(8) %}
+    <tr class="loading table-row-loading" data-loading="table-row">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
