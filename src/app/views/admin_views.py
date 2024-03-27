@@ -9,8 +9,6 @@ from controllers.admin import (
     create_professors_by_csv_controller,
 )
 
-from forms.professor_form import ProfessorForm
-
 admin_views = Blueprint("admin_views", __name__)
 
 
@@ -51,10 +49,6 @@ def get_professors_page() -> str:
 @login_checker
 @role_checker("admin")
 def create_professor() -> str:
-    professor_form = ProfessorForm()
-
-    professor_form.validate()
-
     return redirect(url_for("admin_views.get_professors_page"))
 
 
@@ -62,8 +56,13 @@ def create_professor() -> str:
 @login_checker
 @role_checker("admin")
 def create_professors_by_csv() -> str:
-    create_professors_by_csv_controller.execute(request.files["csv"])
-    return "EITA"
+    updated_professors = create_professors_by_csv_controller.execute(
+        request.files["csv"]
+    )
+
+    return render_template(
+        "pages/admin/professors/table/index.html", professors=updated_professors
+    )
 
 
 @admin_views.route("/dashboard/professors/<professor_id>")
