@@ -2,8 +2,8 @@ from typing import List, Dict
 
 from werkzeug.datastructures import FileStorage
 
-from models.professor_model import ProfessorModel
-from models.subject_model import SubjectModel
+from entities.professor import Professor
+from entities.subject import Subject
 
 from repositories import professors_repository, subjects_repository
 
@@ -18,7 +18,7 @@ from constants.gender_map import GENDER_MAP
 
 
 class CreateProfessorsByCSVUseCase:
-    def execute(self, csv: FileStorage) -> List[ProfessorModel]:
+    def execute(self, csv: FileStorage) -> List[Professor]:
         self.__validate_csv(csv)
 
         extension = self.__get_csv_extension(csv)
@@ -30,7 +30,7 @@ class CreateProfessorsByCSVUseCase:
         for record in records:
             new_professor = self.__format_professor_record(record)
 
-            professors.append(ProfessorModel(**new_professor))
+            professors.append(Professor(**new_professor))
 
         for professor in professors:
             professors_repository.create_professor(professor)
@@ -82,7 +82,7 @@ class CreateProfessorsByCSVUseCase:
         professor["avatar"] = "default-avatar.png"
         return professor
 
-    def __get_professors_subjects(self, value: str, all_subjects: List[SubjectModel]):
+    def __get_professors_subjects(self, value: str, all_subjects: List[Subject]):
         subjects_names = value.split(",")
         professor_subjects = []
 
@@ -95,8 +95,8 @@ class CreateProfessorsByCSVUseCase:
         return professor_subjects
 
     def __get_subject_by_name(
-        self, subjects: List[SubjectModel], subject_name
-    ) -> SubjectModel | None:
+        self, subjects: List[Subject], subject_name
+    ) -> Subject | None:
         for subject in subjects:
             if subject.name.lower() == subject_name.lower():
                 return subject

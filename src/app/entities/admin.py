@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from models.user_model import UserModel
+from entities.user import User
 
 
 @dataclass
-class AdminModel(UserModel):
+class Admin(User):
     created_by: str = "John Petros"

@@ -36,11 +36,11 @@ class UserForm(FlaskForm):
     )
     gender = RadioField(
         "Gênero",
-        default="male",
         choices=[
             ("male", "Masculino"),
             ("female", "Feminino"),
         ],
+        default="male",
         validators=[DataRequired(message="Gênero é obrigatório")],
     )
     birthdate = DateField(

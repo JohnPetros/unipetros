@@ -2,13 +2,13 @@ from typing import Union, Dict
 
 from database import mysql
 
-from models.student_model import StudentModel
-from models.course_model import CourseModel
+from entities.student import Student
+from entities.course import Course
 from .users_repository import UsersRepository
 
 
 class StudentsRepository(UsersRepository):
-    def get_student_by_id(self, id: str) -> Union[StudentModel, None]:
+    def get_student_by_id(self, id: str) -> Union[Student, None]:
         student = mysql.query(sql="SELECT * FROM students WHERE id = %s", params=[id])
 
         if not student:
@@ -16,7 +16,7 @@ class StudentsRepository(UsersRepository):
 
         return self.__get_student_model(student)
 
-    def get_student_by_email(self, email: str) -> Union[StudentModel, None]:
+    def get_student_by_email(self, email: str) -> Union[Student, None]:
         student = mysql.query(
             sql="SELECT * FROM students WHERE email = %s", params=[email]
         )
@@ -44,9 +44,9 @@ class StudentsRepository(UsersRepository):
         return list(map(self.__get_student_model, students))
 
     def __get_student_model(self, student: Dict):
-        course = CourseModel(name=student["course_name"])
+        course = Course(name=student["course_name"])
 
-        return StudentModel(
+        return Student(
             id=student["id"],
             email=student["email"],
             name=student["name"],

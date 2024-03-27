@@ -3,7 +3,7 @@ from uuid import uuid4 as generate_id
 
 
 @dataclass
-class Model:
+class Entity:
     id: str = None
 
     def __post_init__(self):

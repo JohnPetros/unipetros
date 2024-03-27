@@ -9,6 +9,7 @@ from use_cases.admin import (
     create_professors_by_csv_use_case,
     get_subjects_page_data_use_case,
     create_subject_use_case,
+    get_students_page_data_use_case,
 )
 
 admin_views = Blueprint("admin_views", __name__)
@@ -109,4 +110,38 @@ def create_subjects_by_csv() -> str:
         user=user,
         subjects=subjects,
         subject_form=subject_form,
+    )
+
+
+@admin_views.route("/dashboard/students", methods=["GET", "POST"])
+@login_checker
+@role_checker("admin")
+def get_students_page() -> str:
+    user = get_auth_user()
+
+    students_page_data = get_students_page_data_use_case.excute()
+
+    students = students_page_data["students"]
+    student_form = students_page_data["student_form"]
+
+    if request.method == "POST" and student_form.validate_on_submit():
+        updated_students = create_subject_use_case.execute(student_form.data)
+        students = updated_students
+
+    return render_template(
+        "pages/admin/students/index.html",
+        user=user,
+        students=students,
+        student_form=student_form,
+    )
+
+
+@admin_views.route("/dashboard/students", methods=["POST"])
+@login_checker
+@role_checker("admin")
+def create_students_by_csv() -> str:
+    updated_students = create_professors_by_csv_use_case.execute(request.files["csv"])
+
+    return render_template(
+        "pages/admin/students/table/index.html", students=updated_students
     )

@@ -3,8 +3,8 @@ from typing import Dict, Any
 from uuid import uuid4 as generate_random_name
 from werkzeug.datastructures import FileStorage
 
-from models.professor_model import ProfessorModel
-from models.subject_model import SubjectModel
+from entities.professor import Professor
+from entities.subject import Subject
 
 from repositories import professors_repository
 
@@ -27,7 +27,7 @@ class CreateProfessorUseCase:
 
             image_name = self.__get_avatar_image(avatar)
 
-            new_professor = ProfessorModel(
+            new_professor = Professor(
                 email=professor["email"],
                 name=professor["name"],
                 password=hash_password(professor["password"]),
@@ -35,9 +35,7 @@ class CreateProfessorUseCase:
                 gender=professor["gender"],
                 birthdate=professor["birthdate"],
                 avatar=image_name,
-                subjects=[
-                    SubjectModel(id=subject) for subject in professor["subjects"]
-                ],
+                subjects=[Subject(id=subject) for subject in professor["subjects"]],
             )
 
             professors_repository.create_professor(new_professor)

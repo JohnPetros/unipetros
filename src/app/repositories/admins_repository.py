@@ -2,28 +2,28 @@ from typing import Dict
 
 from database import mysql
 
-from models.admin_model import AdminModel
+from entities.admin import Admin
 from .users_repository import UsersRepository
 
 
 class AdminsRepository(UsersRepository):
-    def get_admin_by_id(self, id: str) -> AdminModel | None:
+    def get_admin_by_id(self, id: str) -> Admin | None:
         admin = mysql.query(sql="SELECT * FROM admins WHERE id = %s", params=[id])
 
         if not admin:
             return None
 
-        return self.__get_admin_model(admin)
+        return self.__get_admin_entity(admin)
 
-    def get_admin_by_email(self, email: str) -> AdminModel | None:
+    def get_admin_by_email(self, email: str) -> Admin | None:
         admin = mysql.query(sql="SELECT * FROM admins WHERE email = %s", params=[email])
 
         if not admin:
             return None
 
-        return self.__get_admin_model(admin)
+        return self.__get_admin_entity(admin)
 
-    def save(self, admin: AdminModel) -> None:
+    def save(self, admin: Admin) -> None:
         mysql.mutate(
             sql="""
             INSERT INTO admins (id, email, name, password, role) 
@@ -32,8 +32,8 @@ class AdminsRepository(UsersRepository):
             params=[admin.id, admin.email, admin.name, admin.password, admin.role],
         )
 
-    def __get_admin_model(self, admin: Dict) -> AdminModel:
-        return AdminModel(
+    def __get_admin_entity(self, admin: Dict) -> Admin:
+        return Admin(
             id=admin["id"],
             email=admin["email"],
             name=admin["name"],

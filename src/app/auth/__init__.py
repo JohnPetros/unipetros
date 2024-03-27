@@ -12,9 +12,9 @@ from flask_login import (
 )
 from flask_bcrypt import Bcrypt
 
-from models.admin_model import AdminModel
-from models.professor_model import ProfessorModel
-from models.student_model import StudentModel
+from entities.admin import Admin
+from entities.professor import Professor
+from entities.student import Student
 
 from repositories import admins_repository, professors_repository, students_repository
 
@@ -42,9 +42,7 @@ def get_user(stored_user_data) -> AuthUser:
     return AuthUser(role=role, **asdict(user))
 
 
-def login(
-    user: Union[AdminModel, ProfessorModel, StudentModel], should_remember_user
-) -> None:
+def login(user: Union[Admin, Professor, Student], should_remember_user) -> None:
     return login_user(user, remember=should_remember_user)
 
 

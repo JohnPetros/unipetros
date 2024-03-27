@@ -2,16 +2,16 @@ from typing import Dict, List
 
 from database import mysql
 
-from models.subject_model import SubjectModel
+from entities.subject import Subject
 
 
 class SubjectsRepository:
-    def get_subjects(self) -> List[SubjectModel]:
+    def get_subjects(self) -> List[Subject]:
         subjects = mysql.query(sql="SELECT * FROM subjects", is_single=False)
 
         return map(self.__get_subject_model, subjects)
 
-    def create_subject(self, subject: SubjectModel):
+    def create_subject(self, subject: Subject):
         mysql.mutate(
             sql="""
                 INSERT INTO subjects (id, name, description) 
@@ -20,7 +20,7 @@ class SubjectsRepository:
             params=[subject.id, subject.name, subject.description],
         )
 
-    def __get_subject_model(self, subject: Dict) -> SubjectModel:
-        return SubjectModel(
+    def __get_subject_model(self, subject: Dict) -> Subject:
+        return Subject(
             id=subject["id"], name=subject["name"], description=subject["description"]
         )

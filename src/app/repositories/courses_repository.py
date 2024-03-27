@@ -2,7 +2,7 @@ from typing import Dict
 
 from database import mysql
 
-from models.course_model import CourseModel
+from entities.course import Course
 
 
 class CoursesRepository:
@@ -12,10 +12,10 @@ class CoursesRepository:
         if len(courses) == 0:
             return []
 
-        return list(map(self.__get_course_model, courses))
+        return list(map(self.__get_course_entity, courses))
 
-    def __get_course_model(self, course: Dict):
-        return CourseModel(
+    def __get_course_entity(self, course: Dict):
+        return Course(
             id=course["id"],
             name=course["name"],
             description=course["description"],

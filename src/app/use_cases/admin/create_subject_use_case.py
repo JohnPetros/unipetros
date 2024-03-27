@@ -1,6 +1,6 @@
 from typing import Dict
 
-from models.subject_model import SubjectModel
+from entities.subject import Subject
 
 from repositories import subjects_repository
 
@@ -10,7 +10,7 @@ from utils.error import Error
 class CreateSubjectUseCase:
     def execute(self, subject: Dict):
         try:
-            new_subject = SubjectModel(
+            new_subject = Subject(
                 name=subject["name"], description=subject["description"]
             )
 

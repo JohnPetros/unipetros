@@ -2,13 +2,14 @@ from typing import Union, Dict, List
 
 from database import mysql
 
-from models.subject_model import SubjectModel
-from models.professor_model import ProfessorModel
+from entities.subject import Subject
+from entities.professor import Professor
+
 from .users_repository import UsersRepository
 
 
 class ProfessorsRepository(UsersRepository):
-    def get_professor_by_id(self, id: str) -> Union[ProfessorModel, None]:
+    def get_professor_by_id(self, id: str) -> Union[Professor, None]:
         professor = mysql.query(
             sql="SELECT * FROM professors WHERE id = %s", params=[id]
         )
@@ -16,9 +17,9 @@ class ProfessorsRepository(UsersRepository):
         if not professor:
             return None
 
-        return self.__get_professor_model(professor)
+        return self.__get_professor_entity(professor)
 
-    def get_professor_by_email(self, email: str) -> Union[ProfessorModel, None]:
+    def get_professor_by_email(self, email: str) -> Union[Professor, None]:
         professor = mysql.query(
             sql="SELECT * FROM professors WHERE email = %s", params=[email]
         )
@@ -26,9 +27,9 @@ class ProfessorsRepository(UsersRepository):
         if not professor:
             return None
 
-        return ProfessorModel(professor, professor["id"])
+        return Professor(professor, professor["id"])
 
-    def get_professors(self) -> List[ProfessorModel]:
+    def get_professors(self) -> List[Professor]:
         professors = mysql.query(
             sql="""
                 SELECT 
@@ -46,11 +47,11 @@ class ProfessorsRepository(UsersRepository):
         if len(professors) == 0:
             return []
 
-        professors = list(map(self.__get_professor_model, professors))
+        professors = list(map(self.__get_professor_entity, professors))
 
         return professors
 
-    def create_professor(self, professor: ProfessorModel) -> None:
+    def create_professor(self, professor: Professor) -> None:
         mysql.mutate(
             sql="""
                 INSERT INTO professors (id, name, email, password, phone, birthdate, gender, avatar) 
@@ -80,15 +81,15 @@ class ProfessorsRepository(UsersRepository):
                 ],
             )
 
-    def __get_professor_model(self, professor: Dict) -> ProfessorModel:
+    def __get_professor_entity(self, professor: Dict) -> Professor:
         subjects_ids = professor["subjects_ids"].split(",")
         subjects_names = professor["subjects_names"].split(",")
         subjects = []
 
         for index, subject_id in enumerate(subjects_ids):
-            subjects.append(SubjectModel(id=subject_id, name=subjects_names[index]))
+            subjects.append(Subject(id=subject_id, name=subjects_names[index]))
 
-        professor_model = ProfessorModel(
+        professor_model = Professor(
             id=professor["id"],
             email=professor["email"],
             name=professor["name"],

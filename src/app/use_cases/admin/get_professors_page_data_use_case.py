@@ -1,6 +1,6 @@
 from typing import Dict, Union, List
 
-from models.professor_model import ProfessorModel
+from entities.professor import Professor
 
 from repositories.professors_repository import ProfessorsRepository
 from repositories.subjects_repository import SubjectsRepository
@@ -14,7 +14,7 @@ subjects_repository = SubjectsRepository()
 
 
 class GetProfessorsPageDataUseCase:
-    def execute(self) -> Dict[str, Union[List[ProfessorModel], ProfessorForm]]:
+    def execute(self) -> Dict[str, Union[List[Professor], ProfessorForm]]:
         try:
             professors = professors_repository.get_professors()
             subjects = subjects_repository.get_subjects()

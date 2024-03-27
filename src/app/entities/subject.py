@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from models.model import Model
+from entities.entity import Entity
 
 
 @dataclass
-class SubjectModel(Model):
+class Subject(Entity):
     name: str = None
     description: str = None

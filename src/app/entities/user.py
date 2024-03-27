@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from datetime import date
 
-from models.model import Model
+from entities.entity import Entity
 
 from helpers.calculate_age import calculate_age
 
 
 @dataclass
-class UserModel(Model):
+class User(Entity):
     name: str = None
     email: str = None
     password: str = None

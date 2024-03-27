@@ -1,13 +1,13 @@
 from typing import Literal
 from dataclasses import dataclass
 
-from models.admin_model import AdminModel
-from models.professor_model import ProfessorModel
-from models.student_model import StudentModel
+from entities.admin import Admin
+from entities.professor import Professor
+from entities.student import Student
 
 
 @dataclass
-class AuthUser(AdminModel, ProfessorModel, StudentModel):
+class AuthUser(Admin, Professor, Student):
     role: Literal["admin", "professor", "student"] = "admin"
     is_active: bool = True
 
