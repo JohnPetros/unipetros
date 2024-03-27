@@ -16,12 +16,9 @@ from models.admin_model import AdminModel
 from models.professor_model import ProfessorModel
 from models.student_model import StudentModel
 
-from repositories.admins_repository import AdminsRepository
-from repositories.professors_repository import ProfessorsRepository
-from repositories.students_repository import StudentsRepository
+from repositories import admins_repository, professors_repository, students_repository
 
 from .auth_user import AuthUser
-
 
 login_manager = LoginManager()
 bcrypt = Bcrypt()
@@ -33,13 +30,10 @@ def get_user(stored_user_data) -> AuthUser:
 
     match role:
         case "admin":
-            admins_repository = AdminsRepository()
             user = admins_repository.get_admin_by_id(id)
         case "professor":
-            professors_repository = ProfessorsRepository()
             user = professors_repository.get_professor_by_id(id)
         case "student":
-            students_repository = StudentsRepository()
             user = students_repository.get_student_by_id(id)
 
     if user is None:

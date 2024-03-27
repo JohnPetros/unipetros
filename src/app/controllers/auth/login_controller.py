@@ -1,9 +1,7 @@
 from typing import Literal
 from dataclasses import asdict
 
-from repositories.admins_repository import AdminsRepository
-from repositories.professors_repository import ProfessorsRepository
-from repositories.students_repository import StudentsRepository
+from repositories import StudentsRepository, ProfessorsRepository, AdminsRepository
 
 from utils.error import Error
 

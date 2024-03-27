@@ -6,8 +6,7 @@ from werkzeug.datastructures import FileStorage
 from models.professor_model import ProfessorModel
 from models.subject_model import SubjectModel
 
-from repositories.professors_repository import ProfessorsRepository
-from repositories.subjects_repository import SubjectsRepository
+from repositories import professors_repository
 
 from auth import hash_password
 
@@ -17,9 +16,6 @@ from utils.file import File
 from constants.folders import FOLDERS
 
 from providers.image_processor_provider import ImageProcessorProvider
-
-professors_repository = ProfessorsRepository()
-subjects_repository = SubjectsRepository()
 
 
 class CreateNewProfessorController:

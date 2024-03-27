@@ -17,8 +17,10 @@ from utils.error import Error
 from utils.file import File
 
 from constants.folders import FOLDERS
+from constants.csv_columns_map import CSV_COLUMNS_MAP
 
 from providers.image_processor_provider import ImageProcessorProvider
+from providers.data_analyser_provider import DataAnalyserProvider
 
 professors_repository = ProfessorsRepository()
 subjects_repository = SubjectsRepository()
@@ -88,6 +90,57 @@ class AdminController:
             return professors
         except Error as error:
             return Error(error)
+
+    def handle_professors_csv(self, csv: FileStorage):
+        if not isinstance(csv, FileStorage):
+            raise Error("Professors csv must be a file")
+
+        extension = csv.filename.split(".")[1]
+        print(csv.filename)
+        print(extension)
+
+        if extension not in ["xlsx", "csv"]:
+            raise Error("Professors csv must be a csv or excel file")
+
+        data_analyser_provider = DataAnalyserProvider()
+        data_analyser_provider.analyse(csv)
+
+        if extension == "csv":
+            data_analyser_provider.read_csv()
+        else:
+            data_analyser_provider.read_excel()
+
+        records = data_analyser_provider.convert_to_list_of_records()
+
+        subjects = subjects_repository.get_subjects()
+
+        professors = []
+        for record in records:
+            new_professor = {}
+            for key, value in record.items():
+                if key in CSV_COLUMNS_MAP["professors"]:
+                    professor_attribute = CSV_COLUMNS_MAP["users"][key]
+                    if professor_attribute == "subjects":
+                        subjects_names = value.split(",")
+                        for subject_name in subjects_names:
+                            is_subject = lambda subject: subject.name == subject_name
+
+                            professor_subject = next(
+                                filter(
+                                    is_subject,
+                                    subjects,
+                                ),
+                                None,
+                            )
+
+                    new_professor[professor_attribute] = value
+
+            professors.append(ProfessorModel(**new_professor))
+
+        for professor in professors:
+            professors_repository.create_professor(professor)
+
+        print(professors)
 
     def handle_professor_page(self, professor_id: str) -> ProfessorModel:
         if not isinstance(professor_id, str):
