@@ -1,9 +1,0 @@
-from .create_professors_by_csv_controller import CreateProfessorsByCSVController
-from .create_new_professor_controller import CreateNewProfessorController
-from .get_professors_page_data_controller import GetProfessorsPageDataController
-from .get_professor_page_data_controller import GetProfessorPageDataController
-
-get_professor_page_data_controller = GetProfessorPageDataController()
-create_professors_by_csv_controller = CreateProfessorsByCSVController()
-create_new_professor_controller = CreateNewProfessorController()
-get_professors_page_data_controller = GetProfessorsPageDataController()

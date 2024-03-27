@@ -17,7 +17,7 @@ from constants.csv_columns_map import CSV_COLUMNS_MAP
 from constants.gender_map import GENDER_MAP
 
 
-class CreateProfessorsByCSVController:
+class CreateProfessorsByCSVUseCase:
     def execute(self, csv: FileStorage) -> List[ProfessorModel]:
         self.__validate_csv(csv)
 

@@ -18,7 +18,7 @@ from constants.folders import FOLDERS
 from providers.image_processor_provider import ImageProcessorProvider
 
 
-class CreateNewProfessorController:
+class CreateProfessorUseCase:
     def execute(self, professor: Dict):
         try:
             self.__validate_professor_email(professor["email"])

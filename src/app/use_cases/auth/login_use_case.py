@@ -8,7 +8,7 @@ from utils.error import Error
 from auth import AuthUser, check_password, login
 
 
-class LoginController:
+class LoginUseCase:
     def execute(
         self,
         email: str,

@@ -13,7 +13,7 @@ professors_repository = ProfessorsRepository()
 subjects_repository = SubjectsRepository()
 
 
-class GetProfessorsPageDataController:
+class GetProfessorsPageDataUseCase:
     def execute(self) -> Dict[str, Union[List[ProfessorModel], ProfessorForm]]:
         try:
             professors = professors_repository.get_professors()
