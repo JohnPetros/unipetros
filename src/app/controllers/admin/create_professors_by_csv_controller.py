@@ -5,22 +5,20 @@ from werkzeug.datastructures import FileStorage
 from models.professor_model import ProfessorModel
 from models.subject_model import SubjectModel
 
-from repositories.professors_repository import ProfessorsRepository
-from repositories.subjects_repository import SubjectsRepository
+from repositories import professors_repository, subjects_repository
 
-from providers.data_analyser_provider import DataAnalyserProvider
+from providers import data_analyser_provider
+
+from auth import hash_password
 
 from utils.error import Error
 
 from constants.csv_columns_map import CSV_COLUMNS_MAP
-
-professors_repository = ProfessorsRepository()
-subjects_repository = SubjectsRepository()
-data_analyser_provider = DataAnalyserProvider()
+from constants.gender_map import GENDER_MAP
 
 
 class CreateProfessorsByCSVController:
-    def execute(self, csv: FileStorage):
+    def execute(self, csv: FileStorage) -> List[ProfessorModel]:
         self.__validate_csv(csv)
 
         extension = self.__get_csv_extension(csv)
@@ -36,6 +34,8 @@ class CreateProfessorsByCSVController:
 
         for professor in professors:
             professors_repository.create_professor(professor)
+
+        return professors_repository.get_professors()
 
     def __validate_csv(self, csv: FileStorage):
         if not isinstance(csv, FileStorage):
@@ -59,7 +59,7 @@ class CreateProfessorsByCSVController:
         return records
 
     def __get_csv_extension(self, csv: FileStorage) -> str:
-        return csv.filename.split(".")[0]
+        return csv.filename.split(".")[1]
 
     def __format_professor_record(self, record: Dict):
         all_subjects = subjects_repository.get_subjects()
@@ -67,28 +67,38 @@ class CreateProfessorsByCSVController:
 
         for key, value in record.items():
             if key in CSV_COLUMNS_MAP["professors"]:
-                professor_attribute = CSV_COLUMNS_MAP["users"][key]
-                professor_subjects = []
+                professor_attribute = CSV_COLUMNS_MAP["professors"][key]
 
-                if professor_attribute == "subjects":
-                    subjects_names = value.split(",")
-
-                    for subject_name in subjects_names:
-                        professor_subject = self.__get_subject_by_name(
-                            all_subjects, subject_name
-                        )
-
-                        if professor_subject:
-                            professor_subjects.append(professor_subject)
+                match professor_attribute:
+                    case "subjects":
+                        value = self.__get_professors_subjects(value, all_subjects)
+                    case "password":
+                        value = hash_password(str(value))
+                    case "gender":
+                        value = GENDER_MAP[value.lower()]
 
                 professor[professor_attribute] = value
 
+        professor["avatar"] = "default-avatar.png"
         return professor
+
+    def __get_professors_subjects(self, value: str, all_subjects: List[SubjectModel]):
+        subjects_names = value.split(",")
+        professor_subjects = []
+
+        for subject_name in subjects_names:
+            professor_subject = self.__get_subject_by_name(all_subjects, subject_name)
+
+            if professor_subject:
+                professor_subjects.append(professor_subject)
+
+        return professor_subjects
 
     def __get_subject_by_name(
         self, subjects: List[SubjectModel], subject_name
     ) -> SubjectModel | None:
         for subject in subjects:
-            if subject.name == subject_name:
+            if subject.name.lower() == subject_name.lower():
                 return subject
+
         return None

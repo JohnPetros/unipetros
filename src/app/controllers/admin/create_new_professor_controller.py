@@ -48,11 +48,13 @@ class CreateNewProfessorController:
         except Exception as exception:
             return Error(exception)
 
-    def __validate_professor_email(self, email: str) -> None:
+    def __validate_professor_email(self, email: str) -> bool:
         professor_already_exists = professors_repository.get_professor_by_email(email)
 
         if professor_already_exists:
             return Error("Professor já existente com esse e-mail", 400)
+
+        return True
 
     def __get_avatar_image(self, avatar: Any):
         image_name = "default.png"
@@ -63,6 +65,7 @@ class CreateNewProfessorController:
             image_name = f"{generate_random_name()}.{extension}"
 
             file = File(FOLDERS["tmp"], image_name)
+
             avatar.save(file.path)
 
             image_processor = ImageProcessorProvider()
