@@ -39,6 +39,10 @@ q::after {
   content: "";
 }
 
+[data-loading].loading {
+  display: none;
+}
+
 @layer components {
   .container {
     @apply w-full max-w-[980px] mx-auto px-2
@@ -75,9 +79,17 @@ q::after {
   .table-row {
     @apply odd:bg-white odd:dark:bg-gray-900 even:bg-gray-100
   }
+
+  .table-row-loading td {
+    @apply bg-gray-300 h-12 animate-pulse
+  }
   
   .table-data {
     @apply p-3 font-medium
+  }
+
+  .textarea {
+    @apply block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
   }
 }
 
