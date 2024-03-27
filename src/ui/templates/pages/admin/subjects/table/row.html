@@ -1,0 +1,16 @@
+{% from 'components/badge.html' import badge %}
+
+{% macro row(subject) %}
+
+<tr class="table-row">
+  <td class="table-data p-1">
+    <a href="" class="flex items-center gap-2 font-semibold">
+      {{ subject.name }}
+    </a>
+  </td>
+  <td class="table-data">
+    {{ subject.description }}
+  </td>
+</tr>
+
+{% endmacro %}

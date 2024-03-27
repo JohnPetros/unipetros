@@ -1,0 +1,31 @@
+{% from 'pages/admin/subjects/table/row.html' import row %}
+
+<table id="subjects-table" class="table">
+  <thead class="table-head">
+    <tr>
+      <th scope="col" class="px-6 py-3">
+        Nome
+      </th>
+      <th scope="col" class="px-6 py-3">
+        Descrição
+      </th>
+    </tr>
+  </thead>
+
+  <tbody class="space-y-4">
+    {% for subject in subjects %}
+    {{ row(subject) }}
+    {% endfor %}
+
+    {% for _ in range(8) %}
+    <tr class="loading table-row-loading" data-loading="table-row">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
