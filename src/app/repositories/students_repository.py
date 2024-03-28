@@ -4,6 +4,7 @@ from database import mysql
 
 from entities.student import Student
 from entities.course import Course
+
 from .users_repository import UsersRepository
 
 
@@ -46,7 +47,8 @@ class StudentsRepository(UsersRepository):
     def create_student(self, student: Student) -> None:
         mysql.mutate(
             sql="""
-                INSERT INTO students (id, name, email, password, phone, birthdate, gender, avatar, course_id) 
+                INSERT INTO students 
+                (id, name, email, password, phone, birthdate, gender, avatar, course_id) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """,
             params=[

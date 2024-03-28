@@ -22,6 +22,7 @@ from providers import image_processor_provider
 class CreateStudentUseCase:
     def execute(self, student_data: Dict):
         try:
+            print("student_data", student_data)
             self.__validate_student_email(student_data["email"])
 
             image_name = self.__get_avatar_image(student_data["avatar"])
@@ -54,19 +55,19 @@ class CreateStudentUseCase:
         return True
 
     def __get_avatar_image(self, avatar: Any):
-        image_name = "default.png"
+        image_name = "default-avatar.png"
 
         if isinstance(avatar, FileStorage):
             _, extension = avatar.filename.split(".")
 
             image_name = f"{generate_random_name()}.{extension}"
 
-            file = File(FOLDERS["tmp"], image_name)
+            file = File(FOLDERS["uploaded_images"], image_name)
 
             avatar.save(file.path)
 
             image_processor_provider.register(file.path)
-            image_processor_provider.resize(400, 400)
+            image_processor_provider.resize(320, 320)
             image_processor_provider.save()
 
             return image_name

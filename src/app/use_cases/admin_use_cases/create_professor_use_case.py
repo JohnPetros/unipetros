@@ -56,14 +56,14 @@ class CreateProfessorUseCase:
         return True
 
     def __get_avatar_image(self, avatar: Any):
-        image_name = "default.png"
+        image_name = "default-avatar.png"
 
         if isinstance(avatar, FileStorage):
             _, extension = avatar.filename.split(".")
 
             image_name = f"{generate_random_name()}.{extension}"
 
-            file = File(FOLDERS["tmp"], image_name)
+            file = File(FOLDERS["uploaded_images"], image_name)
 
             avatar.save(file.path)
 

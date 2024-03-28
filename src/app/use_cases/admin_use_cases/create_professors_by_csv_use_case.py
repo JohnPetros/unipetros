@@ -27,8 +27,10 @@ class CreateProfessorsByCSVUseCase:
 
         professors = []
 
+        all_subjects = subjects_repository.get_subjects()
+
         for record in records:
-            new_professor = self.__format_professor_record(record)
+            new_professor = self.__format_professor_record(record, all_subjects)
 
             professors.append(Professor(**new_professor))
 
@@ -63,8 +65,9 @@ class CreateProfessorsByCSVUseCase:
     def __get_csv_extension(self, csv: FileStorage) -> str:
         return csv.filename.split(".")[1]
 
-    def __format_professor_record(self, record: Dict):
-        all_subjects = subjects_repository.get_subjects()
+    def __format_professor_record(
+        self, record: Dict, all_subjects: List[Subject]
+    ) -> Dict:
         professor = {}
 
         for key, value in record.items():

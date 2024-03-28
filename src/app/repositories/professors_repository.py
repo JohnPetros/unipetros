@@ -69,17 +69,18 @@ class ProfessorsRepository(UsersRepository):
             ],
         )
 
-        for subject in professor.subjects:
-            mysql.mutate(
-                sql="""
-                INSERT INTO professors_subjects (professor_id, subject_id)
-                VALUE (%s, %s)
-                """,
-                params=[
-                    professor.id,
-                    subject.id,
-                ],
-            )
+        if len(professor.subjects) > 0:
+            for subject in professor.subjects:
+                mysql.mutate(
+                    sql="""
+                        INSERT INTO professors_subjects (professor_id, subject_id)
+                        VALUE (%s, %s)
+                        """,
+                    params=[
+                        professor.id,
+                        subject.id,
+                    ],
+                )
 
     def __get_professor_entity(self, professor: Dict) -> Professor:
         subjects_ids = professor["subjects_ids"].split(",")
