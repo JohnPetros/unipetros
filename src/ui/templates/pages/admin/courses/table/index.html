@@ -1,0 +1,27 @@
+{% from 'pages/admin/courses/table/row.html' import row %}
+{% from 'components/rows_skeleton.html' import rows_skeleton %}
+
+<table id="courses-table" class="table">
+  <thead class="table-head">
+    <tr>
+      <th scope="col" class="table-heading">
+        Nome
+      </th>
+      <th scope="col" class="table-heading">
+        Descrição
+      </th>
+      <th scope="col" class="table-heading">
+        Disciplinas
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for course in courses %}
+    {{ row(course) }}
+    {% endfor %}
+
+    {{ rows_skeleton(8) }}
+  </tbody>
+
+</table>

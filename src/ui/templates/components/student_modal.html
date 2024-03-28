@@ -11,6 +11,14 @@
   <div class="flex items-center gap-3">
     <p class="text-petros-800 text-lg font-semibold">Manualmente</p>
     ou
+    {{
+    csv_button(
+    id="student_csv",
+    action='import',
+    url=url_for("admin_views.create_professors_by_csv_view"),
+    target="#new-student"
+    )
+    }}
   </div>
 
   <form method="post" enctype="multipart/form-data" class="space-y-6 w-full">

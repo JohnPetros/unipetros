@@ -1,0 +1,27 @@
+{% from 'components/badge.html' import badge %}
+
+{% macro row(course) %}
+
+<tr class="table-row">
+  <td class="table-data p-1">
+    <a href="" class="flex items-center gap-2 font-semibold">
+      {{ course.name }}
+    </a>
+  </td>
+  <td class="table-data">
+    {{ course.description[:80] }}...
+  </td>
+  <td class="table-data">
+    {% if course.subjects | length > 0 %}
+    {% for subject in course.subjects %}
+    {{ badge(subject.name) }}
+    {% endfor %}
+    {% else %}
+    <p>Nenhuma disciplina</p>
+    {% endif %}
+
+
+  </td>
+</tr>
+
+{% endmacro %}

@@ -1,0 +1,21 @@
+{% from 'components/input_errors.html' import input_errors %}
+{% from 'components/checkbox.html' import checkbox as checkbox_field %}
+
+{% macro checkbox_table(label, checkboxes, errors) %}
+
+<div>
+  <strong class="label">{{ label }}</strong>
+  <ul class="grid grid-cols-3 mt-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+    {% for checkbox in checkboxes %}
+    <li class="w-full border-b border-gray-200 rounded-t-lg p-3">
+      <div class="flex items-center ps-3">
+        {{ checkbox_field(label=checkbox.label, field=checkbox) }}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  {{ input_errors(errors) }}
+</div>
+
+{% endmacro %}

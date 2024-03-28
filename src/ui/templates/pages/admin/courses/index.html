@@ -1,0 +1,36 @@
+{% extends "layouts/dashboard/index.html" %}
+
+{% from 'components/modal.html' import modal %}
+{% from 'components/csv_button.html' import csv_button %}
+{% from 'components/search.html' import search %}
+
+{% block dashboard_content %}
+
+<div class="flex items-center gap-3">
+  {% call modal(
+  id="course-modal", title='Adicionar disciplina',
+  is_default_open=course_form.errors | length
+  )
+  %}
+  {% include 'components/course_modal.html' %}
+  {% endcall %}
+
+  {{
+  csv_button(
+  id="courses_csv",
+  action='import',
+  url=url_for("admin_views.create_courses_by_csv_view"),
+  target="#courses-table"
+  )
+  }}
+</div>
+
+<div class="mt-6">
+  {{ search(label='Pesquisar disciplinas por nome', placeholder='Desenvolvimento de software') }}
+</div>
+
+<div class="mt-12">
+  {% include 'pages/admin/courses/table/index.html' %}
+</div>
+
+{% endblock dashboard_content %}

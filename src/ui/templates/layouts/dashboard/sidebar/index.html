@@ -8,30 +8,40 @@
 
   <nav>
     <ul class="w-full space-y-3 mt-6 px-6">
-      <li>{{ link(
+      <li>
+        {{ link(
         icon='house',
         title='Dashboard',
-        href=url_for("admin_views.get_analytics_page_view")) }}
+        href=url_for("admin_views.get_analytics_page_view"))
+        }}
       </li>
-      <li>{{ link(
+      <li>
+        {{ link(
         icon='identification-badge',
         title='Professores',
-        href=url_for("admin_views.handle_professors_page_view")) }}
+        href=url_for("admin_views.handle_professors_page_view"))
+        }}
       </li>
-      <li>{{ link(
+      <li>
+        {{ link(
         icon='student',
         title='Alunos',
-        href=url_for("admin_views.handle_students_page_view")) }}
+        href=url_for("admin_views.handle_students_page_view"))
+        }}
       </li>
-      <li>{{ link(
+      <li>
+        {{ link(
         icon='book-bookmark',
         title='Disciplinas',
-        href=url_for("admin_views.handle_subjects_page_view")) }}
+        href=url_for("admin_views.handle_subjects_page_view"))
+        }}
       </li>
-      <li>{{ link(
-        icon='users-three',
-        title='Disciplinas',
-        href=url_for("admin_views.handle_professors_page_view")) }}
+      <li>
+        {{ link(
+        icon='book-open-text',
+        title='Cursos',
+        href=url_for("admin_views.handle_courses_page_view"))
+        }}
       </li>
     </ul>
   </nav>
