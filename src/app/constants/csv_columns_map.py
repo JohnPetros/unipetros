@@ -10,4 +10,5 @@ USERS_MAP = {
 CSV_COLUMNS_MAP = {
     "professors": {**USERS_MAP, "disciplinas": "subjects"},
     "students": {**USERS_MAP, "curso": "course"},
+    "subjects": {"nome": "name", "descrição": "description"},
 }
