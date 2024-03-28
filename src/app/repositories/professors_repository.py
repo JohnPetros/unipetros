@@ -83,8 +83,10 @@ class ProfessorsRepository(UsersRepository):
                 )
 
     def __get_professor_entity(self, professor: Dict) -> Professor:
-        subjects_ids = professor["subjects_ids"].split(",")
-        subjects_names = professor["subjects_names"].split(",")
+        if professor["subjects_ids"] and professor["subjects_names"]:
+            subjects_ids = professor["subjects_ids"].split(",")
+            subjects_names = professor["subjects_names"].split(",")
+
         subjects = []
 
         for index, subject_id in enumerate(subjects_ids):
