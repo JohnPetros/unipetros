@@ -2,7 +2,7 @@ from wtforms.validators import DataRequired
 
 from wtforms import SubmitField
 from .user_form import UserForm
-from .multi_checkbox_field import MultiCheckboxField
+from .fields.multi_checkbox_field import MultiCheckboxField
 
 
 class ProfessorForm(UserForm):
