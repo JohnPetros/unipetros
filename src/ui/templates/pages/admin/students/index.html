@@ -1,0 +1,36 @@
+{% extends "layouts/dashboard/index.html" %}
+
+{% from 'components/modal.html' import modal %}
+{% from 'components/csv_button.html' import csv_button %}
+{% from 'components/search.html' import search %}
+
+{% block dashboard_content %}
+
+<div class="flex items-center gap-3">
+  {% call modal(
+  id="professor-modal", title='Adicionar aluno',
+  is_default_open=student_form.errors | length
+  )
+  %}
+  {% include 'components/student_modal.html' %}
+  {% endcall %}
+
+  {{
+  csv_button(
+  id="students_csv",
+  action='import',
+  url=url_for("admin_views.create_students_by_csv_view"),
+  target="#students-table"
+  )
+  }}
+</div>
+
+<div class="mt-6">
+  {{ search(label='Pesquisar aluno por nome ou e-mail', placeholder='Jefferson Ribeiro da Silva') }}
+</div>
+
+<div class="mt-12">
+  {% include 'pages/admin/students/table/index.html' %}
+</div>
+
+{% endblock dashboard_content %}

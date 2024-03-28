@@ -1,0 +1,33 @@
+{% from 'pages/admin/students/table/row.html' import row %}
+{% from 'components/rows_skeleton.html' import rows_skeleton %}
+
+<table id="students-table" class="table">
+  <thead class="table-head">
+    <tr>
+      <th scope="col" class="table-heading">
+        Nome
+      </th>
+      <th scope="col" class="table-heading">
+        E-mail
+      </th>
+      <th scope="col" class="table-heading">
+        Idade
+      </th>
+      <th scope="col" class="table-heading">
+        Gênero
+      </th>
+      <th scope="col" class="table-heading">
+        Curso
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for student in students %}
+    {{ row(student) }}
+    {% endfor %}
+
+    {{ rows_skeleton(6) }}
+  </tbody>
+
+</table>

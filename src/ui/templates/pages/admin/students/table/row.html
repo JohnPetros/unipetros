@@ -1,0 +1,27 @@
+{% from 'components/badge.html' import badge %}
+
+{% macro row(student) %}
+
+<tr class="table-row">
+  <td class="table-data p-1">
+    <a href="" class="flex items-center gap-2 font-semibold">
+      <img class="rounded-md" src="{{ url_for('static', filename='uploads/images/{}'.format(student.avatar)) }}"
+        width="32" height="32" alt="">
+      {{ student.name }}
+    </a>
+  </td>
+  <td class="table-data">
+    {{ student.email }}
+  </td>
+  <td class="table-data flex-wrap">
+    {{ badge(student.course.name) }}
+  </td>
+  <td class="table-data">
+    {{ student.age }}
+  </td>
+  <td class="table-data">
+    {{ student.gender }}
+  </td>
+</tr>
+
+{% endmacro %}
