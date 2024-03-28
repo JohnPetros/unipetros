@@ -39,9 +39,16 @@ q::after {
   content: "";
 }
 
-[data-loading].loading {
+[data-loading] {
   display: none;
 }
+
+.table-wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  overflow: auto;
+  white-space: normal;
+ }
 
 @layer components {
   .container {
@@ -73,17 +80,17 @@ q::after {
   }
   
   .table-head {
-    @apply text-sm text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400
+    @apply text-sm text-gray-700 uppercase bg-gray-100
+  }
+
+  .table-heading {
+    @apply p-3
   }
   
   .table-row {
-    @apply odd:bg-white odd:dark:bg-gray-900 even:bg-gray-100
+    @apply p-3 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-100
   }
 
-  .table-row-loading td {
-    @apply bg-gray-300 h-12 animate-pulse
-  }
-  
   .table-data {
     @apply p-3 font-medium
   }
