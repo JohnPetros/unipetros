@@ -4,5 +4,5 @@ path = Path()
 
 FOLDERS = {
     "tmp": path.absolute() / "src" / "app" / "tmp",
-    "images": path.absolute() / "src" / "ui" / "static" / "images",
+    "uploaded_images": path.absolute() / "src" / "ui" / "static" / "uploads" / "images",
 }
