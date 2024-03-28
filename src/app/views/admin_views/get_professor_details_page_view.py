@@ -2,7 +2,7 @@ from flask import render_template
 
 from auth import get_auth_user, login_checker, role_checker
 
-from use_cases.admin import get_professor_details_page_data_use_case
+from use_cases.admin_use_cases import get_professor_details_page_data_use_case
 
 
 @login_checker

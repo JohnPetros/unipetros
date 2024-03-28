@@ -43,6 +43,25 @@ class StudentsRepository(UsersRepository):
 
         return list(map(self.__get_student_model, students))
 
+    def create_student(self, student: Student) -> None:
+        mysql.mutate(
+            sql="""
+                INSERT INTO students (id, name, email, password, phone, birthdate, gender, avatar, course_id) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+            params=[
+                student.id,
+                student.name,
+                student.email,
+                student.password,
+                student.phone,
+                student.birthdate,
+                student.gender,
+                student.avatar,
+                student.course.id,
+            ],
+        )
+
     def __get_student_model(self, student: Dict):
         course = Course(name=student["course_name"])
 

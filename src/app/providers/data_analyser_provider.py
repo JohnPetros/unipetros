@@ -22,7 +22,6 @@ class DataAnalyserProvider:
 
     def convert_to_list_of_records(self) -> List[Dict] | None:
         if self.__has_dataframe():
-            print("excel", self.data)
             return self.data.to_dict("records")
 
         return None

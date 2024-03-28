@@ -1,12 +1,12 @@
 USERS_MAP = {
-    "Nome": "name",
-    "E-mail": "email",
-    "Telefone": "phone",
-    "Senha": "password",
-    "Data de nascimento": "birthdate",
-    "Gênero": "gender",
+    "nome": "name",
+    "e-mail": "email",
+    "telefone": "phone",
+    "senha": "password",
+    "data de nascimento": "birthdate",
+    "gênero": "gender",
 }
 
 CSV_COLUMNS_MAP = {
-    "professors": {**USERS_MAP, "Disciplinas": "subjects"},
+    "professors": {**USERS_MAP, "disciplinas": "subjects"},
 }

@@ -9,7 +9,7 @@ class SubjectsRepository:
     def get_subjects(self) -> List[Subject]:
         subjects = mysql.query(sql="SELECT * FROM subjects", is_single=False)
 
-        return map(self.__get_subject_model, subjects)
+        return list(map(self.__get_subject_entity, subjects))
 
     def create_subject(self, subject: Subject):
         mysql.mutate(
@@ -20,7 +20,7 @@ class SubjectsRepository:
             params=[subject.id, subject.name, subject.description],
         )
 
-    def __get_subject_model(self, subject: Dict) -> Subject:
+    def __get_subject_entity(self, subject: Dict) -> Subject:
         return Subject(
             id=subject["id"], name=subject["name"], description=subject["description"]
         )

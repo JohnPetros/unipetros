@@ -20,7 +20,11 @@ route(
     view_func=handle_professors_page_view,
     methods=["GET", "POST"],
 )
-route(rule="/dashboard/professors/csv", view_func=create_professors_by_csv_view)
+route(
+    rule="/dashboard/professors/csv",
+    view_func=create_professors_by_csv_view,
+    methods=["POST"],
+)
 
 route(
     rule="/dashboard/professors/<professor_id>",
