@@ -8,6 +8,8 @@ from .handle_students_page_view import handle_students_page_view
 from .create_professors_by_csv_view import create_professors_by_csv_view
 from .create_subjects_by_csv_view import create_subjects_by_csv_view
 from .create_students_by_csv_view import create_students_by_csv_view
+from .handle_courses_page_view import handle_courses_page_view
+from .create_courses_by_csv_view import create_courses_by_csv_view
 
 admin_views = Blueprint("admin_views", __name__)
 
@@ -20,6 +22,7 @@ route(
     view_func=handle_professors_page_view,
     methods=["GET", "POST"],
 )
+
 route(
     rule="/dashboard/professors/csv",
     view_func=create_professors_by_csv_view,
@@ -53,4 +56,16 @@ route(
     rule="/dashboard/subjects",
     view_func=handle_subjects_page_view,
     methods=["GET", "POST"],
+)
+
+route(
+    rule="/dashboard/courses",
+    view_func=handle_courses_page_view,
+    methods=["GET", "POST"],
+)
+
+route(
+    rule="/dashboard/courses/csv",
+    view_func=create_courses_by_csv_view,
+    methods=["POST"],
 )

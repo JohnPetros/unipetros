@@ -2,15 +2,11 @@ from typing import Dict, Union, List
 
 from entities.professor import Professor
 
-from repositories.professors_repository import ProfessorsRepository
-from repositories.subjects_repository import SubjectsRepository
+from repositories import subjects_repository, professors_repository
 
 from forms.professor_form import ProfessorForm
 
 from utils.error import Error
-
-professors_repository = ProfessorsRepository()
-subjects_repository = SubjectsRepository()
 
 
 class GetProfessorsPageDataUseCase:

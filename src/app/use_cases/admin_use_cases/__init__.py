@@ -6,6 +6,11 @@ from .get_subjects_page_data_use_case import GetSubjectsPageDataUseCase
 from .create_subject_use_case import CreateSubjectUseCase
 from .get_students_page_data_use_case import GetStudentsPageDataUseCase
 from .create_student_use_case import CreateStudentUseCase
+from .create_students_by_csv_use_case import CreateStudentsByCSVUseCase
+from .get_courses_page_data_use_case import GetCoursesPageDataUseCase
+from .create_course_use_case import CreateCourseUseCase
+from .create_subjects_by_csv_use_case import CreateSubjectsByCSVUseCase
+from .create_courses_by_csv_use_case import CreateCoursesByCSVUseCase
 
 get_professor_details_page_data_use_case = GetProfessorDetailsPageDataUseCase()
 get_professors_page_data_use_case = GetProfessorsPageDataUseCase()
@@ -14,6 +19,12 @@ create_professors_by_csv_use_case = CreateProfessorsByCSVUseCase()
 
 get_subjects_page_data_use_case = GetSubjectsPageDataUseCase()
 create_subject_use_case = CreateSubjectUseCase()
+create_subjects_by_csv_use_case = CreateSubjectsByCSVUseCase()
 
 get_students_page_data_use_case = GetStudentsPageDataUseCase()
 create_student_use_case = CreateStudentUseCase()
+create_students_by_csv_use_case = CreateStudentsByCSVUseCase()
+
+get_courses_page_data_use_case = GetCoursesPageDataUseCase()
+create_course_use_case = CreateCourseUseCase()
+create_courses_by_csv_use_case = CreateCoursesByCSVUseCase()
