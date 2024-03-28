@@ -95,7 +95,7 @@ def role_checker(role: Literal["admin", "professor", "student"]):
 def init_auth(app: Flask) -> None:
     login_manager.init_app(app)
     login_manager.user_loader(get_user)
-    login_manager.login_view = "auth_views.login"
+    login_manager.login_view = "auth_views.login_view"
     login_manager.login_message = "Por favor, faça seu login antes"
     login_manager.login_message_category = "warn"
 

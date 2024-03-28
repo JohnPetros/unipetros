@@ -2,7 +2,7 @@ from flask import request, render_template, flash, redirect, url_for
 
 from forms.login_form import LoginForm
 
-from use_cases.authentication import login_use_case
+from use_cases.auth_use_cases import login_use_case
 
 from auth import AuthUser
 
