@@ -5,8 +5,9 @@
 <tr class="table-row">
   <td class="table-data p-1">
     <a href="" class="flex items-center gap-2 font-semibold">
-      <img class="rounded-md" src="{{ url_for('static', filename='uploads/images/{}'.format(student.avatar)) }}"
-        width="32" height="32" alt="">
+      <img class="rounded-full w-10 h-10 object-cover"
+        src="{{ url_for('static', filename='uploads/images/{}'.format(student.avatar)) }}" width="40" height="40"
+        alt="">
       {{ student.name }}
     </a>
   </td>

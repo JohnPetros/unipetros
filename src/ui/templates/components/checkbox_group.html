@@ -3,7 +3,7 @@
 
 {% macro checkbox_group(label, name, checkboxes, errors) %}
 
-<div class="flex items-center gap-2">
+<div class="space-y-3">
   <span>{{ label }}:</span>
   {% for checkbox in checkboxes %}
   {{ checkbox_field(label=checkbox.label, field=checkbox) }}

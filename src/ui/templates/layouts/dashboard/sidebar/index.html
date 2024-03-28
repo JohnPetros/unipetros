@@ -1,7 +1,7 @@
 {% from 'layouts/dashboard/sidebar/link.html' import link %}
 {% from 'components/logo.html' import logo %}
 
-<aside class="fixed top-0 left-0 bottom-0 bg-petros-800 w-64">
+<aside class="fixed top-0 left-0 bottom-0 bg-petros-800 w-52">
   <div class="grid place-content-center py-8 border-b-2 border-petros-200">
     {{ logo('w-32 h-24') }}
   </div>
@@ -11,27 +11,27 @@
       <li>{{ link(
         icon='house',
         title='Dashboard',
-        href=url_for("admin_views.get_analytics_page")) }}
+        href=url_for("admin_views.get_analytics_page_view")) }}
       </li>
       <li>{{ link(
         icon='identification-badge',
         title='Professores',
-        href=url_for("admin_views.get_professors_page")) }}
+        href=url_for("admin_views.handle_professors_page_view")) }}
       </li>
       <li>{{ link(
         icon='student',
         title='Alunos',
-        href=url_for("admin_views.get_professors_page")) }}
+        href=url_for("admin_views.handle_students_page_view")) }}
       </li>
       <li>{{ link(
         icon='book-bookmark',
         title='Disciplinas',
-        href=url_for("admin_views.get_professors_page")) }}
+        href=url_for("admin_views.handle_subjects_page_view")) }}
       </li>
       <li>{{ link(
         icon='users-three',
         title='Disciplinas',
-        href=url_for("admin_views.get_professors_page")) }}
+        href=url_for("admin_views.handle_professors_page_view")) }}
       </li>
     </ul>
   </nav>

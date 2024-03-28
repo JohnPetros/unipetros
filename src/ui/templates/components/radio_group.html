@@ -1,10 +1,10 @@
 {% from 'components/input_errors.html' import input_errors %}
 
-{% macro radio_group(label, name, radios, errors) %}
+{% macro radio_group(label, name, radios, errors, is_column) %}
 
 <div>
   <span class="label">{{ label }}</span>
-  <div class="flex items-center gap-2 flex-wrap">
+  <div class="flex gap-2 {{ 'flex-col' if is_column else 'flex-row flex-wrap' }}">
     {% for radio in radios %}
     <div class="flex items-center mt-2">
       <input id="{{ radio[0] }}" type="radio" value="{{ radio[0] }}" name="{{ name }}"

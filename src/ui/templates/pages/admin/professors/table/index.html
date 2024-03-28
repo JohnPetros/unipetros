@@ -1,40 +1,33 @@
 {% from 'pages/admin/professors/table/row.html' import row %}
+{% from 'components/rows_skeleton.html' import rows_skeleton %}
 
 <table id="professors-table" class="table">
   <thead class="table-head">
     <tr>
-      <th scope="col" class="px-6 py-3">
+      <th scope="col" class="table-heading">
         Nome
       </th>
-      <th scope="col" class="px-6 py-3">
+      <th scope="col" class="table-heading">
         E-mail
       </th>
-      <th scope="col" class="px-6 py-3">
+      <th scope="col" class="table-heading">
         Disciplinas
       </th>
-      <th scope="col" class="px-6 py-3">
+      <th scope="col" class="table-heading">
         Idade
       </th>
-      <th scope="col" class="px-6 py-3">
+      <th scope="col" class="table-heading">
         Gênero
       </th>
     </tr>
   </thead>
 
-  <tbody class="space-y-4">
-    {% for professor in professors %}
+  <tbody>
+    {% for professor in professors[:8] %}
     {{ row(professor) }}
     {% endfor %}
 
-    {% for _ in range(8) %}
-    <tr class="loading table-row-loading" data-loading="table-row">
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    {% endfor %}
+    {{ rows_skeleton(6) }}
   </tbody>
 
 </table>

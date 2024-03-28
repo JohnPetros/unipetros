@@ -3,17 +3,17 @@
 {% macro row(professor) %}
 
 <tr class="table-row">
-  <td class="table-data p-1">
-    <a href="" class="flex items-center gap-2 font-semibold">
-      <img class="rounded-md" src="{{ url_for('static', filename='uploads/images/{}'.format(professor.avatar)) }}"
-        width="32" height="32" alt="">
+  <td class="table-data">
+    <a href="" class="flex items-center gap-2 font-semibold p-0">
+      <img src="{{url_for('static', filename='uploads/images/{}'.format(professor.avatar)) }}" alt="" width="32"
+        height="32">
       {{ professor.name }}
     </a>
   </td>
   <td class="table-data">
     {{ professor.email }}
   </td>
-  <td class="table-data flex-wrap w-96">
+  <td class="table-data flex-wrap">
     {% for subjects in professor.subjects %}
     {{ badge(subjects.name) }}
     {% endfor %}

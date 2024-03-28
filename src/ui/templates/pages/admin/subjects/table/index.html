@@ -1,4 +1,5 @@
 {% from 'pages/admin/subjects/table/row.html' import row %}
+{% from 'components/rows_skeleton.html' import rows_skeleton %}
 
 <table id="subjects-table" class="table">
   <thead class="table-head">
@@ -17,15 +18,7 @@
     {{ row(subject) }}
     {% endfor %}
 
-    {% for _ in range(8) %}
-    <tr class="loading table-row-loading" data-loading="table-row">
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    {% endfor %}
+    {{ rows_skeleton(6) }}
   </tbody>
 
 </table>

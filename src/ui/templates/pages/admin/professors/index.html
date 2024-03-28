@@ -19,7 +19,7 @@
   csv_button(
   id="professors_csv",
   action='import',
-  url=url_for("admin_views.create_professors_by_csv"),
+  url=url_for("admin_views.create_professors_by_csv_view"),
   target="#professors-table"
   )
   }}
@@ -29,7 +29,7 @@
   {{ search(label='Pesquisar professor por nome ou e-mail', placeholder='Girafalles da Nôbrega') }}
 </div>
 
-<div class="mt-12">
+<div class="table-wrapper">
   {% include 'pages/admin/professors/table/index.html' %}
 </div>
 

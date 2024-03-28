@@ -8,13 +8,13 @@
   <div>
     {% include 'layouts/dashboard/header.html' %}
 
-    <main class="w-full h-full pl-72 pr-8 py-12">
+    <main class="h-full pl-64 px-6 py-12">
       {% block dashboard_content %}
       {% endblock dashboard_content %}
     </main>
   </div>
 </div>
 
-{{ url_for('static', filename='scripts/avatar_input.js') }}
+<script src="{{ url_for('static', filename='scripts/avatar_input.js') }}"></script>
 
 {% endblock body %}
