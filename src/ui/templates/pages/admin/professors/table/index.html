@@ -23,9 +23,11 @@
   </thead>
 
   <tbody>
-    {% for professor in professors[:8] %}
+    {% for professor in professors %}
     {{ row(professor) }}
     {% endfor %}
+
+    <span id="new-professor" class="sr-only"></span>
 
     {{ rows_skeleton(6) }}
   </tbody>

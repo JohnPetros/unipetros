@@ -4,16 +4,16 @@
 <table id="subjects-table" class="table">
   <thead class="table-head">
     <tr>
-      <th scope="col" class="px-6 py-3">
+      <th scope="col" class="table-heading">
         Nome
       </th>
-      <th scope="col" class="px-6 py-3">
+      <th scope="col" class="table-heading">
         Descrição
       </th>
     </tr>
   </thead>
 
-  <tbody class="space-y-4">
+  <tbody>
     {% for subject in subjects %}
     {{ row(subject) }}
     {% endfor %}

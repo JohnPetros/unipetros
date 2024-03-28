@@ -12,7 +12,7 @@
   is_default_open=professor_form.errors | length
   )
   %}
-  {% include 'pages/admin/professors/professor_modal.html' %}
+  {% include 'components/professor_modal.html' %}
   {% endcall %}
 
   {{
@@ -29,7 +29,7 @@
   {{ search(label='Pesquisar professor por nome ou e-mail', placeholder='Girafalles da Nôbrega') }}
 </div>
 
-<div class="table-wrapper">
+<div class="mt-6">
   {% include 'pages/admin/professors/table/index.html' %}
 </div>
 
