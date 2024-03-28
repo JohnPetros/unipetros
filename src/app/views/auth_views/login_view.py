@@ -1,16 +1,13 @@
-from flask import Blueprint, request, render_template, flash, redirect, url_for
+from flask import request, render_template, flash, redirect, url_for
 
 from forms.login_form import LoginForm
 
-from use_cases.auth import login_use_case
+from use_cases.authentication import login_use_case
 
-from auth import AuthUser, logout as logout_user, login_checker
-
-auth_views = Blueprint("auth_views", __name__)
+from auth import AuthUser
 
 
-@auth_views.route("/login", methods=["GET", "POST"])
-def login() -> str:
+def login_view() -> str:
     login_form = LoginForm()
 
     if request.method == "GET":
@@ -32,15 +29,7 @@ def login() -> str:
                 return redirect(next_page_param)
 
             flash(f"Bem-vindo, {auth_user.name} 😁", "success")
-            return redirect(url_for("admin_views.get_analytics_page"))
+            return redirect(url_for("admin_views.get_analytics_page_view"))
 
     flash("E-mail ou senha incorretos", "error")
     return render_template("pages/home/login/index.html", login_form=login_form)
-
-
-@auth_views.route("/logout")
-@login_checker
-def logout() -> str:
-    logout_user()
-
-    return redirect(url_for("auth_views.login"))
