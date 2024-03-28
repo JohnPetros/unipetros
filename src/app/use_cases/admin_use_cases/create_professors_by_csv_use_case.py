@@ -2,14 +2,14 @@ from typing import List, Dict
 
 from werkzeug.datastructures import FileStorage
 
+from auth import hash_password
+
 from entities.professor import Professor
 from entities.subject import Subject
 
 from repositories import professors_repository, subjects_repository
 
 from providers import data_analyser_provider
-
-from auth import hash_password
 
 from utils.error import Error
 
@@ -39,12 +39,14 @@ class CreateProfessorsByCSVUseCase:
 
     def __validate_csv(self, csv: FileStorage):
         if not isinstance(csv, FileStorage):
-            raise Error("Professors csv must be a file")
+            raise Error("Arquivo de professores precisa ser um arquivo csv")
 
         extension = self.__get_csv_extension(csv)
 
         if extension not in ["xlsx", "csv"]:
-            raise Error("Professors csv must be a csv or excel file")
+            raise Error(
+                "Arquivo contendo os professors precisam ser must um arquivo csv ou excel válido"
+            )
 
     def __get_records(self, csv: FileStorage, extension: str):
         data_analyser_provider.analyse(csv)
@@ -66,8 +68,8 @@ class CreateProfessorsByCSVUseCase:
         professor = {}
 
         for key, value in record.items():
-            if key in CSV_COLUMNS_MAP["professors"]:
-                professor_attribute = CSV_COLUMNS_MAP["professors"][key]
+            if key.lower() in CSV_COLUMNS_MAP["professors"]:
+                professor_attribute = CSV_COLUMNS_MAP["professors"][key.lower()]
 
                 match professor_attribute:
                     case "subjects":

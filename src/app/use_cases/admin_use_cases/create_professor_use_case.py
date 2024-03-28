@@ -3,12 +3,13 @@ from typing import Dict, Any
 from uuid import uuid4 as generate_random_name
 from werkzeug.datastructures import FileStorage
 
+from auth import hash_password
+
 from entities.professor import Professor
 from entities.subject import Subject
 
 from repositories import professors_repository
 
-from auth import hash_password
 
 from utils.error import Error
 from utils.file import File

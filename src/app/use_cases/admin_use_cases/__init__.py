@@ -5,6 +5,7 @@ from .get_professor_details_page_data_use_case import GetProfessorDetailsPageDat
 from .get_subjects_page_data_use_case import GetSubjectsPageDataUseCase
 from .create_subject_use_case import CreateSubjectUseCase
 from .get_students_page_data_use_case import GetStudentsPageDataUseCase
+from .create_student_use_case import CreateStudentUseCase
 
 get_professor_details_page_data_use_case = GetProfessorDetailsPageDataUseCase()
 get_professors_page_data_use_case = GetProfessorsPageDataUseCase()
@@ -15,3 +16,4 @@ get_subjects_page_data_use_case = GetSubjectsPageDataUseCase()
 create_subject_use_case = CreateSubjectUseCase()
 
 get_students_page_data_use_case = GetStudentsPageDataUseCase()
+create_student_use_case = CreateStudentUseCase()
