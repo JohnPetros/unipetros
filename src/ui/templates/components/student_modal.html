@@ -1,0 +1,90 @@
+{% from 'components/csv_button.html' import csv_button %}
+{% from 'components/input.html' import input %}
+{% from 'components/avatar_input.html' import avatar_input %}
+{% from 'components/radio_group.html' import radio_group %}
+{% from 'components/radio_group.html' import radio_group %}
+{% from 'components/checkbox.html' import checkbox %}
+
+{% set grid_input = "grid grid-cols-2 gap-6" %}
+
+<div class="mt-6">
+  <div class="flex items-center gap-3">
+    <p class="text-petros-800 text-lg font-semibold">Manualmente</p>
+    ou
+  </div>
+
+  <form method="post" enctype="multipart/form-data" class="space-y-6 w-full">
+    {{ student_form.csrf_token }}
+
+    {{
+    input(
+    id='name',
+    field=student_form.name,
+    label=student_form.name.label,
+    placeholder="Giraffales da Nôbrega",
+    has_autofocus=True,
+    errors=student_form.name.errors
+    )
+    }}
+
+    <div class="{{ grid_input }}">
+      {{
+      input(
+      field=student_form.email,
+      label=student_form.email.label,
+      placeholder="john@unipetros.com",
+      errors=student_form.email.errors
+      )
+      }}
+      {{
+      input(
+      field=student_form.phone,
+      label=student_form.phone.label,
+      placeholder="(12) 944028922",
+      errors=student_form.phone.errors
+      )
+      }}
+    </div>
+
+
+    <div class="{{ grid_input }}">
+      <div class="space-y-2">
+        {{ student_form.birthdate.label(class="label") }}
+        {{ student_form.birthdate(class="input") }}
+      </div>
+      {{ radio_group(label="Gênero", name="gender", radios=student_form.gender.choices) }}
+    </div>
+
+    <div class="{{ grid_input }}">
+      {{
+      input(field=student_form.password,
+      label=student_form.password.label,
+      placeholder="******",
+      errors=student_form.password.errors
+      )
+      }}
+      {{
+      input(field=student_form.password_confirmation,
+      label=student_form.password_confirmation.label,
+      placeholder="confirmação de senha",
+      errors=student_form.password_confirmation.errors
+      )
+      }}
+    </div>
+
+    {{ avatar_input(label=student_form.avatar.label, control=student_form.avatar) }}
+
+    {{
+    radio_group(
+    label=student_form.course.label,
+    name="course",
+    radios=student_form.course.choices,
+    is_column=True
+    )
+    }}
+
+    <div class="mx-auto pt-6 w-max">
+      {{ student_form.submit_button(class="button") }}
+    </div>
+  </form>
+</div>
