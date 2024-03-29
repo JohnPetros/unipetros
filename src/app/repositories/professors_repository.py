@@ -51,6 +51,14 @@ class ProfessorsRepository(UsersRepository):
 
         return professors
 
+    def get_professors_count(self):
+        result = mysql.query(
+            sql="SELECT COUNT(id) AS count FROM professors",
+            is_single=True,
+        )
+
+        return int(result["count"])
+
     def create_professor(self, professor: Professor) -> None:
         mysql.mutate(
             sql="""
@@ -82,26 +90,31 @@ class ProfessorsRepository(UsersRepository):
                     ],
                 )
 
-    def __get_professor_entity(self, professor: Dict) -> Professor:
-        if professor["subjects_ids"] and professor["subjects_names"]:
-            subjects_ids = professor["subjects_ids"].split(",")
-            subjects_names = professor["subjects_names"].split(",")
+    def __get_professor_entity(self, professor_data: Dict) -> Professor:
+        subjects_ids = []
+        subjects_names = []
+
+        if "subjects_ids" in professor_data and "subjects_names" in professor_data:
+            subjects_ids = professor_data["subjects_ids"].split(",")
+            subjects_names = professor_data["subjects_names"].split(",")
 
         subjects = []
 
         for index, subject_id in enumerate(subjects_ids):
             subjects.append(Subject(id=subject_id, name=subjects_names[index]))
 
-        professor_model = Professor(
-            id=professor["id"],
-            email=professor["email"],
-            name=professor["name"],
-            password=professor["password"],
-            avatar=professor["avatar"],
-            birthdate=professor["birthdate"],
-            gender="masculino" if professor["gender"] == "male" else "feminino",
+        professor = Professor(
+            id=professor_data["id"],
+            email=professor_data["email"],
+            name=professor_data["name"],
+            password=professor_data["password"],
+            avatar=professor_data["avatar"],
+            birthdate=professor_data["birthdate"],
+            gender="masculino" if professor_data["gender"] == "male" else "feminino",
             subjects=subjects,
         )
 
-        del professor_model.password
-        return professor_model
+        if not self.should_get_password:
+            del professor.password
+
+        return professor

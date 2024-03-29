@@ -19,4 +19,6 @@ INSERT INTO professors (name, email, password, phone, gender, birthdate) VALUES
 
 SELECT * FROM professors;
 
+SELECT COUNT(id) AS count FROM professors
+
 DELETE FROM professors;
