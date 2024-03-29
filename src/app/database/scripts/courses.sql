@@ -15,4 +15,18 @@ VALUES
 ('Segurança da Informação', 'Este curso aborda os princípios e práticas de segurança da informação, ensinando como proteger sistemas e dados contra ameaças. Os tópicos incluem criptografia, autenticação, segurança de rede e gestão de vulnerabilidades.'),
 ('Análise e Desenvolvimento de Sistemas', 'O curso de Análise e Desenvolvimento de Sistemas é uma formação de tecnologia que prepara profissionais para implementar, desenvolver, manter e gerenciar sistemas computacionais, abrangendo desde a análise de necessidades até o design, codificação, testes e documentação de softwares. Este curso é voltado para a expansão do mercado de trabalho em Tecnologia da Informação (TI), com disciplinas que incluem Arquitetura de Computadores, Programação, Engenharia de Software, Banco de Dados, Gerenciamento de Projetos e Metodologias Ágeis, entre outras. A duração do curso é de aproximadamente 2 anos e meio, com mensalidades variando de acordo com a instituição de ensino e a modalidade de ensino escolhida');
 
-SELECT * FROM courses; 
+SELECT * FROM courses;
+
+SELECT 
+  C.*, 
+  GROUP_CONCAT(S.id) AS subjects_ids, 
+  GROUP_CONCAT(S.name) AS subjects_names
+FROM courses AS C
+JOIN courses_subjects AS CS ON CS.course_id = C.id 
+JOIN subjects AS S ON CS.subject_id = S.id
+GROUP BY C.id;
+
+SELECT C.*, COUNT(S.id) AS students_count
+FROM courses AS C
+LEFT JOIN students AS S ON S.course_id = C.id
+GROUP BY C.id
