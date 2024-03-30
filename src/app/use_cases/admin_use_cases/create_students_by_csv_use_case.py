@@ -40,9 +40,9 @@ class CreateStudentsByCSVUseCase:
 
             return students_repository.get_students()
         except Exception as exception:
-            print(exception)
             raise Error(
-                "Não foi possível usar os dados de estudantes desse arquivo csv"
+                ui_message="Não foi possível usar os dados de estudantes desse arquivo csv",
+                error_message=exception,
             ) from exception
 
     def __validate_csv(self, csv: FileStorage) -> None:

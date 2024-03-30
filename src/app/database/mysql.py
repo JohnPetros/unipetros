@@ -38,9 +38,9 @@ class MySQL:
         except mysql.connector.Error as error:
             self.__close_connection()
 
-            return Error(
+            raise Error(
                 f"Failed to execute a query on the database. Error: {error}",
-            )
+            ) from error
 
     def mutate(self, sql: str, params) -> Dict:
         try:
@@ -48,12 +48,12 @@ class MySQL:
             self.__connection.commit()
 
         except mysql.connector.Error as error:
-            print(
-                f"Failed to execute a mutation on the database. Error: {error}",
-                flush=True,
-            )
             self.__connection.rollback()
             self.__close_connection()
+
+            raise Error(
+                f"Failed to execute a mutation on the database. Error: {error}",
+            ) from error
 
     def __close_connection(self):
         self.__connection.close()

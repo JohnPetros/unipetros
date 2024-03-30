@@ -27,7 +27,7 @@ class ProfessorsRepository(UsersRepository):
         if not professor:
             return None
 
-        return Professor(professor, professor["id"])
+        return self.__get_professor_entity(professor)
 
     def get_professors(self) -> List[Professor]:
         professors = mysql.query(
