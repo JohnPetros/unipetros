@@ -11,6 +11,14 @@ class SubjectsRepository:
 
         return list(map(self.__get_subject_entity, subjects))
 
+    def get_subjects_count(self) -> int:
+        result = mysql.query(
+            sql="SELECT COUNT(id) AS count FROM subjects",
+            is_single=True,
+        )
+
+        return int(result["count"])
+
     def create_subject(self, subject: Subject):
         mysql.mutate(
             sql="""
