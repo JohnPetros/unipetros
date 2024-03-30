@@ -29,6 +29,22 @@ class ProfessorsRepository(UsersRepository):
 
         return self.__get_professor_entity(professor)
 
+    def get_professors_count_by_subject(self) -> int:
+        result = mysql.query(
+            sql="""
+            SELECT 
+                COUNT(P.id) AS professors_count,
+                S.name
+            FROM professors AS P
+            LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
+            LEFT JOIN subjects AS S ON PS.subject_id = S.id
+            GROUP BY S.name
+            """,
+            is_single=False,
+        )
+
+        return int(result["count"])
+
     def get_professors(self) -> List[Professor]:
         professors = mysql.query(
             sql="""
@@ -110,7 +126,7 @@ class ProfessorsRepository(UsersRepository):
             password=professor_data["password"],
             avatar=professor_data["avatar"],
             birthdate=professor_data["birthdate"],
-            gender="masculino" if professor_data["gender"] == "male" else "feminino",
+            gender=professor_data["gender"],
             subjects=subjects,
         )
 

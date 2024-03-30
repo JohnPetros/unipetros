@@ -17,8 +17,8 @@ INSERT INTO professors (name, email, password, phone, gender, birthdate) VALUES
 ('Jane Doe', 'jane@example.com', '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', '1234567890', 'female', '1995-04-20'),
 ('Bob Smith', 'bob@smith.com', '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', '0987654321', 'male', '1980-05-30');
 
+DELETE FROM professors;
+
 SELECT * FROM professors;
 
 SELECT COUNT(id) AS count FROM professors
-
-DELETE FROM professors;

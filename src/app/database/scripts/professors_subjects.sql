@@ -23,4 +23,13 @@ SELECT
 FROM professors AS P
 LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
 LEFT JOIN subjects AS S ON PS.subject_id = S.id
-GROUP BY P.id
+GROUP BY P.id;
+
+SELECT 
+  COUNT(P.id) AS professors_count,
+  P.gender, S.name
+FROM professors AS P
+LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
+LEFT JOIN subjects AS S ON PS.subject_id = S.id
+GROUP BY P.gender
+GROUP BY S.name
