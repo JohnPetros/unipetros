@@ -80,6 +80,16 @@ class StudentsRepository(UsersRepository):
             self.__get_student_entity(student) for student in last_enrolled_students
         ]
 
+    def get_students_absents(self):
+        students_absents = mysql.query(
+            sql="""
+                SELECT * FROM students_absents
+                """,
+            is_single=False,
+        )
+
+        return students_absents
+
     def create_student(self, student: Student) -> None:
         mysql.mutate(
             sql="""
