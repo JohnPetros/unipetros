@@ -6,7 +6,7 @@ from auth import init_auth
 
 from flask import Flask
 
-x = "eita ggggg"
+x = "eita ggggg zzzzzzzzzzz"
 
 
 def init_app() -> Flask:
