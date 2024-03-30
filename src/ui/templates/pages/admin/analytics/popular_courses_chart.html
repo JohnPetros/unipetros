@@ -1,0 +1,28 @@
+<div class="w-full bg-white rounded-lg shadow p-4 md:p-6">
+  <div class="flex justify-between mb-3">
+    <div class="flex items-center">
+      <div class="flex justify-center items-center">
+        <h5 class="text-xl font-bold leading-none text-gray-900 pe-1">
+          Cursos mais populares
+        </h5>
+      </div>
+    </div>
+  </div>
+
+  <div data-popular-courses-chart="container"></div>
+  <input type="text" value="{{ popular_courses | map(attribute='course.name') | list | join(';') }}"
+    data-popular-courses-chart="courses-names" hidden>
+
+  <input type="text" value="{{ popular_courses | map(attribute='students_count') | list | join(';') }}"
+    data-popular-courses-chart="students-counts" hidden>
+
+  <div class="border-gray-200 border-t pt-3">
+    <div class="flex justify-center">
+      <a href="{{ url_for('admin_views.handle_courses_page_view') }}"
+        class="flex uppercase text-sm font-semibold items-center rounded-lg text-blue-600 hover:text-blue-700 hover:bg-gray-100 px-3 py-2">
+        Ver todos os cursos
+        <i class="ph-bold ph-caret-right text-blue-700"></i>
+      </a>
+    </div>
+  </div>
+</div>
