@@ -25,4 +25,7 @@ def get_analytics_page_view() -> str:
         students_absents_count_by_range_days=data[
             "students_absents_count_by_range_days"
         ],
+        professors_count_by_gender_and_subject=data[
+            "professors_count_by_gender_and_subject"
+        ],
     )

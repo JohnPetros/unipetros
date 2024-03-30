@@ -1,5 +1,8 @@
-from typing import Dict
+from typing import Dict, List
 from datetime import date, timedelta
+
+from entities.subject import Subject
+from entities.professor import Professor
 
 from repositories import (
     professors_repository,
@@ -41,6 +44,13 @@ class GetAnalyticsPageDataUseCase:
 
             total_posts_by_category = posts_repository.get_posts_count_by_category()
 
+            professors = professors_repository.get_professors()
+            subjects = subjects_repository.get_subjects()
+
+            professors_count_by_gender_and_subject = (
+                self.__get_professors_count_by_gender_and_subject(professors, subjects)
+            )
+
             popular_courses = courses_repository.get_courses_ordered_by_students_count()
 
             return {
@@ -52,9 +62,56 @@ class GetAnalyticsPageDataUseCase:
                 "last_enrolled_students": last_enrolled_students,
                 "popular_courses": popular_courses,
                 "students_absents_count_by_range_days": students_absents_count_by_range_days,
+                "professors_count_by_gender_and_subject": professors_count_by_gender_and_subject,
             }
         except Exception as exception:
             raise Error(error_message=exception) from exception
+
+    def __get_professors_count_by_gender_and_subject(
+        self, professors: List[Professor], subjects: List[Subject]
+    ):
+        subjects_ids = [subject.id for subject in subjects]
+
+        male_professors = [
+            professor for professor in professors if professor.gender == "male"
+        ]
+
+        female_professors = [
+            professor for professor in professors if professor.gender == "female"
+        ]
+
+        data = []
+
+        for index, subject_id in enumerate(subjects_ids):
+            male_professors_count = 0
+            female_professors_count = 0
+
+            for male_professor in male_professors:
+                professor_subjects_ids = [
+                    subject.id for subject in male_professor.subjects
+                ]
+
+                if subject_id in professor_subjects_ids:
+                    male_professors_count += 1
+
+            for female_professor in female_professors:
+                professor_subjects_ids = [
+                    subject.id for subject in female_professor.subjects
+                ]
+
+                if subject_id in professor_subjects_ids:
+                    female_professors_count += 1
+
+            data.append(
+                {
+                    "subject_id": subject_id,
+                    "subject_name": subjects[index].name,
+                    "male_professors_count": male_professors_count,
+                    "female_professors_count": female_professors_count,
+                }
+            )
+
+        return data
 
     def __get_students_absents_count_by_range_days(
         self, range_days: int, students_absents: Dict, total_students_count: int
