@@ -33,6 +33,8 @@ window.addEventListener('load', () => {
       legend: {
         position: 'bottom',
         fontFamily: 'Poppins, sans-serif',
+        fontWeight: 600,
+        fontSize: 14,
       },
       xaxis: {
         axisTicks: {
