@@ -1,9 +1,12 @@
 from os import getenv
 
-from flask import Flask
 
 from views import init_views
 from auth import init_auth
+
+from flask import Flask
+
+x = "eita"
 
 
 def init_app() -> Flask:
