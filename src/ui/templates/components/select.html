@@ -1,0 +1,16 @@
+{% macro select(id, options) %}
+
+<div class="space-y-3">
+  <label for="{{ id }}" class="label">Selecione uma opção</label>
+  <select id="{{ id }}" class="input">
+    {% for option in options %}
+    {% set is_selected = "selected" if loop.index0 == 0 else "" %}
+
+    <option value="{{ option[0] }}" {{ is_selected }}>
+      {{ option[1] }}
+    </option>
+    {% endfor %}
+  </select>
+</div>
+
+{% endmacro %}
