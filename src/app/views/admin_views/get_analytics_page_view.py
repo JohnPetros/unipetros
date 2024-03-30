@@ -18,8 +18,11 @@ def get_analytics_page_view() -> str:
         total_professors=data["total_professors"],
         total_students=data["total_students"],
         total_subjects=data["total_subjects"],
-        popular_courses=data["popular_courses"],
         total_students_by_gender=data["total_students_by_gender"],
         total_posts_by_category=data["total_posts_by_category"],
+        popular_courses=data["popular_courses"],
         last_enrolled_students=data["last_enrolled_students"],
+        students_absents_count_by_range_days=data[
+            "students_absents_count_by_range_days"
+        ],
     )
