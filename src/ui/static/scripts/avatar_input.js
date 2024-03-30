@@ -14,5 +14,4 @@ function handleInputChange(event) {
   }
 }
 
-if (input)
-  input.addEventListener('change', handleInputChange)
+if (input) input.addEventListener('change', handleInputChange)
