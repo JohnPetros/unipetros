@@ -1,0 +1,67 @@
+{% from 'components/select.html' import select %}
+
+<div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+  <div class="flex justify-between">
+    <div>
+      <h3 class="leading-none text-xl font-bold text-gray-900 dark:text-white pb-2">
+        Frequência dos alunos
+      </h3>
+    </div>
+  </div>
+
+  <div data-students-absents-chart="container"></div>
+  <input type="text" data-students-absents-chart="7-days-range-dates" value="
+  {{ 
+    students_absents_count_by_range_days['7 days']
+    | map(attribute='date') 
+    | join(';') 
+  }}" hidden>
+  <input type="text" data-students-absents-chart="7-days-range-count" value="
+  {{ 
+    students_absents_count_by_range_days['7 days']
+    | map(attribute='absents_count') 
+    | join(';') 
+  }}" hidden>
+
+
+  <input type="text" data-students-absents-chart="30-days-range-dates" value="
+  {{ 
+    students_absents_count_by_range_days['30 days']
+    | map(attribute='date') 
+    | join(';') 
+  }}" hidden>
+  <input type="text" data-students-absents-chart="30-days-range-count" value="
+  {{ 
+    students_absents_count_by_range_days['30 days']
+    | map(attribute='absents_count') 
+    | join(';') 
+  }}" hidden>
+
+  <input type="text" data-students-absents-chart="90-days-range-dates" value="
+  {{ 
+    students_absents_count_by_range_days['90 days']
+    | map(attribute='date') 
+    | join(';') 
+  }}" hidden>
+  <input type="text" data-students-absents-chart="90-days-range-count" value="
+  {{ 
+    students_absents_count_by_range_days['90 days']
+    | map(attribute='absents_count') 
+    | join(';') 
+  }}" hidden>
+
+
+  <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5">
+    <div class="flex justify-between items-center pt-5">
+      {{
+      select(
+      id="students-absents-chart-select",
+      options=[
+      ("7 days", "Últimos 7 dias"),
+      ("30 days", "Últimos 30 dias"),
+      ("90 days", "Últimos 90 dias")
+      ])
+      }}
+    </div>
+  </div>
+</div>

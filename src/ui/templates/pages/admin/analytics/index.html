@@ -44,12 +44,14 @@
   {% include 'pages/admin/analytics/posts_by_category_chart.html' %}
 </div>
 
-<div class="grid mt-12">
+<div class="grid grid-cols-2 gap-6 mt-12">
+  {% include 'pages/admin/analytics/students_absents_chart.html' %}
   {% include 'pages/admin/analytics/students_by_gender_chart.html' %}
 </div>
 
 <script src="{{ url_for('static', filename='scripts/popular_courses_chart.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/students_by_gender_chart.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/posts_by_category_chart.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/students_absents_chart.js') }}"></script>
 
 {% endblock dashboard_content %}
