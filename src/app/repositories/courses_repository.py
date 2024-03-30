@@ -30,6 +30,7 @@ class CoursesRepository:
                FROM courses AS C
                LEFT JOIN students AS S ON S.course_id = C.id
                GROUP BY C.id
+               LIMIT 4
                 """,
             is_single=False,
         )
