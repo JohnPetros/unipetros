@@ -1,8 +1,55 @@
 {% extends "layouts/dashboard/index.html" %}
 
+{% from 'pages/admin/analytics/count_card.html' import count_card %}
 
 {% block dashboard_content %}
 
-<h1>Analytics</h1>
+<h1 class="text-3xl text-petros-800 font-bold">Dashboard</h1>
+
+<ul class="grid grid-cols-3 gap-6 mt-6">
+  <li>
+    {{
+    count_card(
+    icon='identification-badge',
+    title='Professores',
+    href=url_for("admin_views.handle_professors_page_view"),
+    count=total_professors
+    )}}
+  </li>
+  <li>
+    {{
+    count_card(
+    icon='student',
+    title='Alunos',
+    href=url_for("admin_views.handle_students_page_view"),
+    count=total_students
+    )}}
+  </li>
+  <li>
+    {{
+    count_card(
+    icon='book-bookmark',
+    title='Disciplinas',
+    href=url_for("admin_views.handle_subjects_page_view"),
+    count=total_subjects
+    )}}
+  </li>
+</ul>
+
+<div class="grid grid-cols-2 items-start gap-6 mt-12">
+  <div class="space-y-6">
+    {% include 'pages/admin/analytics/popular_courses_chart.html' %}
+    {% include 'pages/admin/analytics/last_enrolled_students.html' %}
+  </div>
+  {% include 'pages/admin/analytics/posts_by_category_chart.html' %}
+</div>
+
+<div class="grid mt-12">
+  {% include 'pages/admin/analytics/students_by_gender_chart.html' %}
+</div>
+
+<script src="{{ url_for('static', filename='scripts/popular_courses_chart.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/students_by_gender_chart.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/posts_by_category_chart.js') }}"></script>
 
 {% endblock dashboard_content %}
