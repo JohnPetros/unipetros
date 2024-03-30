@@ -1,0 +1,19 @@
+{% macro count_card(icon, title, count, href) %}
+
+<div class="space-y-3 p-3 text-petros-800 font-semibold text-md rounded-md shadow-md bg-white">
+  <div class="flex items-center gap-3">
+    <div class="grid place-content-center p-2 rounded-md bg-blue-50">
+      <i class="ph-bold ph-{{ icon }} text-2xl text-blue-400"></i>
+    </div>
+    <span class="">Total de {{ title }}</span>
+  </div>
+  <div class="flex items-center justify-between">
+    <strong class="text-4xl text-blue-400 font-bold">{{ count }}</strong>
+    <a href="{{ href }}" class="flex items-center mt-3 gap-3 text-petros-300 text-sm">
+      Ver detalhes
+      <i class="ph-bold ph-arrow-right"></i>
+    </a>
+  </div>
+</div>
+
+{% endmacro %}
