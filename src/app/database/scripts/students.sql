@@ -10,8 +10,8 @@ CREATE TABLE students (
   avatar VARCHAR(255) DEFAULT 'default-avatar.png',
   birthdate DATE NOT NULL,
   gender ENUM('male', 'female'),
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  course_id CHAR(36),
+  created_at TIMESTAMP NOT NULL DEFAULT (UTC_TIMESTAMP),
+  course_id CHAR(36) NOT NULL,
   FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
@@ -35,3 +35,10 @@ GROUP BY S.id
 SELECT gender, COUNT(gender) AS count
 FROM students
 GROUP BY gender;
+
+SELECT S.*, GROUP_CONCAT(C.name) AS course_name
+FROM students AS S
+JOIN courses AS C ON C.id = S.course_id
+GROUP BY S.id
+ORDER BY S.created_at DESC
+LIMIT 4;

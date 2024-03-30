@@ -1,4 +1,5 @@
 from typing import Union, List, Dict
+from datetime import datetime
 
 from database import mysql
 
@@ -15,7 +16,7 @@ class StudentsRepository(UsersRepository):
         if not student:
             return None
 
-        return self.__get_student_model(student)
+        return self.__get_student_entity(student)
 
     def get_student_by_email(self, email: str) -> Union[Student, None]:
         student = mysql.query(
@@ -25,7 +26,7 @@ class StudentsRepository(UsersRepository):
         if not student:
             return None
 
-        return self.__get_student_model(student)
+        return self.__get_student_entity(student)
 
     def get_students(self) -> List[Student]:
         students = mysql.query(
@@ -42,7 +43,7 @@ class StudentsRepository(UsersRepository):
         if len(students) == 0:
             return []
 
-        return list(map(self.__get_student_model, students))
+        return list(map(self.__get_student_entity, students))
 
     def get_students_count(self) -> int:
         result = mysql.query(
@@ -61,6 +62,23 @@ class StudentsRepository(UsersRepository):
             """,
             is_single=False,
         )
+
+    def get_last_enrolled_students(self):
+        last_enrolled_students = mysql.query(
+            sql="""
+            SELECT S.*, GROUP_CONCAT(C.name) AS course_name
+            FROM students AS S
+            JOIN courses AS C ON C.id = S.course_id
+            GROUP BY S.id
+            ORDER BY S.created_at DESC
+            LIMIT 3
+            """,
+            is_single=False,
+        )
+
+        return [
+            self.__get_student_entity(student) for student in last_enrolled_students
+        ]
 
     def create_student(self, student: Student) -> None:
         mysql.mutate(
@@ -82,7 +100,7 @@ class StudentsRepository(UsersRepository):
             ],
         )
 
-    def __get_student_model(self, student_data: Dict):
+    def __get_student_entity(self, student_data: Dict):
         course = Course(name=student_data["course_name"])
 
         student = Student(
@@ -93,6 +111,7 @@ class StudentsRepository(UsersRepository):
             avatar=student_data["avatar"],
             birthdate=student_data["birthdate"],
             gender="masculino" if student_data["gender"] == "male" else "feminino",
+            created_at=datetime.strftime(student_data["created_at"], "%d/%m/%Y"),
             course=course,
         )
 
