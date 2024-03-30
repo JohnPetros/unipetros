@@ -49,9 +49,14 @@
   {% include 'pages/admin/analytics/students_by_gender_chart.html' %}
 </div>
 
+<div class="grid grid-cols-2 gap-6 mt-12">
+  {% include 'pages/admin/analytics/professors_by_gender_and_subject_chart.html' %}
+</div>
+
 <script src="{{ url_for('static', filename='scripts/popular_courses_chart.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/students_by_gender_chart.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/posts_by_category_chart.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/students_absents_chart.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/professors_count_by_gender_and_subject.js') }}"></script>
 
 {% endblock dashboard_content %}

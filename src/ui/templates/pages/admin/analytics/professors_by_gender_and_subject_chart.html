@@ -1,0 +1,54 @@
+{% from 'components/checkbox.html' import checkbox %}
+
+<div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+
+  <div class="flex justify-between mb-3">
+    <div class="flex justify-center items-center">
+      <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1">Professores por disciplina</h3>
+    </div>
+    <div>
+      <div id="data-tooltip" role="tooltip"
+        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        Download CSV
+        <div class="tooltip-arrow" data-popper-arrow></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="flex flex-wrap gap-3 mt-6">
+    {% for data in professors_count_by_gender_and_subject %}
+    {{
+    checkbox(
+    label=data["subject_name"],
+    id="checkbox-" ~ data["subject_id"],
+    value='subject-{}'.format(data['subject_id']),
+    attributes="data-professors-by-gender-and-subject-chart=checkbox checked"
+    )
+    }}
+    {% endfor %}
+  </div>
+
+  <div data-professors-by-gender-and-subject-chart="container"></div>
+
+  {% for data in professors_count_by_gender_and_subject %}
+  <input type="text" id="{{ 'subject-{}'.format(data['subject_id']) }}"
+    data-professors-by-gender-and-subject-chart="professor-count"
+    value="{{ '{};{}'.format(data['male_professors_count'], data['female_professors_count']) }}" hidden>
+  {% endfor %}
+
+
+  <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
+    <div class="flex justify-end pt-5">
+      <a href="#"
+        class="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-blue-600 hover:text-blue-700 dark:hover:text-blue-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2">
+        Ver todos os professores
+        <svg class="w-2.5 h-2.5 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 6 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m1 9 4-4-4-4" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

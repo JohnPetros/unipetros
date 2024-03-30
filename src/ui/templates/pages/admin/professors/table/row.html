@@ -22,7 +22,7 @@
     {{ professor.age }}
   </td>
   <td class="table-data">
-    {{ professor.gender }}
+    {{ "masculino" if professor_data.gender == "male" else "feminino" }}
   </td>
 </tr>
 
