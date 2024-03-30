@@ -4,6 +4,8 @@ from database import mysql
 
 from entities.post import Post
 
+from constants.post_category_map import POST_CATEGORY_MAP
+
 
 class PostsRepository:
     def get_posts(self) -> List[Post]:
@@ -12,7 +14,7 @@ class PostsRepository:
         return [self.__get_post_entity(post) for post in posts]
 
     def get_posts_count_by_category(self) -> List[Dict]:
-        return mysql.query(
+        posts_count_by_category = mysql.query(
             sql="""
                 SELECT category, COUNT(category) AS count 
                 FROM posts 
@@ -20,6 +22,11 @@ class PostsRepository:
                 """,
             is_single=False,
         )
+
+        return [
+            {"category": POST_CATEGORY_MAP[data["category"]], "count": data["count"]}
+            for data in posts_count_by_category
+        ]
 
     def __get_post_entity(self, post_data: Dict) -> Post:
         return Post(
