@@ -1,0 +1,45 @@
+<div class="p-6 rounded-md shadow-md bg-white">
+  <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1">
+    Últimos alunos cadastrados
+  </h3>
+
+  <table class="w-full mt-6">
+    <thead>
+      <tr>
+        <th scolpe="col" class="text-petros-200">
+          Aluno
+        </th>
+        <th scolpe="col" class="text-petros-200">
+          Curso
+        </th>
+        <th scolpe="col" class="text-petros-200">
+          Data
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for student in last_enrolled_students %}
+      <tr class="text-sm">
+        <td class="text-petros-800 font-medium">
+          <a href="" class="flex items-center gap-3">
+            <img src="{{ url_for('static', filename='uploads/images/{}'.format(student.avatar)) }}" width="32"
+              height="32" alt="">
+            {{ student.name }}
+          </a>
+        </td>
+        <td class="text-petros-800 font-medium">
+          <div class="w-full">
+            <span class="block truncate">
+              {{ student.course.name }}
+            </span>
+          </div>
+        </td>
+        <td class="text-petros-800 font-medium">
+          {{ student.created_at }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
