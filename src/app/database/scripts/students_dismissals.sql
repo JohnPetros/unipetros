@@ -1,14 +1,14 @@
 -- Active: 1711212961472@@127.0.0.1@3306
-DROP TABLE IF EXISTS students_absents;
+DROP TABLE IF EXISTS students_dismissals;
 
-CREATE TABLE IF NOT EXISTS students_absents (
+CREATE TABLE IF NOT EXISTS students_dismissals (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY,
-  date DATE DEFAULT CURRENT_DATE NOT NULL,
+  date DATE NOT NULL,
   student_id CHAR(36) NOT NULL,
-  FOREIGN KEY students_absents(student_id) REFERENCES students(id) ON DELETE CASCADE
+  FOREIGN KEY students_dismissals(student_id) REFERENCES students(id) ON DELETE CASCADE
 );
 
-INSERT INTO students_absents (student_id, date) VALUES
+INSERT INTO students_dismissals (student_id, date) VALUES
 ('21961378-0d00-435a-9fe5-f9579ae8715a', '2024-03-29'),
 ('21961378-0d00-435a-9fe5-f9579ae8715a', '2024-03-28'),
 ('21961378-0d00-435a-9fe5-f9579ae8715a', '2024-03-27'),
@@ -35,6 +35,6 @@ INSERT INTO students_absents (student_id, date) VALUES
 ('fb4c6227-932a-47a2-97ca-f4942d13aeab', '2024-03-26'),
 ('fb4c6227-932a-47a2-97ca-f4942d13aeab', '2024-03-21');
 
-DELETE FROM students_absents;
+DELETE FROM students_dismissals;
 
-SELECT * FROM students_absents;
+SELECT * FROM students_dismissals;
