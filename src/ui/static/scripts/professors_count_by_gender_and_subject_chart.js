@@ -96,7 +96,6 @@ window.addEventListener('load', () => {
           )
 
           if (professors_count) {
-            console.log(professors_count.value.split(';').map(Number))
             const checkboxValues = professors_count.value.split(';').map(Number)
             maleProfessorsCount += checkboxValues[0]
             femaleProfessorsCount += checkboxValues[1]

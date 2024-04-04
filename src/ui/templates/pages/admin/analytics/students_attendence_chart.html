@@ -1,0 +1,60 @@
+{% from 'components/select.html' import select %}
+{% from 'components/balance_percentage.html' import balance_percentage %}
+
+<div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+  <div class="flex items-center justify-between">
+    <h3
+      class="leading-none text-xl font-bold text-gray-900 dark:text-white pb-2">
+      Frequência dos alunos
+    </h3>
+    <div>
+      {{
+      balance_percentage(attributes="data-students-absents-chart=balance-percentage")
+      }}
+    </div>
+  </div>
+  <div data-students-absents-chart="container"></div>
+  <input
+    type="text"
+    data-students-absents-chart="total-students"
+    value="{{ total_students }}"
+    hidden>
+
+  {% for days in [7, 30, 90] %}
+  <input
+    type="text"
+    data-students-absents-chart="{{ days }}-days-range-dates"
+    value="
+      {{ 
+        students_activity_by_range_days['{} days'.format(days)]
+        | map(attribute='date') 
+        | join(';') 
+      }}"
+    hidden>
+  <input
+    type="text"
+    data-students-absents-chart="{{ days }}-days-range-attendance"
+    value="
+      {{ 
+        students_activity_by_range_days['{} days'.format(days)]
+        | map(attribute='attendance') 
+        | join(';') 
+      }}"
+    hidden>
+  {% endfor %}
+  <div
+    class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5">
+    <div class="flex justify-between items-center pt-5">
+      {{
+      select(
+      id="students-absents-chart-select",
+      options=[
+      ("7 days", "Últimos 7 dias"),
+      ("30 days", "Últimos 30 dias"),
+      ("90 days", "Últimos 90 dias")
+      ]
+      )
+      }}
+    </div>
+  </div>
+</div>

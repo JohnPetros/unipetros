@@ -21,7 +21,7 @@
     {{ student.age }}
   </td>
   <td class="table-data">
-    {{ student.gender }}
+    {{ "masculino" if student_data.gender == "male" else "feminino" }}
   </td>
 </tr>
 
