@@ -20,6 +20,7 @@ Flask==3.0.2
 Flask-Bcrypt==1.0.1
 Flask-Login==0.6.3
 Flask-WTF==1.2.1
+gunicorn==21.2.0
 identify==2.5.35
 idna==3.6
 importlib_metadata==7.1.0
