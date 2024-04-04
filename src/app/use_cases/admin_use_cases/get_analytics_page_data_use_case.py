@@ -28,17 +28,33 @@ class GetAnalyticsPageDataUseCase:
 
             last_enrolled_students = students_repository.get_last_enrolled_students()
 
+            students = students_repository.get_students()
+
             students_absents = students_repository.get_students_absents()
 
-            students_absents_count_by_range_days = {
-                "7 days": self.__get_students_absents_count_by_range_days(
-                    7, students_absents, total_students
+            students_dismissals = students_repository.get_students_dismissals()
+
+            students_activity_by_range_days = {
+                "7 days": self.__get_students_data_count_by_range_days(
+                    range_days=7,
+                    students=students,
+                    students_dismissals=students_dismissals,
+                    students_absents=students_absents,
+                    total_students_count=total_students,
                 ),
-                "30 days": self.__get_students_absents_count_by_range_days(
-                    30, students_absents, total_students
+                "30 days": self.__get_students_data_count_by_range_days(
+                    range_days=30,
+                    students=students,
+                    students_dismissals=students_dismissals,
+                    students_absents=students_absents,
+                    total_students_count=total_students,
                 ),
-                "90 days": self.__get_students_absents_count_by_range_days(
-                    90, students_absents, total_students
+                "90 days": self.__get_students_data_count_by_range_days(
+                    range_days=90,
+                    students=students,
+                    students_dismissals=students_dismissals,
+                    students_absents=students_absents,
+                    total_students_count=total_students,
                 ),
             }
 
@@ -61,7 +77,7 @@ class GetAnalyticsPageDataUseCase:
                 "total_posts_by_category": total_posts_by_category,
                 "last_enrolled_students": last_enrolled_students,
                 "popular_courses": popular_courses,
-                "students_absents_count_by_range_days": students_absents_count_by_range_days,
+                "students_activity_by_range_days": students_activity_by_range_days,
                 "professors_count_by_gender_and_subject": professors_count_by_gender_and_subject,
             }
         except Exception as exception:
@@ -113,26 +129,42 @@ class GetAnalyticsPageDataUseCase:
 
         return data
 
-    def __get_students_absents_count_by_range_days(
-        self, range_days: int, students_absents: Dict, total_students_count: int
-    ) -> Dict:
+    def __get_students_data_count_by_range_days(self, **kwargs) -> Dict:
         current_date = date.today()
 
-        absents_count_by_date = []
+        range_days = kwargs["range_days"]
+         students = kwargs["students"]
+        students_absents = kwargs["students_absents"]
+        students_dismissals = kwargs["students_dismissals"]
+        total_students_count = kwargs["total_students_count"]
+        
+            data = []
 
-        for days in range(range_days, -1, -1):
+        for days in range(range_days, 0, -1):
             first_date = current_date - timedelta(days=days)
+            enrollments_count = 0
+            absents_count = 0
+            dismissals_count = 0
 
-            count = 0
+            for student in students:
+                if student.created_at == first_date:
+                    enrollments_count += 1
+
             for absent in students_absents:
                 if absent["date"] == first_date:
-                    count += 1
+                    absents_count += 1
 
-            absents_count_by_date.append(
+            for dismissal in students_dismissals:
+                if dismissal["date"] == first_date:
+                    dismissals_count += 1
+
+            data.append(
                 {
                     "date": first_date.strftime("%d/%m/%Y"),
-                    "absents_count": total_students_count - count,
+                    "enrollments_count": enrollments_count,
+                    "attendance": total_students_count - absents_count,
+                    "dismissals_count": dismissals_count,
                 }
             )
 
-        return absents_count_by_date
+        return data

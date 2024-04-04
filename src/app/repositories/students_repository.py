@@ -31,11 +31,17 @@ class StudentsRepository(UsersRepository):
     def get_students(self) -> List[Student]:
         students = mysql.query(
             sql="""
-            SELECT 
-                S.*, 
-                C.name AS course_name
+           SELECT 
+            S.*, 
+            C.name AS course_name,
+            (SELECT EXISTS (
+                SELECT 1 
+                FROM students_dismissals AS SD 
+                WHERE SD.student_id = S.id
+            )) AS is_active
             FROM students AS S
             JOIN courses AS C ON C.id = S.course_id
+            GROUP BY S.id
             """,
             is_single=False,
         )
@@ -66,7 +72,14 @@ class StudentsRepository(UsersRepository):
     def get_last_enrolled_students(self):
         last_enrolled_students = mysql.query(
             sql="""
-            SELECT S.*, GROUP_CONCAT(C.name) AS course_name
+           SELECT 
+                S.*, 
+                GROUP_CONCAT(C.name) AS course_name,
+                (SELECT EXISTS (
+                    SELECT 1 
+                    FROM students_dismissals AS SD 
+                    WHERE SD.student_id = S.id
+                )) AS is_active
             FROM students AS S
             JOIN courses AS C ON C.id = S.course_id
             GROUP BY S.id
@@ -89,6 +102,16 @@ class StudentsRepository(UsersRepository):
         )
 
         return students_absents
+
+    def get_students_dismissals(self):
+        students_dismissals = mysql.query(
+            sql="""
+                SELECT * FROM students_dismissals
+                """,
+            is_single=False,
+        )
+
+        return students_dismissals
 
     def create_student(self, student: Student) -> None:
         mysql.mutate(
@@ -120,7 +143,8 @@ class StudentsRepository(UsersRepository):
             password=student_data["password"],
             avatar=student_data["avatar"],
             birthdate=student_data["birthdate"],
-            gender="masculino" if student_data["gender"] == "male" else "feminino",
+            gender=student_data["gender"],
+            is_active=bool(student_data["is_active"]),
             created_at=datetime.strftime(student_data["created_at"], "%d/%m/%Y"),
             course=course,
         )

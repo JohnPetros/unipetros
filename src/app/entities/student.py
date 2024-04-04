@@ -8,4 +8,5 @@ from entities.course import Course
 @dataclass
 class Student(User):
     course: Course = None
+    is_active: bool = True
     created_at: date = None
