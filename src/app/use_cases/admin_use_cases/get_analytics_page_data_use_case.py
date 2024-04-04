@@ -133,12 +133,12 @@ class GetAnalyticsPageDataUseCase:
         current_date = date.today()
 
         range_days = kwargs["range_days"]
-         students = kwargs["students"]
+        students = kwargs["students"]
         students_absents = kwargs["students_absents"]
         students_dismissals = kwargs["students_dismissals"]
         total_students_count = kwargs["total_students_count"]
-        
-            data = []
+
+        data = []
 
         for days in range(range_days, 0, -1):
             first_date = current_date - timedelta(days=days)
