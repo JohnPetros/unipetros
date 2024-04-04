@@ -8,7 +8,7 @@
   {% if field %}
   {{ field(class='input min-h-24', placeholder=placeholder) }}
   {% else %}
-  <textarea id="{{ id }}" name="{{ id }}" placeholder="{{ placeholder }}" class="input"></textarea>
+  <textarea id="{{ id }}" name="{{ id }}" placeholder="{{ placeholder }}" class="input h-32"></textarea>
   {% endif %}
 
   {{ input_errors(errors) }}

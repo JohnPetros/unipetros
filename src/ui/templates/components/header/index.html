@@ -2,11 +2,12 @@
 
 {% from 'components/header/navigation.html' import navigation %}
 {% from 'components/header/login_button.html' import login_button %}
+{% from 'components/logo.html' import logo %}
 
 <header>
   <div class="bg-gradient-to-r from-petros-900 via-petros-800 to-petros-700 py-6">
     <div class="container flex items-center justify-between">
-      {% include 'components/logo.html' %}
+      {{ logo() }}
 
       <div class="hidden md:block">
         {{ navigation() }}
