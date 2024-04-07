@@ -1,3 +1,4 @@
+-- Active: 1712190283212@@localhost@3306@unipetros
 USE unipetros;
 
 DROP TABLE IF EXISTS professors;
@@ -22,3 +23,14 @@ DELETE FROM professors;
 SELECT * FROM professors;
 
 SELECT COUNT(id) AS count FROM professors
+
+
+SELECT 
+  P.*, 
+  GROUP_CONCAT(S.id) AS subjects_ids, 
+  GROUP_CONCAT(S.name) AS subjects_names
+FROM professors AS P
+LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
+LEFT JOIN subjects AS S ON PS.subject_id = S.id
+WHERE P.name LIKE '%felix%' OR P.email LIKE '%felix.nc@gmail.com%'
+GROUP BY P.id
