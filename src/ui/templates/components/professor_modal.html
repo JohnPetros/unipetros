@@ -54,13 +54,13 @@
       }}
     </div>
 
-
     <div class="{{ grid_input }}">
       <div class="space-y-2">
         {{ professor_form.birthdate.label(class="label") }}
         {{ professor_form.birthdate(class="input") }}
       </div>
-      {{ radio_group(label="Gênero", name="gender", radios=professor_form.gender.choices) }}
+      {{ radio_group(label="Gênero", name="gender",
+      radios=professor_form.gender.choices) }}
     </div>
 
     <div class="{{ grid_input }}">
@@ -80,7 +80,8 @@
       }}
     </div>
 
-    {{ avatar_input(label=professor_form.avatar.label, control=professor_form.avatar) }}
+    {{ avatar_input(label=professor_form.avatar.label,
+    control=professor_form.avatar) }}
 
     <div class="flex items-center gap-3 flex-wrap">
       {{

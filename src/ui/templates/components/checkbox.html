@@ -4,7 +4,8 @@
   {% if field %}
   {{ field(id=id, class='checkbox') }}
   {% else %}
-  <input type="checkbox" id="{{ id }}" name="{{ id }}" value="{{ value }}" {{ attributes }} class="checkbox">
+  <input type="checkbox" id="{{ value }}" name="{{ id }}" value="{{ value }}" {{
+    attributes }} class="checkbox">
   {% endif %}
   <label for="{{ id }}" class="block text-sm font-semibold text-blue-700">
     {{ label }}
