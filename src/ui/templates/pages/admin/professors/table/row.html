@@ -4,8 +4,10 @@
 
 <tr class="table-row">
   <td class="table-data">
-    <a href="" class="flex items-center gap-2 font-semibold p-0">
-      <img src="{{url_for('static', filename='uploads/images/{}'.format(professor.avatar)) }}" alt="" width="32"
+    <a href class="flex items-center gap-2 font-semibold p-0">
+      <img
+        src="{{url_for('static', filename='uploads/images/{}'.format(professor.avatar)) }}"
+        alt width="32"
         height="32">
       {{ professor.name }}
     </a>
@@ -22,7 +24,7 @@
     {{ professor.age }}
   </td>
   <td class="table-data">
-    {{ "masculino" if professor_data.gender == "male" else "feminino" }}
+    {{ "masculino" if professor.gender == "male" else "feminino" }}
   </td>
 </tr>
 
