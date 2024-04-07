@@ -82,10 +82,11 @@ class ProfessorsRepository(UsersRepository):
             filters.append(f" P.email LIKE '%{email}%' ")
 
         if len(subjects_ids) > 0:
-            filters.append(f" P.email LIKE '%{subjects_ids}%' ")
+            ids = ",".join(list(map(lambda id: f"'{id}'", subjects_ids)))
+            filters.append(f" S.id IN ({ids}) ")
 
         if len(filters) > 0:
-            filters = "WHERE" + "AND".join(filters)
+            filters = "WHERE" + "OR".join(filters)
         else:
             filters = ""
 
