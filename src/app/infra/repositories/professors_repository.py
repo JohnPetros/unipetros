@@ -45,7 +45,7 @@ class ProfessorsRepository(UsersRepository):
 
         return int(result["count"])
 
-    def get_professors(self) -> List[Professor]:
+    def get_professors(self):
         professors = mysql.query(
             sql="""
                 SELECT 
@@ -55,6 +55,50 @@ class ProfessorsRepository(UsersRepository):
                 FROM professors AS P
                 LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
                 LEFT JOIN subjects AS S ON PS.subject_id = S.id
+                GROUP BY P.id
+                """,
+            is_single=False,
+        )
+
+        if len(professors) == 0:
+            return []
+
+        professors = list(map(self.__get_professor_entity, professors))
+
+        return professors
+
+    def get_filtered_professors(
+        self,
+        name: str = None,
+        email: str = None,
+        subjects_ids: List[str] = [],
+    ) -> List[Professor]:
+        filters = []
+
+        if name:
+            filters.append(f" P.name LIKE '%{name}%' ")
+
+        if email:
+            filters.append(f" P.email LIKE '%{email}%' ")
+
+        if len(subjects_ids) > 0:
+            filters.append(f" P.email LIKE '%{subjects_ids}%' ")
+
+        if len(filters) > 0:
+            filters = "WHERE" + "AND".join(filters)
+        else:
+            filters = ""
+
+        professors = mysql.query(
+            sql=f"""
+                SELECT 
+                    P.*, 
+                    GROUP_CONCAT(S.id) AS subjects_ids, 
+                    GROUP_CONCAT(S.name) AS subjects_names
+                FROM professors AS P
+                LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
+                LEFT JOIN subjects AS S ON PS.subject_id = S.id
+                {filters}
                 GROUP BY P.id
                 """,
             is_single=False,
