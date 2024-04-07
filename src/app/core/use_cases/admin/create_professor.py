@@ -40,14 +40,15 @@ class CreateProfessor:
             professors = professors_repository.get_professors()
             return professors
 
-        except Exception as exception:
-            return Error(exception)
+        except Error as error:
+            print(error)
+            raise Error(ui_message=error)
 
     def __validate_professor_email(self, email: str) -> bool:
         professor_already_exists = professors_repository.get_professor_by_email(email)
 
         if professor_already_exists:
-            return Error("Professor já existente com esse e-mail", 400)
+            raise Error("Professor já existente com esse e-mail")
 
         return True
 
