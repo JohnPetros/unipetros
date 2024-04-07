@@ -2,7 +2,7 @@ from typing import Dict, Union, List
 
 from core.entities.professor import Professor
 
-from infra.repositories import subjects_repository, professors_repository
+from infra.repositories import subjects_repository
 from infra.forms.professor_form import ProfessorForm
 from infra.utils.error import Error
 
@@ -10,7 +10,6 @@ from infra.utils.error import Error
 class GetProfessorsPageData:
     def execute(self) -> Dict[str, Union[List[Professor], ProfessorForm]]:
         try:
-            professors = professors_repository.get_professors()
             subjects = subjects_repository.get_subjects()
 
             professors_form = ProfessorForm()
@@ -19,7 +18,6 @@ class GetProfessorsPageData:
             ]
 
             return {
-                "professors": professors,
                 "professor_form": professors_form,
             }
 
