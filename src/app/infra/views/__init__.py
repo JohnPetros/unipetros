@@ -17,4 +17,4 @@ def init_views(app: Flask) -> None:
     @app.errorhandler(400)
     def handle_bad_request_error(error):
         flash(error.description, "error")
-        return redirect(request.path)
+        return "BAD REQUEST"
