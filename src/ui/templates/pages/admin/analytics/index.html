@@ -12,7 +12,7 @@
     count_card(
     icon='identification-badge',
     title='Professores',
-    href=url_for("admin_views.handle_professors_page_view"),
+    href=url_for("admin_views.get_professors_page_view"),
     count=total_professors
     )}}
   </li>
@@ -50,15 +50,22 @@
 </div>
 
 <div class="grid grid-cols-2 gap-6 mt-12">
-  {% include 'pages/admin/analytics/professors_by_gender_and_subject_chart.html' %}
+  {% include 'pages/admin/analytics/professors_by_gender_and_subject_chart.html'
+  %}
   {% include 'pages/admin/analytics/students_registration_chart.html' %}
 </div>
 
-<script src="{{ url_for('static', filename='scripts/popular_courses_chart.js') }}"></script>
-<script src="{{ url_for('static', filename='scripts/students_by_gender_chart.js') }}"></script>
-<script src="{{ url_for('static', filename='scripts/posts_by_category_chart.js') }}"></script>
-<script src="{{ url_for('static', filename='scripts/students_attendence_chart.js') }}"></script>
-<script src="{{ url_for('static', filename='scripts/professors_count_by_gender_and_subject_chart.js') }}"></script>
-<script src="{{ url_for('static', filename='scripts/students_registration_chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/popular_courses_chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/students_by_gender_chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/posts_by_category_chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/students_attendence_chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/professors_count_by_gender_and_subject_chart.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/students_registration_chart.js') }}"></script>
 
 {% endblock dashboard_content %}

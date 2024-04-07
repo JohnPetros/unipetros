@@ -24,12 +24,24 @@
   )
   }}
 </div>
-
 <div class="mt-6">
-  {{ search(label='Pesquisar professor por nome ou e-mail', placeholder='Girafalles da Nôbrega') }}
+  {{
+  search(
+  label='Pesquisar professor por nome ou e-mail',
+  placeholder='Girafalles da Nôbrega',
+  url=url_for("admin_views.get_filtered_professors_view"),
+  target="#professors-table"
+  )
+  }}
 </div>
 
-<div class="mt-6">
+<div
+  id="professors-table"
+  hx-get="/dashboard/professors/filter"
+  hx-params="*"
+  hx-swap="innerHTML"
+  hx-trigger="load"
+  class="mt-6">
   {% include 'pages/admin/professors/table/index.html' %}
 </div>
 
