@@ -7,7 +7,9 @@ from infra.repositories import professors_repository
 
 
 class GetFilteredProfessors:
-    def excute(self, name_or_email: str, subjects_ids: List) -> List[Professor]:
+    def excute(
+        self, name_or_email: str = "", subjects_ids: List = []
+    ) -> List[Professor]:
         professors = []
 
         if name_or_email:

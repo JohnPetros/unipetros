@@ -9,8 +9,11 @@ from infra.auth import login_checker, role_checker
 @role_checker("admin")
 def get_filtered_professors_view() -> str:
     search = request.args.get("search")
+    subjects_ids = request.args.getlist("subjects_ids[]")
 
-    professors = get_filtered_professors.excute(name_or_email=search, subjects_ids=[])
+    professors = get_filtered_professors.excute(
+        name_or_email=search, subjects_ids=subjects_ids
+    )
 
     return render_template(
         "pages/admin/professors/table/index.html",
