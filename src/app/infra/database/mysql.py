@@ -22,7 +22,7 @@ class MySQL:
 
         except mysql.connector.Error as error:
             raise Error(
-                f"Failed to create a database connection. Error: {error}",
+                error_message=f"Failed to create a database connection. Error: {error}",
                 should_abort=False,
             ) from error
 
@@ -39,7 +39,7 @@ class MySQL:
             self.__close_connection()
 
             raise Error(
-                f"Failed to execute a query on the database. Error: {error}",
+                error_message=f"Failed to execute a query on the database. Error: {error}",
             ) from error
 
     def mutate(self, sql: str, params) -> Dict:

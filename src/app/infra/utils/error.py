@@ -5,14 +5,19 @@ from cowsay import func as cow_say
 class Error(Exception):
     def __init__(
         self,
-        error_message: str,
+        ui_message: str = "",
+        error_message: str = "Internal Server Error",
         status_code: int = 500,
-        ui_message="",
-        should_abort=True,
+        should_abort=False,
     ) -> None:
-        cow_say(error_message)
+        super().__init__(ui_message)
+        self.message = ui_message
+
         if ui_message:
             flash(ui_message, "error")
+
+        if error_message:
+            cow_say(error_message)
 
         if should_abort:
             abort(status_code, error_message)
