@@ -3,6 +3,8 @@
 {% from 'components/modal.html' import modal %}
 {% from 'components/csv_button.html' import csv_button %}
 {% from 'components/search.html' import search %}
+{% from 'components/dropdown.html' import dropdown %}
+{% from 'components/checkbox.html' import checkbox %}
 
 {% block dashboard_content %}
 
@@ -24,23 +26,40 @@
   )
   }}
 </div>
-<div class="mt-6">
+<form
+  hx-get="{{ url_for('admin_views.get_filtered_professors_view') }}"
+  hx-target="#professors-table"
+  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[type='checkbox']"
+  hx-swap="innerHTML"
+  class="flex items-end gap-3 w-full mt-6">
   {{
   search(
   label='Pesquisar professor por nome ou e-mail',
   placeholder='Girafalles da Nôbrega',
-  url=url_for("admin_views.get_filtered_professors_view"),
-  target="#professors-table"
+  value=search_value
   )
   }}
-</div>
+
+  {% call dropdown(title="Selecionar disciplina") %}
+  <ul class="space-y-3">
+    {% for subject_checkbox in subjects_checkbox_group %}
+    <li>
+      {{
+      checkbox(
+      id=subject_checkbox[1],
+      name="subjects_ids[]",
+      label=subject_checkbox[1],
+      value=subject_checkbox[0],
+      )
+      }}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endcall %}
+</form>
 
 <div
   id="professors-table"
-  hx-get="/dashboard/professors/filter"
-  hx-params="*"
-  hx-swap="innerHTML"
-  hx-trigger="load"
   class="mt-6">
   {% include 'pages/admin/professors/table/index.html' %}
 </div>
