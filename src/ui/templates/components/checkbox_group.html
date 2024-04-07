@@ -1,12 +1,17 @@
 {% from 'components/input_errors.html' import input_errors %}
 {% from 'components/checkbox.html' import checkbox as checkbox_field %}
 
-{% macro checkbox_group(label, name, checkboxes, errors) %}
+{% macro checkbox_group(label, name, checkboxes, errors, is_form) %}
 
 <div class="space-y-3">
   <strong>{{ label }}:</strong>
   {% for checkbox in checkboxes %}
-  {{ checkbox_field(id=checkbox.value, label=checkbox.label, field=checkbox) }}
+  {{
+  checkbox_field(
+  id=checkbox.value,
+  label=checkbox.label,
+  field=checkbox)
+  }}
   {% endfor %}
   {{ input_errors(errors) }}
 </div>
