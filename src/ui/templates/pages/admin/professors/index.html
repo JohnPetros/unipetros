@@ -5,6 +5,7 @@
 {% from 'components/search.html' import search %}
 {% from 'components/dropdown.html' import dropdown %}
 {% from 'components/checkbox.html' import checkbox %}
+{% from 'components/pagination/index.html' import pagination %}
 
 {% block dashboard_content %}
 
@@ -29,7 +30,7 @@
 <form
   hx-get="{{ url_for('admin_views.get_filtered_professors_view') }}"
   hx-target="#professors-table"
-  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[type='checkbox']"
+  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[type='checkbox'], change from:#pagination-input"
   hx-swap="innerHTML"
   class="flex items-end gap-3 w-full mt-6">
   {{
@@ -56,12 +57,20 @@
     {% endfor %}
   </ul>
   {% endcall %}
+
+  <input data-pagination="input" id="pagination-input" type="text" name="page"
+    hidden>
 </form>
 
-<div
-  id="professors-table"
-  class="mt-6">
-  {% include 'pages/admin/professors/table/index.html' %}
+<div class="relative mt-6">
+  <div
+    id="professors-table">
+    {% include 'pages/admin/professors/table/index.html' %}
+  </div>
+
+  <div class="mt-6 fixed bottom-2">
+    {{ pagination(current_page_number=1, pages_count=4) }}
+  </div>
 </div>
 
 {% endblock dashboard_content %}
