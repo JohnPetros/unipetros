@@ -6,7 +6,6 @@ from .get_professor_details_page_view import get_professor_details_page_view
 from .handle_professors_page_view import handle_professors_page_view
 from .get_filtered_professors_view import get_filtered_professors_view
 from .create_professors_by_csv_view import create_professors_by_csv_view
-from .create_professor_view import create_professor_view
 
 from .handle_students_page_view import handle_students_page_view
 from .create_students_by_csv_view import create_students_by_csv_view
@@ -38,12 +37,6 @@ route(
 route(
     rule="/dashboard/professors/csv",
     view_func=create_professors_by_csv_view,
-    methods=["POST"],
-)
-
-route(
-    rule="/dashboard/professors/new",
-    view_func=create_professor_view,
     methods=["POST"],
 )
 
