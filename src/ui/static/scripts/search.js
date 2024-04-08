@@ -1,16 +1,22 @@
-const searchInput = document.querySelector('[data-search="input"]')
+class Search {
+  constructor() {
+    const searchInput = document.querySelector(
+      '[data-search="input"]',
+      (event) => this.handleSearchInputChange(event),
+    )
 
-function appendSeachParam(searchValue) {
-  const url = new URL(location)
-  url.searchParams.set('search', searchValue)
-  history.pushState({}, '', url)
+    if (searchInput) {
+      searchInput.addEventListener('input', (event) =>
+        this.handleSearchInputChange(event),
+      )
+      this.queryParam = new QueryParam()
+    }
+  }
+
+  handleSearchInputChange(event) {
+    const searchValue = event.currentTarget.value
+    this.queryParam.append('search', searchValue)
+  }
 }
 
-function handleSearchInputChange(event) {
-  searchValue = event.currentTarget.value
-  appendSeachParam(searchValue)
-}
-
-if (searchInput) {
-  searchInput.addEventListener('input', handleSearchInputChange)
-}
+window.addEventListener('load', () => new Search())
