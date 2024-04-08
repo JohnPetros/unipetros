@@ -12,9 +12,14 @@ from infra.forms.professor_form import ProfessorForm
 def handle_professors_page_view() -> str:
     user = get_auth_user()
 
+    search = request.args.get("search")
+    subjects_ids = request.args.getlist("subjects_ids")
+    page = request.args.get("page", 1)
+
     try:
-        search = request.args.get("search")
-        professors = get_filtered_professors.excute(name_or_email="", subjects_ids=[])
+        professors = get_filtered_professors.excute(
+            name_or_email=search, subjects_ids=subjects_ids, page_number=page
+        )
 
         subjects = subjects_repository.get_subjects()
 
@@ -22,8 +27,6 @@ def handle_professors_page_view() -> str:
 
         professor_form = ProfessorForm()
         professor_form.subjects.choices = subjects_checkbox_group
-
-        subjects_checkbox_group = subjects_checkbox_group
 
         if request.method == "POST" and professor_form.validate_on_submit():
             create_professor.execute(professor_form.data)

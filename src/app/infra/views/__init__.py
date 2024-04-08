@@ -1,4 +1,4 @@
-from flask import Flask, request, flash, redirect
+from flask import Flask, flash
 
 from .home_views import home_views
 from .auth_views import auth_views
@@ -14,7 +14,7 @@ def init_views(app: Flask) -> None:
     def handle_not_found_error(_):
         return "EITA"
 
-    @app.errorhandler(400)
+    @app.errorhandler(500)
     def handle_bad_request_error(error):
         flash(error.description, "error")
-        return "BAD REQUEST"
+        return "PROBLEMA GRAVE NO SERVIDOR"

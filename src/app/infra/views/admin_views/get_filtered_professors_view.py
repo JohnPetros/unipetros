@@ -10,9 +10,12 @@ from infra.auth import login_checker, role_checker
 def get_filtered_professors_view() -> str:
     search = request.args.get("search")
     subjects_ids = request.args.getlist("subjects_ids[]")
+    page = request.args.get("page", 1)
+
+    print(page, flush=True)
 
     professors = get_filtered_professors.excute(
-        name_or_email=search, subjects_ids=subjects_ids
+        name_or_email=search, subjects_ids=subjects_ids, page_number=page
     )
 
     return render_template(

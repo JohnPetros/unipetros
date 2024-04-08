@@ -1,9 +1,12 @@
 from typing import Union, Dict, List
 
-from infra.database import mysql
 
 from core.entities.subject import Subject
 from core.entities.professor import Professor
+
+from core.constants.pagination_limit import PAGINATION_LIMIT
+
+from infra.database import mysql
 
 from .users_repository import UsersRepository
 
@@ -72,6 +75,7 @@ class ProfessorsRepository(UsersRepository):
         name: str = None,
         email: str = None,
         subjects_ids: List[str] = [],
+        page_number: int = 1,
     ) -> List[Professor]:
         filters = []
 
@@ -101,6 +105,8 @@ class ProfessorsRepository(UsersRepository):
                 LEFT JOIN subjects AS S ON PS.subject_id = S.id
                 {filters}
                 GROUP BY P.id
+                LIMIT {PAGINATION_LIMIT}
+                OFFSET {(page_number - 1) * PAGINATION_LIMIT}
                 """,
             is_single=False,
         )

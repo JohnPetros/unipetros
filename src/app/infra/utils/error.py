@@ -5,7 +5,7 @@ from cowsay import func as cow_say
 class Error(Exception):
     def __init__(
         self,
-        ui_message: str = "",
+        ui_message: str = "Tivemos um problema grave 😨",
         error_message: str = "Internal Server Error",
         status_code: int = 500,
         should_abort=False,

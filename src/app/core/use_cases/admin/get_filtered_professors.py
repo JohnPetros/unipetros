@@ -8,7 +8,7 @@ from infra.repositories import professors_repository
 
 class GetFilteredProfessors:
     def excute(
-        self, name_or_email: str = "", subjects_ids: List = []
+        self, name_or_email: str = "", subjects_ids: List = [], page_number: int = 1
     ) -> List[Professor]:
         professors = []
 
@@ -18,11 +18,15 @@ class GetFilteredProfessors:
 
             if is_email:
                 professors = professors_repository.get_filtered_professors(
-                    email=email.value, subjects_ids=subjects_ids
+                    email=email.value,
+                    subjects_ids=subjects_ids,
+                    page_number=page_number,
                 )
             else:
                 professors = professors_repository.get_filtered_professors(
-                    name=name_or_email, subjects_ids=subjects_ids
+                    name=name_or_email,
+                    subjects_ids=subjects_ids,
+                    page_number=page_number,
                 )
         else:
             professors = professors_repository.get_filtered_professors()
