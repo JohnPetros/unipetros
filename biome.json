@@ -79,8 +79,8 @@
       "enabled": true,
       "semicolons": "asNeeded",
       "indentWidth": 2,
-      "quoteStyle": "single",
-      "jsxQuoteStyle": "single",
+      "quoteStyle": "double",
+      "jsxQuoteStyle": "double",
       "lineWidth": 80,
       "quoteProperties": "asNeeded",
       "arrowParentheses": "always"
