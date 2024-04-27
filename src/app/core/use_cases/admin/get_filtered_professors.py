@@ -12,6 +12,9 @@ class GetFilteredProfessors:
     ) -> List[Professor]:
         professors = []
 
+        if not page_number:
+            page_number = 1
+
         if name_or_email:
             email = Email(name_or_email)
             is_email = email.validate()

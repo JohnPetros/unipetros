@@ -94,6 +94,9 @@ class ProfessorsRepository(UsersRepository):
         else:
             filters = ""
 
+        print(page_number)
+        offset = (int(page_number) - 1) * PAGINATION_LIMIT
+
         professors = mysql.query(
             sql=f"""
                 SELECT 
@@ -106,7 +109,7 @@ class ProfessorsRepository(UsersRepository):
                 {filters}
                 GROUP BY P.id
                 LIMIT {PAGINATION_LIMIT}
-                OFFSET {(page_number - 1) * PAGINATION_LIMIT}
+                OFFSET {offset}
                 """,
             is_single=False,
         )
