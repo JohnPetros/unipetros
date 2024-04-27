@@ -42,7 +42,7 @@
   }}
 
   {% call dropdown(title="Selecionar disciplina") %}
-  <ul class="space-y-3">
+  <ul class="space-y-3" data-checklist-group="container">
     {% for subject_checkbox in subjects_checkbox_group %}
     <li>
       {{
@@ -51,15 +51,22 @@
       name="subjects_ids[]",
       label=subject_checkbox[1],
       value=subject_checkbox[0],
+      attributes='data-checklist-group=checkbox'
       )
       }}
     </li>
+
     {% endfor %}
   </ul>
   {% endcall %}
 
-  <input data-pagination="input" id="pagination-input" type="text" name="page"
+  <input
+    data-pagination="input"
+    id="pagination-input"
+    type="text"
+    name="page"
     hidden>
+
 </form>
 
 <div class="relative mt-6">
@@ -72,5 +79,8 @@
     {{ pagination(current_page_number=1, pages_count=4) }}
   </div>
 </div>
+
+<script
+  src="{{ url_for('static', filename='scripts/checkbox_group.js') }}"></script>
 
 {% endblock dashboard_content %}
