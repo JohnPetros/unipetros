@@ -90,12 +90,27 @@ class ProfessorsRepository(UsersRepository):
             filters.append(f" S.id IN ({ids}) ")
 
         if len(filters) > 0:
-            filters = "WHERE" + "OR".join(filters)
+            filters = "WHERE" + "AND".join(filters)
         else:
             filters = ""
 
-        print(page_number)
         offset = (int(page_number) - 1) * PAGINATION_LIMIT
+
+        print(subjects_ids)
+
+        print(f"""
+                SELECT 
+                    P.*, 
+                    GROUP_CONCAT(S.id) AS subjects_ids, 
+                    GROUP_CONCAT(S.name) AS subjects_names
+                FROM professors AS P
+                LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
+                LEFT JOIN subjects AS S ON PS.subject_id = S.id
+                {filters}
+                GROUP BY P.id
+                LIMIT {PAGINATION_LIMIT}
+                OFFSET {offset}
+                """)
 
         professors = mysql.query(
             sql=f"""

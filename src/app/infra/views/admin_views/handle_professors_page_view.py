@@ -13,7 +13,7 @@ def handle_professors_page_view() -> str:
     user = get_auth_user()
 
     search = request.args.get("search")
-    subjects_ids = request.args.getlist("subjects_ids")
+    subjects_ids = request.args.getlist("subjects_ids[]")
     page = request.args.get("page", 1)
 
     try:

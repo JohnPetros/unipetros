@@ -32,6 +32,10 @@ class GetFilteredProfessors:
                     page_number=page_number,
                 )
         else:
-            professors = professors_repository.get_filtered_professors()
+            professors = professors_repository.get_filtered_professors(
+                name=name_or_email,
+                subjects_ids=subjects_ids,
+                page_number=page_number,
+            )
 
         return professors

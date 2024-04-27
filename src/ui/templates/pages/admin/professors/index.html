@@ -30,7 +30,7 @@
 <form
   hx-get="{{ url_for('admin_views.get_filtered_professors_view') }}"
   hx-target="#professors-table"
-  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[type='checkbox'], change from:#pagination-input"
+  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[type='checkbox'] delay:500ms, change from:#pagination-input delay:500ms"
   hx-swap="innerHTML"
   class="flex items-end gap-3 w-full mt-6">
   {{
