@@ -5,6 +5,7 @@
 {% from 'components/search.html' import search %}
 {% from 'components/dropdown.html' import dropdown %}
 {% from 'components/checkbox.html' import checkbox %}
+{% from 'components/select.html' import select %}
 {% from 'components/pagination/index.html' import pagination %}
 
 {% block dashboard_content %}
@@ -27,38 +28,54 @@
   )
   }}
 </div>
+
 <form
   hx-get="{{ url_for('admin_views.get_filtered_professors_view') }}"
   hx-target="#professors-table"
-  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[type='checkbox'] delay:500ms, change from:#pagination-input delay:500ms"
+  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[type='checkbox'] delay:500ms, change from:#pagination-input delay:500ms, change from:select[data-select='select'] delay:500ms"
   hx-swap="innerHTML"
-  class="flex items-end gap-3 w-full mt-6">
-  {{
-  search(
-  label='Pesquisar professor por nome ou e-mail',
-  placeholder='Girafalles da Nôbrega',
-  value=search_value
-  )
-  }}
+  class="flex flex-col">
+  <div class="flex items-end gap-3 w-full mt-6">
+    {{
+    search(
+    label='Pesquisar professor por nome ou e-mail',
+    placeholder='Girafalles da Nôbrega',
+    value=search_value
+    )
+    }}
 
-  {% call dropdown(title="Selecionar disciplina") %}
-  <ul class="space-y-3" data-checklist-group="container">
-    {% for subject_checkbox in subjects_checkbox_group %}
-    <li>
-      {{
-      checkbox(
-      id=subject_checkbox[1],
-      name="subjects_ids[]",
-      label=subject_checkbox[1],
-      value=subject_checkbox[0],
-      attributes='data-checklist-group=checkbox'
-      )
-      }}
-    </li>
+    {% call dropdown(title="Selecionar disciplina") %}
+    <ul class="space-y-3" data-checklist-group="container">
+      {% for subject_checkbox in subjects_checkbox_group %}
+      <li>
+        {{
+        checkbox(
+        id=subject_checkbox[1],
+        name="subjects_ids[]",
+        label=subject_checkbox[1],
+        value=subject_checkbox[0],
+        attributes='data-checklist-group=checkbox'
+        )
+        }}
+      </li>
 
-    {% endfor %}
-  </ul>
-  {% endcall %}
+      {% endfor %}
+    </ul>
+    {% endcall %}
+  </div>
+
+  <div class="mr-auto mt-3">
+    {{ select(
+    name='gender',
+    options=[
+    ('all', 'todos os gêneros'),
+    ('male', 'masculino'),
+    ('female', 'feminino')
+    ],
+    attributes='data-select=select'
+    )
+    }}
+  </div>
 
   <input
     data-pagination="input"
@@ -71,16 +88,20 @@
 
 <div class="relative mt-6">
   <div
-    id="professors-table">
+    id="professors-table" class="h-96">
     {% include 'pages/admin/professors/table/index.html' %}
   </div>
 
-  <div class="mt-6 fixed bottom-2">
-    {{ pagination(current_page_number=1, pages_count=4) }}
+  {% if pages_count > 1 %}
+  <div class="mt-6">
+    {{ pagination(pages_count) }}
   </div>
+  {% endif %}
 </div>
 
 <script
   src="{{ url_for('static', filename='scripts/checkbox_group.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/select.js') }}"></script>
 
 {% endblock dashboard_content %}
