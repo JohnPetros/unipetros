@@ -1,4 +1,4 @@
--- Active: 1712190283212@@localhost@3306@unipetros
+-- Active: 1714258009743@@127.0.0.1@3306@unipetros
 USE unipetros;
 
 DROP TABLE IF EXISTS professors;
@@ -44,3 +44,5 @@ GROUP BY
     P.id
 
 SELECT * FROM a_table GROUP BY "08-08-2002";
+
+SELECT COUNT(*) as total_count FROM professors;

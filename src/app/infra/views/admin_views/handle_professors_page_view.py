@@ -1,6 +1,9 @@
+from math import ceil
+
 from flask import render_template, request
 
 from core.use_cases.admin import get_filtered_professors, create_professor
+from core.constants.pagination_limit import PAGINATION_LIMIT
 
 from infra.auth import get_auth_user, login_checker, role_checker
 from infra.repositories import subjects_repository
@@ -17,7 +20,7 @@ def handle_professors_page_view() -> str:
     page = request.args.get("page", 1)
 
     try:
-        professors = get_filtered_professors.excute(
+        professors, professors_count = get_filtered_professors.excute(
             name_or_email=search, subjects_ids=subjects_ids, page_number=page
         )
 
@@ -41,4 +44,5 @@ def handle_professors_page_view() -> str:
         subjects_checkbox_group=subjects_checkbox_group,
         professor_form=professor_form,
         professors=professors,
+        pages_count=ceil(professors_count / PAGINATION_LIMIT),
     )

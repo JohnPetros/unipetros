@@ -76,6 +76,7 @@ class ProfessorsRepository(UsersRepository):
         email: str = None,
         subjects_ids: List[str] = [],
         page_number: int = 1,
+        gender: str = "all",
     ) -> List[Professor]:
         filters = []
 
@@ -88,6 +89,9 @@ class ProfessorsRepository(UsersRepository):
         if len(subjects_ids) > 0:
             ids = ",".join(list(map(lambda id: f"'{id}'", subjects_ids)))
             filters.append(f" S.id IN ({ids}) ")
+
+        if gender != "all":
+            filters.append(f" P.gender = '{gender}' ")
 
         if len(filters) > 0:
             filters = "WHERE" + "AND".join(filters)
