@@ -1,4 +1,9 @@
 class QueryParam {
+  get(key) {
+    const params = new URLSearchParams(document.location.search)
+    return params.get(key)
+  }
+
   append(key, value) {
     const url = new URL(location)
     url.searchParams.set(key, value)

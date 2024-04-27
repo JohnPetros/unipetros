@@ -3,7 +3,7 @@
 {% macro pagination(current_page_number, pages_count) %}
 
 <nav aria-label="Page navigation example">
-  <ul class="flex items-center h-10 text-base">
+  <ul class="flex items-center gap-2 h-10 text-base">
     {% for page_number in range(1, pages_count + 1) %}
     <li>
       {% call page(
