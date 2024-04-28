@@ -6,6 +6,7 @@
 {% from 'components/dropdown.html' import dropdown %}
 {% from 'components/checkbox.html' import checkbox %}
 {% from 'components/select.html' import select %}
+{% from 'components/button.html' import button %}
 {% from 'components/pagination/index.html' import pagination %}
 
 {% block dashboard_content %}
@@ -32,7 +33,7 @@
 <form
   hx-get="{{ url_for('admin_views.get_filtered_professors_view') }}"
   hx-target="#professors-table"
-  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[type='checkbox'] delay:500ms, change from:#pagination-input delay:500ms, change from:select[data-select='select'] delay:500ms"
+  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[name='subjects_ids[]'] delay:500ms, change from:#pagination-input delay:500ms, change from:select[data-select='select'] delay:500ms"
   hx-swap="innerHTML"
   class="flex flex-col">
   <div class="flex items-end gap-3 w-full mt-6">
@@ -64,7 +65,7 @@
     {% endcall %}
   </div>
 
-  <div class="mr-auto mt-3">
+  <div class="flex items-center justify-start gap-6 mt-3">
     {{ select(
     name='gender',
     options=[
@@ -73,6 +74,15 @@
     ('female', 'feminino')
     ],
     attributes='data-select=select'
+    )
+    }}
+
+    {{
+    button(
+    type="submit",
+    title="Deletar linhas",
+    class="hidden bg-red-700 py-1 h-8 animate-pulse",
+    attributes="data-table=delete-button form=delete-professors"
     )
     }}
   </div>
@@ -88,7 +98,7 @@
 
 <div class="relative mt-6">
   <div
-    id="professors-table" class="h-96">
+    id="professors-table" class="h-96" data-table="container">
     {% include 'pages/admin/professors/table/index.html' %}
   </div>
 
@@ -103,5 +113,6 @@
   src="{{ url_for('static', filename='scripts/checkbox_group.js') }}"></script>
 <script
   src="{{ url_for('static', filename='scripts/select.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/table.js') }}"></script>
 
 {% endblock dashboard_content %}

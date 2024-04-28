@@ -1,8 +1,19 @@
 {% from 'components/badge.html' import badge %}
+{% from 'components/checkbox.html' import checkbox %}
 
 {% macro row(professor) %}
 
 <tr class="table-row" data-loading-class="hidden">
+  <td class="table-data">
+    {{
+    checkbox(
+    id=professor.id,
+    value=professor.id,
+    name="professors_ids[]",
+    attributes='data-table=checkbox-row'
+    )
+    }}
+  </td>
   <td class="table-data">
     <a href class="flex items-center gap-2 font-semibold p-0">
       <img
@@ -15,7 +26,7 @@
   <td class="table-data">
     {{ professor.email }}
   </td>
-  <td class="table-data flex-wrap">
+  <td class="table-data flex flex-wrap gap-y-2">
     {% for subjects in professor.subjects %}
     {{ badge(subjects.name) }}
     {% endfor %}
