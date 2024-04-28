@@ -163,6 +163,12 @@ class ProfessorsRepository(UsersRepository):
                     ],
                 )
 
+    def delete_professor_by_id(self, professor_id: str):
+        mysql.mutate(
+            sql="DELETE FROM professors WHERE id = %s",
+            params=[professor_id],
+        )
+
     def __get_professor_entity(self, professor_data: Dict) -> Professor:
         subjects_ids = []
         subjects_names = []

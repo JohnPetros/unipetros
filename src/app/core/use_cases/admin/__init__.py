@@ -13,6 +13,7 @@ from .create_course import CreateCourse
 from .create_subjects_by_csv import CreateSubjectsByCSV
 from .create_courses_by_csv import CreateCoursesByCSV
 from .get_analytics_page_data import GetAnalyticsPageData
+from .delete_professors import DeleteProfessors
 
 get_professor_details_page_data = GetProfessorDetailsPageData()
 get_professors_page_data = GetProfessorsPageData()
@@ -33,3 +34,5 @@ create_course = CreateCourse()
 create_courses_by_csv = CreateCoursesByCSV()
 
 get_analytics_page_data = GetAnalyticsPageData()
+
+delete_professors = DeleteProfessors()

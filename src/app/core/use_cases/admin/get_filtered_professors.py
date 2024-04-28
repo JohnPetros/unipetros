@@ -13,7 +13,7 @@ class GetFilteredProfessors:
         subjects_ids: List = [],
         page_number: int = 1,
         gender: str = "all",
-    ) -> List[Professor]:
+    ) -> tuple[list[Professor], int]:
         professors = []
 
         if not page_number:

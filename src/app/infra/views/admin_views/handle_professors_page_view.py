@@ -4,6 +4,7 @@ from flask import render_template, request
 
 from core.use_cases.admin import get_filtered_professors, create_professor
 from core.constants.pagination_limit import PAGINATION_LIMIT
+from infra.utils.error import Error
 
 from infra.auth import get_auth_user, login_checker, role_checker
 from infra.repositories import subjects_repository
@@ -34,7 +35,9 @@ def handle_professors_page_view() -> str:
         if request.method == "POST" and professor_form.validate_on_submit():
             create_professor.execute(professor_form.data)
             professors = get_filtered_professors.excute()
-    except Exception:
+        print(professor_form.errors)
+    except Error as error:
+        print(error)
         pass
 
     return render_template(
