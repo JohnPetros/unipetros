@@ -4,13 +4,13 @@
 {% macro checkbox_group(label, name, checkboxes, errors, is_form) %}
 
 <div class="space-y-3">
-  <strong>{{ label }}:</strong>
   {% for checkbox in checkboxes %}
   {{
   checkbox_field(
   id=checkbox.value,
   label=checkbox.label,
-  field=checkbox)
+  field=checkbox
+  )
   }}
   {% endfor %}
   {{ input_errors(errors) }}

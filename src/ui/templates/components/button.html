@@ -1,14 +1,14 @@
-{% macro button(title, class, href, as='button') %}
+{% macro button(title, class, href, attributes, as="button", type="button") %}
 
 {% if as == 'button' %}
 
-<button type="button" class="button {{ class }}">
+<button type="{{ type }}" class="button {{ class }}" {{ attributes }}>
   {{ title }}
 </button>
 
 {% elif as == 'link' %}
 
-<a href="{{ href }}" class="button {{ class }}">
+<a href="{{ href }}" class="button {{ class }}" {{ attributes }}>
   {{ title }}
 </a>
 
