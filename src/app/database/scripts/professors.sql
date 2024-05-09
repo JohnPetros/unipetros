@@ -1,3 +1,4 @@
+-- Active: 1712242301041@@127.0.0.1@3306@unipetros
 USE unipetros;
 
 DROP TABLE IF EXISTS professors;

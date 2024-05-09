@@ -1,9 +1,9 @@
--- Active: 1711212961472@@127.0.0.1@3306
+-- Active: 1712242301041@@127.0.0.1@3306@unipetros
 DROP TABLE IF EXISTS students_absents;
 
 CREATE TABLE IF NOT EXISTS students_absents (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY,
-  date DATE DEFAULT CURRENT_DATE NOT NULL,
+  date DATE DEFAULT (CURDATE()) NOT NULL,
   student_id CHAR(36) NOT NULL,
   FOREIGN KEY students_absents(student_id) REFERENCES students(id) ON DELETE CASCADE
 );

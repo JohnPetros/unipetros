@@ -5,10 +5,10 @@ services:
     image: 'bitnami/mysql:latest'
     container_name: 'mysql'
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_DATABASE_PASSWORD}
-      - MYSQL_PASSWORD=${MYSQL_DATABASE_PASSWORD}
-      - MYSQL_USER=${MYSQL_DATABASE_USER}
-      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      - MYSQL_ROOT_PASSWORD=unipetros
+      - MYSQL_PASSWORD=unipetros
+      - MYSQL_USER=unipetros
+      - MYSQL_DATABASE=unipetros
     networks:
       - app-tier
     volumes:

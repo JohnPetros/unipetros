@@ -13,6 +13,7 @@
     "tailwindcss-intersect": "^1.0.5"
   },
   "dependencies": {
-    "flowbite": "^2.3.0"
+    "flowbite": "^2.3.0",
+    "pnpm": "^8.15.6"
   }
 }

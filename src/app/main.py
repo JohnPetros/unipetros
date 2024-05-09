@@ -12,7 +12,7 @@ def init_app() -> Flask:
         __name__, template_folder="../ui/templates", static_folder="../ui/static"
     )
 
-    app.config["SECRET_KEY"] = getenv("SECRET_KEY")
+    app.config["SECRET_KEY"] = "secret-key"
 
     init_views(app)
     init_auth(app)

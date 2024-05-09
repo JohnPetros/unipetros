@@ -5,7 +5,7 @@ from repositories import StudentsRepository, ProfessorsRepository, AdminsReposit
 
 from utils.error import Error
 
-from auth import AuthUser, check_password, login
+from auth import AuthUser, check_password, login, hash_password
 
 
 class LoginUseCase:
@@ -29,6 +29,7 @@ class LoginUseCase:
             case _:
                 raise Error(f"Invalid role: {role}")
 
+        print(hash_password(user.password), flush=True)
         if not user or not check_password(user.password, password):
             return None
 

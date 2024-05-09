@@ -10,11 +10,9 @@ CREATE TABLE IF NOT EXISTS professors_subjects (
 );
 
 INSERT INTO professors_subjects (professor_id, subject_id) VALUES
-('b5e426b9-e93a-11ee-b9aa-0242ac130002', 'c86ba7d1-e93b-11ee-b9aa-0242ac130002'),
-('b5e426b9-e93a-11ee-b9aa-0242ac130002', 'c86ba520-e93b-11ee-b9aa-0242ac130002'),
-('b5e426b9-e93a-11ee-b9aa-0242ac130002', 'c86ba843-e93b-11ee-b9aa-0242ac130002'),
-('ed0d310b-e93b-11ee-b9aa-0242ac130002', 'c86ba843-e93b-11ee-b9aa-0242ac130002'),
-('ed0d6319-e93b-11ee-b9aa-0242ac130002', 'c86acfb0-e93b-11ee-b9aa-0242ac130002');
+('25edf049-f65d-11ee-b82f-0242ac140002', '64f2d2af-f65d-11ee-b82f-0242ac140002'),
+('25edf40d-f65d-11ee-b82f-0242ac140002', '64f2d2af-f65d-11ee-b82f-0242ac140002'),
+('25edf60d-f65d-11ee-b82f-0242ac140002', '64f2d498-f65d-11ee-b82f-0242ac140002');
 
 SELECT 
   P.*, 

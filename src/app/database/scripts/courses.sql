@@ -1,6 +1,7 @@
+-- Active: 1712242301041@@127.0.0.1@3306@unipetros
 DROP TABLE IF EXISTS courses;
 
-CREATE TABLE courses (
+CREATE TABLE IF NOT EXISTS courses (
   id CHAR(36) DEFAULT (uuid()) PRIMARY KEY,
   name VARCHAR(255),
   description TEXT

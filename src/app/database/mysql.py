@@ -9,10 +9,10 @@ from utils.error import Error
 class MySQL:
     def __init__(self) -> None:
         config = {
-            "user": getenv("MYSQL_DATABASE_USER"),
-            "password": getenv("MYSQL_DATABASE_PASSWORD"),
-            "database": getenv("MYSQL_DATABASE_NAME"),
-            "host": getenv("MYSQL_DATABASE_HOST"),
+            "user": "unipetros",
+            "password": "unipetros",
+            "database": "unipetros",
+            "host": "localhost",
             "raise_on_warnings": True,
         }
 

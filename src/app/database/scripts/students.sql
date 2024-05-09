@@ -1,4 +1,4 @@
--- Active: 1711212961472@@127.0.0.1@3306
+-- Active: 1712242301041@@127.0.0.1@3306@unipetros
 DROP TABLE IF EXISTS students;
 
 CREATE TABLE IF NOT EXISTS students (
@@ -21,9 +21,7 @@ ALTER TABLE students DROP COLUMN is_active;
 
 INSERT INTO students (name, email, password, phone, birthdate, gender, course_id)
 VALUES
-('Lúcia Romena', 'lucia300@unipetros.com', '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', '12894561235', '2002-03-16', 'female', '01cbf711-ec80-11ee-8ced-0242ac130002'),
-('Milena Oliveira', 'milena7777@unipetros.com', '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', '21456789632', '2005-08-15', 'female', '01cd80a7-ec80-11ee-8ced-0242ac130002'),
-('Raquel Oliveira', 'milena8888@unipetros.com', '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', '22456789635', '2006-11-12', 'female', '01cdc9fe-ec80-11ee-8ced-0242ac130002');
+('Jefferson Henrique', 'jefferson@unipetros.com', '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', '22456789635', '2006-11-12', 'male', '2a0752da-f65d-11ee-b82f-0242ac140002');
 
 DELETE FROM students;
 
