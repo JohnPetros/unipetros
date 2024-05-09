@@ -33,8 +33,32 @@ O objetivo ao realizar esse projeto foi aprender de forma avançanda o desensolv
 <table align="center">
   <tr>
     <td align="center" width="700">
-    <span>Página da Urna funcionando<br/></span>
-    <img alt="Home page" src=".github/unipetros-funcionando.gif" alt="Demonstração da urna funcionando" />
+    <span>Landing page<br/></span>
+    <img alt="Home page" src=".github/images/home.png" alt="Demonstração da landing page" />
+    </td>
+  </tr>
+   <tr>
+    <td align="center" width="700">
+    <span>Página de contato<br/></span>
+    <img alt="Home page" src=".github/images/contact.png" alt="Demonstração da página de contato" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="700">
+    <span>Página de sobre<br/></span>
+    <img alt="Home page" src=".github/images/about.png" alt="Demonstração da página de sobre" />
+    </td>
+  </tr>
+   <tr>
+    <td align="center" width="700">
+    <span>Página de dashboard<br/></span>
+    <img alt="Home page" src=".github/images/dashboard.png" alt="Demonstração de dashboard" />
+    </td>
+  </tr>
+   <tr>
+    <td align="center" width="700">
+    <span>Página de tabela<br/></span>
+    <img alt="Home page" src=".github/images/table.png" alt="Demonstração da página de tabela" />
     </td>
   </tr>
 </table>
