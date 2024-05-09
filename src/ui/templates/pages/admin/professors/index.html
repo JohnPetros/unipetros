@@ -45,24 +45,27 @@
     )
     }}
 
-    {% call dropdown(title="Selecionar disciplina") %}
-    <ul class="space-y-3" data-checklist-group="container">
-      {% for subject_checkbox in subjects_checkbox_group %}
-      <li>
-        {{
-        checkbox(
-        id=subject_checkbox[1],
-        name="subjects_ids[]",
-        label=subject_checkbox[1],
-        value=subject_checkbox[0],
-        attributes='data-checklist-group=checkbox'
-        )
-        }}
-      </li>
+    <div class="-translate-y-2">
+      {% call dropdown(title="Selecionar disciplina") %}
+      <ul class="space-y-3" data-checklist-group="container">
+        {% for subject_checkbox in subjects_checkbox_group %}
+        <li>
+          {{
+          checkbox(
+          id=subject_checkbox[1],
+          name="subjects_ids[]",
+          label=subject_checkbox[1],
+          value=subject_checkbox[0],
+          attributes='data-checklist-group=checkbox'
+          )
+          }}
+        </li>
 
-      {% endfor %}
-    </ul>
-    {% endcall %}
+        {% endfor %}
+      </ul>
+      {% endcall %}
+    </div>
+
   </div>
 
   <div class="flex items-center justify-start gap-6 mt-3">
