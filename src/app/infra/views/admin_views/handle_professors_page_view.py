@@ -35,9 +35,7 @@ def handle_professors_page_view() -> str:
         if request.method == "POST" and professor_form.validate_on_submit():
             create_professor.execute(professor_form.data)
             professors = get_filtered_professors.excute()
-        print(professor_form.errors)
-    except Error as error:
-        print(error)
+    except Error:
         pass
 
     return render_template(

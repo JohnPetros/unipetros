@@ -7,9 +7,9 @@ from infra.repositories import (
     AdminsRepository,
 )
 
-from utils.error import Error
+from infra.utils.error import Error
 
-from auth import AuthUser, check_password, login, hash_password
+from infra.auth import AuthUser, check_password, login, hash_password
 
 
 class LoginUser:
