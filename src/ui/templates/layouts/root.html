@@ -27,8 +27,8 @@
   </head>
 
   <body
-    class="h-screen w-screen bg-petros-50 overflow-x-hidden"
-    hx-ext="loading-states,response-targets">
+    hx-ext="loading-states,response-targets"
+    class="h-screen w-screen bg-petros-50 overflow-x-hidden">
 
     {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
