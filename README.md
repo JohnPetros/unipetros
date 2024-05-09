@@ -46,98 +46,78 @@ O objetivo ao realizar esse projeto foi aprender de forma avançanda o desensolv
 ### Landing Page
 
 - [x] A página inicial deve possuir estilo landing page para captar a atenção do usuário. 
-- [x] 
+- [x] Essa página deve possuir as sessões:
+  - Vantagens de estudar na Unipetros
+  - Depoimento de um aluno/aluna falando bem da Unipetros
+  - Depoimento de um aluno/aluna falando bem da Unipetros
+  - Últimos posts do blog fictício da Unipetros
+
+### Página de contato
+- [x] Deve haver um página contendo um formulário para o usuário entrar em contato com a Unipetros
+- [X] Essa página deve exibir endereço, número de telefone e e-mail e um formulário de contato da Unipetros
+- [x] O formulário deve conter
+  - Nome do usuário
+  - E-mail do usuário
+  - Mensagem do usuário
+
+### Página contando a história da Unipetros
+- [x] Deve haver uma página que fale mais sobre a Unipetros
+- [x] Essa página conter as sessões:
+  - Um resumo da origem e fundação da Unipetros
+  - Uma mapa indicando a localização da Unipetros
+  - Dados a respeito da infraestrutura da Unipetros
+  - Nome e descrição dos programas de extensão da Unipetros
+  - Nome, cargo, local de trabalho e depoimento de ex-alunos da Unipetros
+
+### Navegação
+- [x] Deve haver links de acesso para qualquer uma das páginas do site
+
+### Login
+- [x] O usuário administrador deve fazer login para poder acessar o dashboard utilizando e-mail e senha
+- [x] O usuário deve poder escolher manter ou não sua sessão mesmo que navegador venha a fechar
+- [x] O sistema deve bloquear o acesso ao dashboard caso não haja uma sessão ativa
+- [x] O sistema guardar a rota da página que o usuário não conseguiu acessar em um primeiro momento para que caso ele faça login ele seja redirecionado imediatamente para a página em questão 
+- [x] O usuário deve poder fazer logout, ou seja, encerrar sua sessão
 
   
-#### Seleção de SKU (Tipo de um produto)
-- Deve ser possível selecionar um único SKU de um produto antes de adicioná-lo ao carrinho
--  A seleção do SKU deve ser com base nas variações disponíveis para o produto. Ex: Se o usuário escolher Material: Inox e Tamanho: Médio, seleciona o SKU que atende essas características
-- Caso o produto não tenha variação, o SKU é o próprio produto em si.
+### Gráficos
+- [x] O dashboard deve exibir gráficos de diversos formatos a respeito dos dados cadastrados no sistema
+- [x] Deve gráfico que indique a quantidade matrículas por disciplina
+- [x] Deve haver um gráfico que indique a quantidade posts por categoria de post
+- [x] Deve haver um gráfico que indique a frequência dos alunos em um período de 7, 30 ou 90 dias (escolha do usuário) 
+- [x] Deve haver um gráfico que indique a quantidade de alunos por gênero 
+- [x] Deve haver um gráfico que indique a quantidade de professores por disciplina 
+- [x] Deve haver um gráfico que indique a quantidade de matrículas ativas e desativadas em um período de 7, 30 ou 90 dias (escolha do usuário)
 
-#### Filtragem de produtos
+### Tabela de professores
 
-- [x] Deve ser possível filtrar produtos por:
-  - nome
-  - categoria
-    - o filtro deve conter apenas uma categoria
-  - marca
-    - o filtro pode conter mais de uma marca
-- [x] Deve ser possível filtrar utilizando de forma simuntânea os filtros listado acima
-- [x] Deve ser possível pesquisar um produto pelo nome em mais de uma tela
+- [x] Deve ser exibido uma tabela que contenha todos os professores de forma paginada
+- [x] Cada linha dessa tabela deve exibir:
+  - Avatar
+  - Nome
+  - E-mail
+  - Disciplinas
+  - Idade
+  - Gênero
+- [x] Deve ser possível filtrar professores por nome, email ou disciplina
+- [x] Deve ser possível deletar um ou mais professors de uma vez
+- [x] Deve ser possível adicionar um professor via formulário contendo os campos:
+  - Nome
+  - E-mail
+  - Telefone
+  - Data de nascimento
+  - Gênero
+  - Senha
+  - Confirmação de senha
+  - Avatar
+  - Um ou mais disciplinas
+- [x] Deve ser possível adicionar um professor via arquivo CSV, em cada uma das suas colunas corresponde a um campo do formulário citado no item anterior
 
-#### Ordenação de produtos
+### Página de professor
 
-- [x] Deve ser possível ordenar produtos por ordem alfabética, seja o inverso (Z-A) ou não (A-Z)
-
-
-#### Cálculo de Frete
-
-- [x] Deve ser possível calcular cusot de frete de um produto com base no CEP do usuário
-- [x] Deve ser possível o usuário calcular o frete antes de ir para o checkout
-- [x] Deve ser exibido para o usuário uma tabela de preço para cada transportadora especifica
-- [x] Deve ser exibido para o usuário uma tabela de preço para cada transportadora especifica
-
-#### Carrinho
-
-- [x] Deve haver uma tela própria para o carrinho
-- [x] Deve ser possível inserir um produto no carrinho
-- [x] Deve ser possível alterar a quantidade do produto que está no carrinho
-- [x] Deve ser possível remover um produto no carrinho
-- [x] Deve ser possível remover todos os produtos do carrinho de uma vez
-- [x] Não deve ser posível inserir produtos repetidos no carrinho
-- [x] Não deve ser possível alterar a quantidade maior que o estoque permitido
-- [x] Não deve ser possível alterar a quantidade menor para menor que 1
-- [x] Todos os produtos do carrinho devem ser removidos se o usuário for redirecionado para o checkout
-- [x] Os produtos do carrinho devem ser persistidos de modo que o usuário possa acessá-los novamente mesmo que ele feche e abre o aplicativo novamente  
-- [x] O produto no carrinho deve dizer a respeito a um do seus SKU, que por sua vez são definidos pelas variações escolhidas pelo usuário. Ex.: variações: material: Inox e tamanho: Médio definem o SKU que contém essas características 
-
-#### Capturador de leads
-
-- [x] Deve ser possível cadastrar o `e-mail` do cliente/lead na tela `Home`
-- [x] Não deve ser possível inserir o `e-mail` de um cliente/lead já cadastrado
-
-#### Contato
-
-- [x] Deve ser possível o usuário entrar em contato com alguém da `unipetros` via whatsapp ou e-mail
-
-#### Listagem de pedidos
-
-- [x] Deve ser possível listar todos os pedidos do usuário
-- [x] A lista de pedidos deve ser com base no CPF ou CNPJ utilizado para fazer o pedido
-- [x] Cada pedido deve exibir:
-  - número,
-  - status (pago, aguardando pagamento ou cancelado),
-  - produtos, onde cada produto exibe:
-    - nome
-  - total de desconto,
-  - total a pagar (considerando o desconto)
-  - tipo de pagamento (cartão de crédito, pix ou boleto), sendo que:
-    - Se for por pix, permitir o usuário acessar o QR Code gerado pelo pedido
-    - Se for por boleto, permitir o usuário acessar o pdf do boleto gerado pelo pedido
-- [] Deve ser possível o usuário arquivar o pedido de forma que não seja possível mais acessá-lo no aplicativo
-
-### ☑️ Requisitos não funcionais
-
-#### Informações relevantes
-
-- [x] Deve ser exibido ao usuário informações sobre a empresa unipetros, termos e condições, política de devolução de produto
-
-#### Listagem paginada de produtos
-
-- [x] Todos os produtos não devem ser carregados todos de uma vez mas conforme o usuário desce a tela para visualizar mais produtos
-
-#### Banners
-
-- [x] Devem ser exibidos banners que capturem a atenção do cliente
-
-#### Coleções
-
-- [x] Devem ser exibidos coleções de produtos que compartilham o mesmo tema ou categoria
-
-#### Botão de carrinho
-
-- [x] Deve ser possível adicionar um produto ao carrinho sem o usuário precisar ver a tela de detalhes desse produto
-- [x] O botão de carrinho deve seguir as regras da funcionalidade de carrinho
+- [x] Deve haver uma página própria que exiba os dados do professor
+- [x] Deve ser exibido o avatar de outros professores que também lecionam as mesma disciplinas que o professor em questão
+- [x] Deve haver um formulário para editar qualquer dado do professors em questão
 
 ---
 
@@ -195,18 +175,6 @@ $ docker compose up
 
 ```
 
-> Você irá precisar um emulador de android (se não estiver em um ambiente Mac) para ver o aplicativo funcionando. Porém você pode gerar o expo development build do projecto e executá-lo tanto no emulador quanto no seu dispositivo físico.
-
-```bash
-# Instale o expo development client
-$ npx expo install expo-dev-client
-
-# Gere a build do projeto
-$ eas build --profile development --platform android
-```
-
-> Veja a [documentação](https://docs.expo.dev/develop/development-builds/create-a-build/) para mais detalhes a respeito do expo development build
-
 ### 🧪 Rodando os testes
 
 ```bash
@@ -215,14 +183,6 @@ $ npm run test
 # ou
 $ yarn test
 ```
-
-###
-
----
-
-## 🚚 Deploy
-
-O deploy dessa aplicação foi realizada usando a plataforma da **[Render](https://dashboard.render.com/)**, o que implica dizer que você pode acessar aplicação funcionando acessando esse **[link](https://unipetros-app.onrender.com/)**.
 
 ---
 
@@ -247,12 +207,6 @@ $ git push origin minha-feature
 > Você deve substituir 'minha-feature' pelo nome da feature que você está adicionando
 
 > Você também pode abrir um [nova issue](https://github.com/JohnPetros/unipetros/issues) a respeito de algum problema, dúvida ou sugestão para o projeto. Ficarei feliz em poder ajudar, assim como melhorar este projeto
-
----
-
-## 🎨 Layout
-
-O design do projeto pode ser acessada nesse [link](https://www.figma.com/file/8DRd8OlhogKoCcofQD1QX4/unipetros-Industrial?type=design&t=pbdOp6tdnmj2kTmc-6).
 
 ---
 
