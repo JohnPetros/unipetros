@@ -3,7 +3,7 @@ version: '2'
 services:
  database:
     image: 'bitnami/mysql:latest'
-    container_name: 'mysql'
+    container_name: 'unipetros-database'
     environment:
       - MYSQL_ROOT_PASSWORD=unipetros
       - MYSQL_PASSWORD=unipetros
