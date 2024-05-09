@@ -25,10 +25,6 @@ class Pagination {
   }
 
   activePageButton(pageNumber) {
-    const activePageButton = Array.from(this.pageButtons).find(
-      (pageButton) => pageButton.value === pageNumber,
-    )
-
     for (const pageButton of this.pageButtons) {
       if (pageButton.value === pageNumber) {
         pageButton.classList.add("bg-blue-700", "text-white")
