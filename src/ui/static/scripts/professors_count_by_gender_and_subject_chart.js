@@ -1,16 +1,16 @@
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
   function getChartOptions(professors_count) {
     return {
       series: professors_count,
-      colors: ['#16BDCA', '#9061F9'],
+      colors: ["#16BDCA", "#9061F9"],
       chart: {
         height: 320,
-        width: '100%',
-        type: 'donut',
+        width: "100%",
+        type: "donut",
       },
       stroke: {
-        colors: ['transparent'],
-        lineCap: '',
+        colors: ["transparent"],
+        lineCap: "",
       },
       plotOptions: {
         pie: {
@@ -19,14 +19,14 @@ window.addEventListener('load', () => {
               show: true,
               name: {
                 show: true,
-                fontFamily: 'Poppins, sans-serif',
+                fontFamily: "Poppins, sans-serif",
                 offsetY: 20,
               },
               total: {
                 showAlways: true,
                 show: true,
-                label: 'Total de professores',
-                fontFamily: 'Poppins, sans-serif',
+                label: "Total de professores",
+                fontFamily: "Poppins, sans-serif",
                 formatter: (chart) => {
                   const sum = chart.globals.seriesTotals.reduce((a, b) => {
                     return a + b
@@ -36,11 +36,11 @@ window.addEventListener('load', () => {
               },
               value: {
                 show: true,
-                fontFamily: 'Poppins, sans-serif',
+                fontFamily: "Poppins, sans-serif",
                 offsetY: -20,
               },
             },
-            size: '80%',
+            size: "80%",
           },
         },
       },
@@ -49,13 +49,13 @@ window.addEventListener('load', () => {
           top: -2,
         },
       },
-      labels: ['Homens', 'Mulheres'],
+      labels: ["Homens", "Mulheres"],
       dataLabels: {
         enabled: false,
       },
       legend: {
-        position: 'bottom',
-        fontFamily: 'Poppins, sans-serif',
+        position: "bottom",
+        fontFamily: "Poppins, sans-serif",
         fontWeight: 600,
         fontSize: 14,
       },
@@ -78,7 +78,7 @@ window.addEventListener('load', () => {
     '[data-professors-by-gender-and-subject-chart="checkbox"]',
   )
 
-  if (container && checkboxes.length && typeof ApexCharts !== 'undefined') {
+  if (container && checkboxes.length && typeof ApexCharts !== "undefined") {
     const first_checkbox = checkboxes[0]
 
     const chart = new ApexCharts(container, getChartOptions([50, 50]))
@@ -96,7 +96,7 @@ window.addEventListener('load', () => {
           )
 
           if (professors_count) {
-            const checkboxValues = professors_count.value.split(';').map(Number)
+            const checkboxValues = professors_count.value.split(";").map(Number)
             maleProfessorsCount += checkboxValues[0]
             femaleProfessorsCount += checkboxValues[1]
           }
@@ -117,7 +117,7 @@ window.addEventListener('load', () => {
     }
 
     for (const checkbox of checkboxes) {
-      checkbox.addEventListener('change', handleCheckboxChange)
+      checkbox.addEventListener("change", handleCheckboxChange)
     }
   }
 })

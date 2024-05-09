@@ -1,10 +1,9 @@
 from os import getenv
 
-
-from views import init_views
-from auth import init_auth
-
 from flask import Flask
+
+from infra.views import init_views
+from infra.auth import init_auth
 
 
 def init_app() -> Flask:

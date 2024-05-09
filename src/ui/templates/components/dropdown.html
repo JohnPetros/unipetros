@@ -1,0 +1,18 @@
+{% from "components/button.html" import button %}
+
+{% macro dropdown(title) %}
+
+<button
+  id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover"
+  type="button"
+  class="button flex items-center gap-2">
+  {{ title }}
+  <i class="ph-bold ph-caret-down"></i>
+</button>
+
+<div id="dropdownBgHover"
+  class="z-10 hidden w-48 p-6 bg-white rounded-lg shadow dark:bg-gray-700">
+  {{ caller() }}
+</div>
+
+{% endmacro %}

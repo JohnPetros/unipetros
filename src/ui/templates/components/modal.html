@@ -1,13 +1,18 @@
 {% macro modal(id, title, is_default_open=False) %}
 
-<button data-modal-target="{{ id }}" data-modal-toggle="{{ id }}" class="button" type="button"
+<button
+  data-modal-target="{{ id }}"
+  data-modal-toggle="{{ id }}"
+  type="button"
+  class="button"
   _="{{ 'on load wait 500ms then trigger click on me' if is_default_open else '' }}">
   {{ title }}
 </button>
 
 <div id="{{ id }}" tabindex="-1" aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-full max-h-full bg-black/70 animate-fade animate-duration-[500ms]">
-  <div class="bg-white rounded-lg shadow min-w-24 max-w-4xl max-h-[40rem] overflow-auto">
+  <div
+    class="bg-white rounded-lg shadow min-w-24 max-w-4xl max-h-[40rem] overflow-auto">
     <div class="border-b rounded-t p-6">
       <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
         {{ title }}

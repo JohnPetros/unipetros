@@ -1,10 +1,11 @@
-{% macro checkbox(label, field, id, value, attributes) %}
+{% macro checkbox(label, field, id, name, value, attributes) %}
 
 <div class="flex items-center gap-2">
   {% if field %}
-  {{ field(id=id, class='checkbox') }}
+  {{ field(class='checkbox') }}
   {% else %}
-  <input type="checkbox" id="{{ id }}" name="{{ id }}" value="{{ value }}" {{ attributes }} class="checkbox">
+  <input type="checkbox" id="{{ id }}" name="{{ name if name else id }}"
+    value="{{ value }}" class="checkbox" {{ attributes }}>
   {% endif %}
   <label for="{{ id }}" class="block text-sm font-semibold text-blue-700">
     {{ label }}

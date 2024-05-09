@@ -4,14 +4,17 @@
 
 <div>
   <span class="label">{{ label }}</span>
-  <div class="flex gap-2 {{ 'flex-col' if is_column else 'flex-row flex-wrap' }}">
+  <div
+    class="flex gap-2 {{ 'flex-col' if is_column else 'flex-row flex-wrap' }}">
     {% for radio in radios %}
     <div class="flex items-center mt-2">
-      <input id="{{ radio[0] }}" type="radio" value="{{ radio[0] }}" name="{{ name }}"
+      <input id="{{ radio[0] }}" type="radio" value="{{ radio[0] }}"
+        name="{{ name }}"
         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
         checked="{{ 'true' if loop.index0 == 0 else 'false' }}">
 
-      <label for="{{ radio[0] }}" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+      <label for="{{ radio[0] }}"
+        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
         {{ radio[1] }}
       </label>
     </div>

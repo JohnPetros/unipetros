@@ -3,6 +3,11 @@
 {% from 'components/modal.html' import modal %}
 {% from 'components/csv_button.html' import csv_button %}
 {% from 'components/search.html' import search %}
+{% from 'components/dropdown.html' import dropdown %}
+{% from 'components/checkbox.html' import checkbox %}
+{% from 'components/select.html' import select %}
+{% from 'components/button.html' import button %}
+{% from 'components/pagination/index.html' import pagination %}
 
 {% block dashboard_content %}
 
@@ -25,12 +30,89 @@
   }}
 </div>
 
-<div class="mt-6">
-  {{ search(label='Pesquisar professor por nome ou e-mail', placeholder='Girafalles da Nôbrega') }}
+<form
+  hx-get="{{ url_for('admin_views.get_filtered_professors_view') }}"
+  hx-target="#professors-table"
+  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[name='subjects_ids[]'] delay:500ms, change from:#pagination-input delay:500ms, change from:select[data-select='select'] delay:500ms"
+  hx-swap="innerHTML"
+  class="flex flex-col">
+  <div class="flex items-end gap-3 w-full mt-6">
+    {{
+    search(
+    label='Pesquisar professor por nome ou e-mail',
+    placeholder='Girafalles da Nôbrega',
+    value=search_value
+    )
+    }}
+
+    {% call dropdown(title="Selecionar disciplina") %}
+    <ul class="space-y-3" data-checklist-group="container">
+      {% for subject_checkbox in subjects_checkbox_group %}
+      <li>
+        {{
+        checkbox(
+        id=subject_checkbox[1],
+        name="subjects_ids[]",
+        label=subject_checkbox[1],
+        value=subject_checkbox[0],
+        attributes='data-checklist-group=checkbox'
+        )
+        }}
+      </li>
+
+      {% endfor %}
+    </ul>
+    {% endcall %}
+  </div>
+
+  <div class="flex items-center justify-start gap-6 mt-3">
+    {{ select(
+    name='gender',
+    options=[
+    ('all', 'todos os gêneros'),
+    ('male', 'masculino'),
+    ('female', 'feminino')
+    ],
+    attributes='data-select=select'
+    )
+    }}
+
+    {{
+    button(
+    type="submit",
+    title="Deletar linhas",
+    class="hidden bg-red-700 py-1 h-8 animate-pulse",
+    attributes="data-table=delete-button form=delete-professors"
+    )
+    }}
+  </div>
+
+  <input
+    data-pagination="input"
+    id="pagination-input"
+    type="text"
+    name="page"
+    hidden>
+
+</form>
+
+<div class="relative mt-6">
+  <div
+    id="professors-table" class="h-96" data-table="container">
+    {% include 'pages/admin/professors/table/index.html' %}
+  </div>
+
+  {% if pages_count > 1 %}
+  <div class="mt-6">
+    {{ pagination(pages_count) }}
+  </div>
+  {% endif %}
 </div>
 
-<div class="mt-6">
-  {% include 'pages/admin/professors/table/index.html' %}
-</div>
+<script
+  src="{{ url_for('static', filename='scripts/checkbox_group.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/select.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/table.js') }}"></script>
 
 {% endblock dashboard_content %}

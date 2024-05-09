@@ -156,3 +156,14 @@ window.addEventListener('load', () => {
       })
   }
 })
+
+window.addEventListener('load', () => {
+  if (container && initialData && typeof ApexCharts !== 'undefined') {
+    const chart = new ApexCharts(
+      container,
+      getChartOptions(initialData.dates, initialData.attendance),
+    )
+
+    chart.render()
+  }
+})

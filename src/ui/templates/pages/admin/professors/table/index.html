@@ -1,35 +1,56 @@
 {% from 'pages/admin/professors/table/row.html' import row %}
 {% from 'components/rows_skeleton.html' import rows_skeleton %}
+{% from 'components/toast.html' import toast %}
 
-<table id="professors-table" class="table">
-  <thead class="table-head">
-    <tr>
-      <th scope="col" class="table-heading">
-        Nome
-      </th>
-      <th scope="col" class="table-heading">
-        E-mail
-      </th>
-      <th scope="col" class="table-heading">
-        Disciplinas
-      </th>
-      <th scope="col" class="table-heading">
-        Idade
-      </th>
-      <th scope="col" class="table-heading">
-        Gênero
-      </th>
-    </tr>
-  </thead>
+{% if success_message %}
+{{ toast(
+id="professors_table_toast",
+category="success",
+message=success_message
+)
+}}
+{% endif %}
 
-  <tbody>
-    {% for professor in professors %}
-    {{ row(professor) }}
-    {% endfor %}
+<form
+  id="delete-professors"
+  hx-delete="{{ url_for('admin_views.delete_professors_view') }}"
+  hx-target="#professors-table"
+  hx-target-error="#toast-message"
+  hx-swap="innerHTML"
+  data-query-param="hx-delete"
+  method="post">
 
-    <span id="new-professor" class="sr-only"></span>
+  <table id="professors-table" class="table">
+    <thead class="table-head">
+      <tr>
+        <th scope="col" class="table-heading">
+        </th>
+        <th scope="col" class="table-heading">
+          Nome
+        </th>
+        <th scope="col" class="table-heading">
+          E-mail
+        </th>
+        <th scope="col" class="table-heading">
+          Disciplinas
+        </th>
+        <th scope="col" class="table-heading">
+          Idade
+        </th>
+        <th scope="col" class="table-heading">
+          Gênero
+        </th>
+      </tr>
+    </thead>
 
-    {{ rows_skeleton(6) }}
-  </tbody>
+    <tbody class="relative">
+      {% for professor in professors %}
+      {{ row(professor) }}
+      {% endfor %}
 
-</table>
+      {{ rows_skeleton(6) }}
+    </tbody>
+
+  </table>
+
+</form>
