@@ -1,0 +1,37 @@
+{% from 'components/csv_button.html' import csv_button %}
+{% from 'components/input.html' import input %}
+{% from 'components/avatar_input.html' import avatar_input %}
+{% from 'components/radio_group.html' import radio_group %}
+{% from 'components/checkbox_group.html' import checkbox_group %}
+{% from 'components/checkbox.html' import checkbox %}
+
+<div class="mt-6">
+  <div class="flex items-center gap-3">
+    <p class="text-petros-800 text-lg font-semibold">Manualmente</p>
+    ou
+    {{
+    csv_button(
+    id="professor_csv",
+    action='import',
+    url=url_for("admin_views.create_professors_by_csv_view"),
+    target="#professors-table"
+    )
+    }}
+  </div>
+
+  <form
+    id="create-professor"
+    hx-post="{{ url_for('admin_views.create_professor_by_form_view') }}"
+    hx-target="#professors-table"
+    hx-trigger="submit"
+    hx-target-error="#create-professor-form-fields"
+    hx-swap="innerHTML"
+    data-query-param="hx-post"
+    enctype="multipart/form-data">
+    <div
+      id="create-professor-form-fields"
+      class="space-y-6 w-full">
+      {% include "pages/admin/professors/create_professor_form/fields.html" %}
+    </div>
+  </form>
+</div>
