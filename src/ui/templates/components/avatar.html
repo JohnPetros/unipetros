@@ -1,0 +1,8 @@
+{% macro avatar(src, alt, class) %}
+
+<img
+  src="{{ url_for('static', filename='uploads/images/{}'.format(src)) }}"
+  alt="{{ alt }}"
+  class="rounded-full {{ class }}">
+
+{% endmacro %}
