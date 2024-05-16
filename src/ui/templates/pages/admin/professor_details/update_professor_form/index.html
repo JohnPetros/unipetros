@@ -1,0 +1,25 @@
+{% from 'components/csv_button.html' import csv_button %}
+{% from 'components/input.html' import input %}
+{% from 'components/avatar_input.html' import avatar_input %}
+{% from 'components/radio_group.html' import radio_group %}
+{% from 'components/checkbox_group.html' import checkbox_group %}
+{% from 'components/checkbox.html' import checkbox %}
+
+<div class="mt-6">
+  <form
+    id="update-professor"
+    hx-post="{{ url_for('admin_views.update_professor_view') }}"
+    hx-target="#professor"
+    hx-trigger="submit"
+    hx-target-error="#update-professor-form-fields"
+    hx-swap="innerHTML"
+    data-query-param="hx-post"
+    enctype="multipart/form-data">
+    <div
+      id="update-professor-form-fields"
+      class="space-y-6 w-full">
+      {% include
+      "pages/admin/professor_details/update_professor_form/fields.html" %}
+    </div>
+  </form>
+</div>

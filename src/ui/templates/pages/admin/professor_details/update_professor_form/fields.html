@@ -1,0 +1,106 @@
+{% from 'components/toast.html' import toast %}
+{% from 'components/input.html' import input %}
+{% from 'components/avatar_input.html' import avatar_input %}
+{% from 'components/radio_group.html' import radio_group %}
+{% from 'components/checkbox_group.html' import checkbox_group %}
+{% from 'components/checkbox.html' import checkbox %}
+
+{% set grid_input = "grid grid-cols-2 gap-6" %}
+
+{% if error_message %}
+{{
+toast(
+id="professors_table_toast",
+category="error",
+message=error_message
+)
+}}
+{% endif %}
+
+{{ professor_form.csrf_token }}
+
+{{
+input(
+id='name',
+field=professor_form.name,
+label=professor_form.name.label,
+placeholder="Giraffales da Nôbrega",
+has_autofocus=True,
+errors=professor_form.name.errors
+)
+}}
+
+<div class="{{ grid_input }}">
+  {{
+  input(
+  field=professor_form.email,
+  label=professor_form.email.label,
+  placeholder="john@unipetros.com",
+  errors=professor_form.email.errors
+  )
+  }}
+  {{
+  input(
+  field=professor_form.phone,
+  label=professor_form.phone.label,
+  placeholder="(12) 944028922",
+  errors=professor_form.phone.errors
+  )
+  }}
+</div>
+
+<div class="{{ grid_input }}">
+  <div class="space-y-2">
+    {{ professor_form.birthdate.label(class="label") }}
+    {{ professor_form.birthdate(class="input") }}
+  </div>
+  {{
+  radio_group(
+  label="Gênero",
+  name="gender",
+  radios=professor_form.gender.choices,
+  default=professor_form.gender.data
+  )
+  }}
+</div>
+
+<div class="{{ grid_input }}">
+  {{
+  input(field=professor_form.password,
+  label=professor_form.password.label,
+  placeholder="******",
+  errors=professor_form.password.errors
+  )
+  }}
+  {{
+  input(field=professor_form.password_confirmation,
+  label=professor_form.password_confirmation.label,
+  placeholder="confirmação de senha",
+  errors=professor_form.password_confirmation.errors
+  )
+  }}
+</div>
+
+{{
+avatar_input(
+label=professor_form.avatar.label,
+control=professor_form.avatar,
+errors=professor_form.avatar.errors,
+default=professor_form.avatar.data
+)
+}}
+
+<div class="flex items-center gap-3 flex-wrap">
+  {{
+  checkbox_group(
+  label=professor_form.subjects.label,
+  checkboxes=professor_form.subjects,
+  checked_checkboxes_ids=professor_form.checked_subjects_ids,
+  errors=professor_form.subjects.errors
+  )
+  }}
+</div>
+
+<div class="mx-auto pt-6 w-max">
+  {{ professor_form.submit_button(class="button") }}
+</div>
