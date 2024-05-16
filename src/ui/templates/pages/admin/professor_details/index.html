@@ -1,6 +1,29 @@
 {% extends "layouts/dashboard/index.html" %}
 
+{% from "components/badge.html" import badge %}
+{% from "components/avatar.html" import avatar %}
+{% from "components/modal.html" import modal %}
+
+{% set info_class =
+"rounded-md flex items-center gap-2 p-3 bg-gray-200 text-gray-500" %}
+
 {% block dashboard_content %}
 
+<div class="flex items-center gap-6">
+  <a href="{{ url_for('admin_views.handle_professors_page_view') }}">
+    <i class="ph-bold ph-caret-left"></i>
+    Voltar
+  </a>
+
+  {% call modal(id="professor-modal", title="Editar professor") %}
+
+  {% include "pages/admin/professor_details/update_professor_form/index.html" %}
+
+  {% endcall %}
+</div>
+
+<div id="professor">
+  {% include "pages/admin/professor_details/professor.html" %}
+</div>
 
 {% endblock dashboard_content %}

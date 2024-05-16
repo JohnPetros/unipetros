@@ -7,7 +7,6 @@
 {% from 'components/checkbox.html' import checkbox %}
 {% from 'components/select.html' import select %}
 {% from 'components/button.html' import button %}
-{% from 'components/pagination/index.html' import pagination %}
 
 {% block dashboard_content %}
 
@@ -17,7 +16,7 @@
   is_default_open=professor_form.errors | length
   )
   %}
-  {% include 'components/professor_modal.html' %}
+  {% include "pages/admin/professors/create_professor_form/index.html" %}
   {% endcall %}
 
   {{
@@ -33,8 +32,9 @@
 <form
   hx-get="{{ url_for('admin_views.get_filtered_professors_view') }}"
   hx-target="#professors-table"
-  hx-trigger="trigger, keyup from:#search changed delay:500ms, search from:#search, change from:input[name='subjects_ids[]'] delay:500ms, change from:#pagination-input delay:500ms, change from:select[data-select='select'] delay:500ms"
+  hx-trigger="keyup from:#search changed delay:500ms, search from:#search, change from:input[name='subjects_ids[]'] delay:500ms, change from:#pagination-input delay:500ms, change from:select[data-select='select'] delay:500ms"
   hx-swap="innerHTML"
+  data-query-param="hx-get"
   class="flex flex-col">
   <div class="flex items-end gap-3 w-full mt-6">
     {{
@@ -69,13 +69,15 @@
   </div>
 
   <div class="flex items-center justify-start gap-6 mt-3">
-    {{ select(
+    {{
+    select(
     name='gender',
     options=[
     ('all', 'todos os gêneros'),
     ('male', 'masculino'),
     ('female', 'feminino')
     ],
+    default=gender,
     attributes='data-select=select'
     )
     }}
@@ -91,25 +93,21 @@
   </div>
 
   <input
-    data-pagination="input"
     id="pagination-input"
+    data-pagination="input"
     type="text"
     name="page"
     hidden>
-
 </form>
 
 <div class="relative mt-6">
   <div
-    id="professors-table" class="h-96" data-table="container">
-    {% include 'pages/admin/professors/table/index.html' %}
+    id="professors-table"
+    data-table="container"
+    data-pagination="container"
+    class="h-96">
+    {% include "pages/admin/professors/table/index.html" %}
   </div>
-
-  {% if pages_count > 1 %}
-  <div class="mt-6">
-    {{ pagination(pages_count) }}
-  </div>
-  {% endif %}
 </div>
 
 <script
@@ -117,5 +115,9 @@
 <script
   src="{{ url_for('static', filename='scripts/select.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/table.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/pagination.js') }}"></script>
+<script
+  src="{{ url_for('static', filename='scripts/avatar_input.js') }}"></script>
 
 {% endblock dashboard_content %}

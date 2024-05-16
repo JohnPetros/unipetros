@@ -1,0 +1,63 @@
+<div class="flex items-center justify-center gap-24 mt-24">
+  <div class="flex flex-col items-center space-y-8">
+
+    {{ avatar(src=professor.avatar, alt=professor.name, class="w-48 h-48") }}
+
+    <h1 class="font-bold">{{ professor.name }}</h1>
+
+    <ul class="flex items-center gap-3">
+      <li class="{{ info_class }}">
+        <i class="ph-bold text-2xl ph-phone"></i>
+        <span>{{ professor.phone }}</span>
+      </li>
+      <li class="{{ info_class }}">
+        <i class="ph-bold text-2xl ph-envelope-simple"></i>
+        <span>{{ professor.email }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="font-bold">Disciplinas</h2>
+    <ul class="flex flex-wrap gap-2 mt-4">
+      {% for subject in professor.subjects %}
+      <li class="text-gray-500">
+        {{ badge(subject.name) }}
+      </li>
+      {% endfor %}
+    </ul>
+
+    <h2 class="font-bold mt-4">Descrição</h2>
+
+    <p class="max-w-lg mt-4">
+      Na jornada acadêmica da Unipetros, o papel do professor se destaca como
+      farol que ilumina o caminho do conhecimento. Mais do que meros
+      transmissores de saber, os mestres da Unipetros se distinguem por suas
+      qualidades excepcionais, tornando-se pilares fundamentais no processo de
+      ensino e aprendizagem.
+    </p>
+
+    <dl class="flex items-center justify-between mt-4">
+      <div>
+        <dt class="font-bold">Idade</dt>
+        <dd>{{ professor.age }}</dd>
+      </div>
+      <div>
+        <dt class="font-bold">Idade</dt>
+        <dd>
+          {{ "masculino" if professor.gender == "male" else "feminino" }}
+        </dd>
+      </div>
+    </dl>
+
+    <h2 class="font-bold mt-6">Professores das mesmas disciplinas</h2>
+    <ul>
+      {% for professor in related_professors %}
+      <li>
+        {{ avatar(src=professor.avatar, alt=professor.name, class="w-12 h-12")
+        }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
