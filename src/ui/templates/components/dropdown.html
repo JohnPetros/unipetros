@@ -3,17 +3,17 @@
 {% macro dropdown(title) %}
 
 <button
-  id="dropdownBgHoverButton"
-  data-dropdown-toggle="dropdownBgHover"
+  id="dropdown-trigger"
+  data-dropdown-toggle="dropdown-"
   type="button"
-  class="button flex items-center gap-2">
+  class="button flex items-center gap-2 -translate-y-2">
   {{ title }}
   <i class="ph-bold ph-caret-down"></i>
 </button>
 
 <div
-  id="dropdownBgHover"
-  class="hidden w-48 p-6 bg-white rounded-lg shadow dark:bg-gray-700">
+  id="dropdown-"
+  class="hidden w-48 z-[150] p-6 bg-white rounded-lg shadow dark:bg-gray-700">
   {{ caller() }}
 </div>
 
