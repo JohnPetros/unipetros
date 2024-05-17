@@ -28,7 +28,19 @@ def create_professor_by_form_view() -> str:
         if not professor_form.validate_on_submit():
             raise Error("Formulário inválido", status_code=400)
 
-        create_professor.execute(professor_form.data)
+        create_professor.execute(
+            {
+                "email": professor_form.email.data,
+                "name": professor_form.name.data,
+                "avatar": professor_form.avatar.data,
+                "password": professor_form.password.data,
+                "phone": professor_form.phone.data,
+                "gender": professor_form.gender.data,
+                "birthdate": professor_form.birthdate.data,
+                "subjects": request.form.getlist("subjects[]"),
+            }
+        )
+
         professors, pages_count = get_filtered_professors.excute(
             gender=gender,
             name_or_email=search,
