@@ -1,4 +1,4 @@
-{% macro select(id, options, attributes, name = "") %}
+{% macro select(id, options, attributes, default, name = "") %}
 
 <div class="space-y-3">
   {% if id %}
@@ -11,7 +11,9 @@
     name="{{ name }}" class="input"
     {{ attributes }}>
     {% for option in options %}
-    {% set is_selected = "selected" if loop.index0 == 0 else "" %}
+
+    {% set is_selected = "selected" if default == option[0] or loop.index0 == 0
+    else "" %}
 
     <option value="{{ option[0] }}" {{ is_selected }}>
       {{ option[1] }}

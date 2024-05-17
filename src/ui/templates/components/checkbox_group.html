@@ -1,7 +1,9 @@
 {% from 'components/input_errors.html' import input_errors %}
 {% from 'components/checkbox.html' import checkbox as checkbox_field %}
 
-{% macro checkbox_group(label, name, checkboxes, errors, is_form) %}
+{% macro
+checkbox_group(label, name, checkboxes, checked_checkboxes_ids, errors, is_form)
+%}
 
 <div class="space-y-3">
   {% for checkbox in checkboxes %}
@@ -9,7 +11,10 @@
   checkbox_field(
   id=checkbox.value,
   label=checkbox.label,
-  field=checkbox
+  field=checkbox,
+  attributes={"checked": "true"} if checkbox.data in checked_checkboxes_ids
+  else
+  {}
   )
   }}
   {% endfor %}

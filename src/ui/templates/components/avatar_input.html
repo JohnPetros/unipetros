@@ -1,21 +1,33 @@
-{% macro avatar_input(label, control) %}
+{% from 'components/input_errors.html' import input_errors %}
+
+{% macro avatar_input(label, control, errors, default="default.png") %}
 
 <div class="flex items-center justify-center gap-3 w-full">
-  <img class="rounded-full w-24 h-24 object-cover" id="avatar-preview"
-    src="{{ url_for('static', filename='uploads/images/default-avatar.png') }}" width="64" height="64" alt=""
+  <img
+    class="rounded-full w-24 h-24 object-cover" id="avatar-preview"
+    src="{{ url_for('static', filename='uploads/images/{}'.format(default)) }}"
+    width="64" height="64"
+    alt
     data-avatar-input="avatar">
   <label for="avatar"
     class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer pt-3 bg-gray-50 hover:bg-gray-100">
     <span class="label">{{ label }}</span>
     <div class="flex flex-col items-center justify-center pt-5 pb-6">
       <i class="ph-bold ph-cloud-arrow-up text-petros-800"></i>
-      <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Clique para fazer upload do avatar</span></p>
+      <p class="mb-2 text-sm text-gray-500">
+        <span class="font-semibold">
+          Clique para fazer upload do avatar
+        </span>
+      </p>
       <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
     </div>
     {{ control() }}
   </label>
+
 </div>
 
-<script src="{{ url_for('static', filename='scripts/avatar_input.js') }}"></script>
+<div class="text-center">
+  {{ input_errors(errors) }}
+</div>
 
 {% endmacro %}

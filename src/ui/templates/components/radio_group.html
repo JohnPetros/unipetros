@@ -1,17 +1,27 @@
 {% from 'components/input_errors.html' import input_errors %}
 
-{% macro radio_group(label, name, radios, errors, is_column) %}
+{% macro radio_group(label, name, radios, errors, is_column, default) %}
+
+{% if not default %}
+{% set default = radios[0][0] %}
+{% endif %}
 
 <div>
-  <span class="label">{{ label }}</span>
+  <span class="label">{{ default }}</span>
   <div
     class="flex gap-2 {{ 'flex-col' if is_column else 'flex-row flex-wrap' }}">
     {% for radio in radios %}
+
+    {% set checked = "checked" if radio[0] == default else "" %}
+
     <div class="flex items-center mt-2">
-      <input id="{{ radio[0] }}" type="radio" value="{{ radio[0] }}"
+      <input
+        id="{{ radio[0] }}"
+        value="{{ radio[0] }}"
+        type="radio"
         name="{{ name }}"
-        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-        checked="{{ 'true' if loop.index0 == 0 else 'false' }}">
+        {{ checked }}
+        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
 
       <label for="{{ radio[0] }}"
         class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
