@@ -24,6 +24,6 @@ class ProfessorForm(UserForm):
             self.gender.data = professor.gender
             self.checked_subjects_ids = [subject.id for subject in professor.subjects]
 
-    subjects = MultiCheckboxField("Disciplinas")
+    subjects = MultiCheckboxField("Disciplinas", name="subjects[]")
     checked_subjects_ids = []
     submit_button = SubmitField("Adicionar professor", validators=[DataRequired()])
