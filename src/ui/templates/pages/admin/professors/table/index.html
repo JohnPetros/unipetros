@@ -1,9 +1,11 @@
 {% from 'pages/admin/professors/table/row.html' import row %}
 {% from 'components/rows_skeleton.html' import rows_skeleton %}
+{% from 'components/pagination/index.html' import pagination %}
 {% from 'components/toast.html' import toast %}
 
 {% if success_message %}
-{{ toast(
+{{
+toast(
 id="professors_table_toast",
 category="success",
 message=success_message
@@ -16,9 +18,9 @@ message=success_message
   hx-delete="{{ url_for('admin_views.delete_professors_view') }}"
   hx-target="#professors-table"
   hx-target-error="#toast-message"
+  hx-trigger="submit"
   hx-swap="innerHTML"
-  data-query-param="hx-delete"
-  method="post">
+  data-query-param="hx-delete">
 
   <table id="professors-table" class="table">
     <thead class="table-head">
@@ -48,9 +50,15 @@ message=success_message
       {{ row(professor) }}
       {% endfor %}
 
-      {{ rows_skeleton(6) }}
+      {{ rows_skeleton(5) }}
     </tbody>
 
   </table>
 
 </form>
+
+{% if pages_count > 1 %}
+<div class="mt-6">
+  {{ pagination(pages_count) }}
+</div>
+{% endif %}

@@ -23,6 +23,10 @@
 
   <form
     method="post"
+    hx-post="{{ url_for('admin_views.create_professor_by_form_view') }}"
+    hx-target="#professors-table"
+    hx-trigger="submit"
+    data-query-param="hx-post"
     enctype="multipart/form-data"
     class="space-y-6 w-full">
     {{ professor_form.csrf_token }}
@@ -83,8 +87,13 @@
       }}
     </div>
 
-    {{ avatar_input(label=professor_form.avatar.label,
-    control=professor_form.avatar) }}
+    {{
+    avatar_input(
+    label=professor_form.avatar.label,
+    control=professor_form.avatar,
+    errors=professor_form.avatar.errors
+    )
+    }}
 
     <div class="flex items-center gap-3 flex-wrap">
       {{

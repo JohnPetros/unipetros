@@ -8,7 +8,7 @@
 <div class="mt-6">
   <form
     id="update-professor"
-    hx-post="{{ url_for('admin_views.update_professor_view') }}"
+    hx-put="{{ url_for('admin_views.update_professor_view', id=professor.id) }}"
     hx-target="#professor"
     hx-trigger="submit"
     hx-target-error="#update-professor-form-fields"
