@@ -1,6 +1,8 @@
 class QueryParam {
   constructor() {
-    this.updateHtmxUrl()
+    setTimeout(() => {
+      this.updateHtmxUrl()
+    }, 2000)
   }
 
   get(key) {
@@ -37,7 +39,7 @@ class QueryParam {
 
     for (const htmxElement of htmxElements) {
       const htmxMethod = htmxElement.dataset.queryParam
-      const htmxUrl = htmxElement.getAttribute(htmxMethod)
+      const htmxUrl = htmxElement.getAttribute(htmxMethod).split("?")[0]
 
       const allParams = this.getAll()
 
@@ -46,6 +48,10 @@ class QueryParam {
         .join("&")
 
       htmxElement.setAttribute(htmxMethod, `${htmxUrl}?${params}`)
+
+      htmx.process(htmxElement)
     }
   }
 }
+
+window.addEventListener("load", () => new QueryParam())

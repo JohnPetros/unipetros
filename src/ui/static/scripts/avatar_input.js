@@ -5,6 +5,7 @@ class AvatarInput {
 
     if (!avatar || !input) return
 
+    this.avatar = avatar
     input.addEventListener("change", (event) => this.handleInputChange(event))
   }
 
@@ -14,7 +15,7 @@ class AvatarInput {
 
     if (file) {
       fileReader.onload = (fileReaderEvent) => {
-        avatar.src = fileReaderEvent.target.result
+        this.avatar.src = fileReaderEvent.target.result
       }
 
       fileReader.readAsDataURL(file)
