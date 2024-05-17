@@ -14,7 +14,18 @@ from .users_repository import UsersRepository
 class ProfessorsRepository(UsersRepository):
     def get_professor_by_id(self, id: str) -> Union[Professor, None]:
         professor = mysql.query(
-            sql="SELECT * FROM professors WHERE id = %s", params=[id]
+            sql="""
+            SELECT 
+                P.*, 
+                GROUP_CONCAT(S.id) AS subjects_ids, 
+                GROUP_CONCAT(S.name) AS subjects_names
+            FROM professors AS P
+            LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
+            LEFT JOIN subjects AS S ON PS.subject_id = S.id
+            WHERE P.id = %s
+            """,
+            params=[id],
+            is_single=True,
         )
 
         if not professor:
@@ -61,6 +72,32 @@ class ProfessorsRepository(UsersRepository):
                 GROUP BY P.id
                 """,
             is_single=False,
+        )
+
+        if len(professors) == 0:
+            return []
+
+        professors = list(map(self.__get_professor_entity, professors))
+
+        return professors
+
+    def get_professors_by_subjects_ids(self, ids: list[str]):
+        subjects_ids = ",".join(ids)
+
+        professors = mysql.query(
+            sql="""
+                SELECT
+                    P.*,
+                    GROUP_CONCAT(S.id) AS subjects_ids,
+                    GROUP_CONCAT(S.name) AS subjects_names
+                FROM professors AS P
+                LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id
+                LEFT JOIN subjects AS S ON PS.subject_id = S.id
+                WHERE S.id IN (%s)
+                GROUP BY P.id
+                """,
+            is_single=False,
+            params=[subjects_ids],
         )
 
         if len(professors) == 0:
@@ -187,6 +224,7 @@ class ProfessorsRepository(UsersRepository):
             email=professor_data["email"],
             name=professor_data["name"],
             password=professor_data["password"],
+            phone=professor_data["phone"],
             avatar=professor_data["avatar"],
             birthdate=professor_data["birthdate"],
             gender=professor_data["gender"],
