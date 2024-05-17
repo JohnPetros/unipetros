@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev:app": "flask --app ./src/app/main.py:init_app run --debug --host=0.0.0.0 --port=5000",
+    "dev:app": "flask --app ./src/app/main.py:init_app run --debug --host=0.0.0.0 --port=5001",
     "dev:style": "tailwindcss -i ./src/ui/static/styles/global.css -o ./src/ui/static/build/styles/global.css --watch",
     "dev": "concurrently 'npm run dev:app' 'npm run dev:style'"
   },
@@ -13,7 +13,6 @@
     "tailwindcss-intersect": "^1.0.5"
   },
   "dependencies": {
-    "flowbite": "^2.3.0",
-    "pnpm": "^8.15.6"
+    "flowbite": "^2.3.0"
   }
 }
