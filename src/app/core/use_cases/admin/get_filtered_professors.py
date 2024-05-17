@@ -1,7 +1,10 @@
+from math import ceil
 from typing import List
 
 from core.commons.email import Email
 from core.entities.professor import Professor
+from core.constants.pagination_limit import PAGINATION_LIMIT
+
 
 from infra.repositories import professors_repository
 
@@ -47,4 +50,5 @@ class GetFilteredProfessors:
 
         professors_count = professors_repository.get_professors_count()
 
-        return professors, professors_count
+        pages_count = ceil(professors_count / PAGINATION_LIMIT)
+        return professors, pages_count

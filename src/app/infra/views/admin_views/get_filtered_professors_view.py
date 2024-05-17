@@ -13,11 +13,12 @@ def get_filtered_professors_view() -> str:
     gender = request.args.get("gender", "all")
     page = request.args.get("page", 1)
 
-    professors = get_filtered_professors.excute(
+    professors, pages_count = get_filtered_professors.excute(
         name_or_email=search, subjects_ids=subjects_ids, page_number=page, gender=gender
-    )[0]
+    )
 
     return render_template(
         "pages/admin/professors/table/index.html",
         professors=professors,
+        pages_count=pages_count,
     )

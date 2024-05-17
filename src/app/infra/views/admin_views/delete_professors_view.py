@@ -1,3 +1,5 @@
+from math import ceil
+
 from flask import render_template, request
 
 
@@ -16,22 +18,24 @@ def delete_professors_view() -> str:
     subjects_ids = request.args.getlist("subjects_ids[]")
     page = request.args.get("page", 1)
 
-    print(page, flush=True)
-
     try:
         delete_professors.execute(professors_ids)
-        updated_professors = get_filtered_professors.excute(
+        professors, pages_count = get_filtered_professors.excute(
             name_or_email=search, subjects_ids=subjects_ids, page_number=page
-        )[0]
+        )
     except Error as error:
-        return render_template(
-            "components/toast_message.html", message=error.ui_message, category="error"
-        ), error.status_code
-
-    print(updated_professors, flush=True)
+        return (
+            render_template(
+                "components/toast_message.html",
+                message=error.ui_message,
+                category="error",
+            ),
+            error.status_code,
+        )
 
     return render_template(
         "pages/admin/professors/table/index.html",
-        professors=updated_professors,
-        success_message="Professor deletado com sucesso",
+        professors=professors,
+        pages_count=pages_count,
+        success_message="Professor(s) deletado(s) com sucesso",
     )

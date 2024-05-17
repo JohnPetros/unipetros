@@ -17,10 +17,14 @@ class GetProfessorDetailsPageData:
 
             professor = professors_repository.get_professor_by_id(professor_id)
 
-            if not isinstance(professor, Professor):
+            if not professor or not isinstance(professor, Professor):
                 raise Error("Professor não encontrado", 404)
 
-            return professor
+            related_professors = professors_repository.get_professors_by_subjects_ids(
+                [subject.id for subject in professor.subjects]
+            )
 
-        except Exception as exception:
-            return Error(exception, 500)
+            return {"professor": professor, "related_professors": related_professors}
+
+        except Error as error:
+            return error
