@@ -19,13 +19,13 @@ def create_professors_by_csv_view() -> str:
     csv = request.files["csv"]
     create_professors_by_csv.execute(csv)
 
-    professors = get_filtered_professors.excute(
+    professors, pages_count = get_filtered_professors.excute(
         name_or_email=search, subjects_ids=subjects_ids, page_number=page, gender=gender
-    )[0]
+    )
 
     return render_template(
         "pages/admin/professors/table/index.html",
         professors=professors,
-        pages_count=ceil(len(professors) / PAGINATION_LIMIT),
+        pages_count=pages_count,
         success_message="Professores criados com sucesso",
     )

@@ -39,12 +39,12 @@ def handle_professors_page_view() -> str:
             search_value=search,
             gender=gender,
             subjects_checkbox_group=subjects_checkbox_group,
+            selected_subjects_ids=subjects_ids,
             professor_form=professor_form,
             professors=professors,
             pages_count=pages_count,
         )
-    except Error as error:
-        print(error, flush=True)
+    except Error:
         return render_template(
             "pages/admin/professors/index.html",
             user=user,

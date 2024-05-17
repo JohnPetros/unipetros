@@ -29,20 +29,21 @@ def update_professor_view(id: str):
                 "gender": professor_form.gender.data,
                 "birthdate": professor_form.birthdate.data,
                 "password": professor_form.password.data,
-                "subjects_ids": professor_form.subjects.data,
+                "subjects_ids": request.form.getlist("subjects[]"),
             }
         )
 
-        print("updated_professor_view", updated_professor, flush=True)
-
         return render_template(
-            "pages/admin/professor_details/professor.html", professor=updated_professor
+            "pages/admin/professor_details/professor.html",
+            professor=updated_professor,
+            message="Professor adicionado com sucesso",
         )
     except Error as error:
         return (
             render_template(
                 "pages/admin/professor_details/update_professor_form/fields.html",
                 professor_form=professor_form,
+                error_message=error.ui_message,
             ),
             error.status_code,
         )
