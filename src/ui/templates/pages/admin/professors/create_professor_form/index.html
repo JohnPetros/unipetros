@@ -20,7 +20,7 @@
   </div>
 
   <form
-    id="create-professor"
+    id="create-professor-form"
     hx-post="{{ url_for('admin_views.create_professor_by_form_view') }}"
     hx-target="#professors-table"
     hx-trigger="submit"
@@ -28,6 +28,7 @@
     hx-swap="innerHTML"
     data-query-param="hx-post"
     enctype="multipart/form-data">
+
     <div
       id="create-professor-form-fields"
       class="space-y-6 w-full">
@@ -35,3 +36,4 @@
     </div>
   </form>
 </div>
+<!-- 123456 -->
