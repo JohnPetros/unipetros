@@ -34,8 +34,6 @@ class CreateProfessorsByCSV:
         for professor in professors:
             professors_repository.create_professor(professor)
 
-        return professors_repository.get_professors()
-
     def __validate_csv(self, csv: FileStorage):
         if not isinstance(csv, FileStorage):
             raise Error("Arquivo de professores precisa ser um arquivo csv")
@@ -44,7 +42,7 @@ class CreateProfessorsByCSV:
 
         if extension not in ["xlsx", "csv"]:
             raise Error(
-                "Arquivo contendo os professors precisam ser must um arquivo csv ou excel válido"
+                "Arquivo contendo os professors precisam ser um arquivo csv ou excel válido"
             )
 
     def __get_records(self, csv: FileStorage, extension: str):
