@@ -81,7 +81,7 @@ class GetAnalyticsPageData:
                 "professors_count_by_gender_and_subject": professors_count_by_gender_and_subject,
             }
         except Exception as exception:
-            raise Error(error_message=exception) from exception
+            raise Error(internal_message=exception) from exception
 
     def __get_professors_count_by_gender_and_subject(
         self, professors: List[Professor], subjects: List[Subject]

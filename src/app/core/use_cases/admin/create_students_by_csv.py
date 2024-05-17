@@ -39,7 +39,7 @@ class CreateStudentsByCSV:
         except Exception as exception:
             raise Error(
                 ui_message="Não foi possível usar os dados de estudantes desse arquivo csv",
-                error_message=exception,
+                internal_message=exception,
             ) from exception
 
     def __validate_csv(self, csv: FileStorage) -> None:
