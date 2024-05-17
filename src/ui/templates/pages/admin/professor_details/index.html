@@ -1,6 +1,5 @@
 {% extends "layouts/dashboard/index.html" %}
 
-{% from "components/badge.html" import badge %}
 {% from "components/modal.html" import modal %}
 
 {% block dashboard_content %}
@@ -22,5 +21,8 @@
 <div id="professor">
   {% include "pages/admin/professor_details/professor.html" %}
 </div>
+
+<script
+  src="{{ url_for('static', filename='scripts/avatar_input.js') }}"></script>
 
 {% endblock dashboard_content %}
