@@ -4,8 +4,7 @@
   data-modal-target="{{ id }}"
   data-modal-toggle="{{ id }}"
   type="button"
-  class="button"
-  _="{{ 'on load wait 500ms then trigger click on me' if is_default_open else '' }}">
+  class="button">
   {{ title }}
 </button>
 
@@ -14,9 +13,20 @@
   <div
     class="bg-white rounded-lg shadow min-w-24 w-[36rem] max-h-[40rem] overflow-auto">
     <div class="border-b rounded-t p-8">
-      <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
-        {{ title }}
-      </h3>
+      <div class="flex items-center justify-between">
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
+          {{ title }}
+        </h3>
+
+        <button
+          id="close-{{ id }}"
+          data-modal-target="{{ id }}"
+          data-modal-hide="{{ id }}"
+          type="button"
+          class="grid place-content-center">
+          <i class="ph-bold ph-x text-lg"></i>
+        </button>
+      </div>
 
       {{ caller() }}
     </div>
