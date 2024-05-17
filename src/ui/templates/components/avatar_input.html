@@ -1,6 +1,6 @@
 {% from 'components/input_errors.html' import input_errors %}
 
-{% macro avatar_input(label, control, errors, default="default.png") %}
+{% macro avatar_input(label, control, errors, default="default-avatar.png") %}
 
 <div class="flex items-center justify-center gap-3 w-full">
   <img
@@ -12,16 +12,16 @@
   <label for="avatar"
     class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer pt-3 bg-gray-50 hover:bg-gray-100">
     <span class="label">{{ label }}</span>
-    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+    <div class="flex flex-col items-center justify-center pt-3 pb-6">
       <i class="ph-bold ph-cloud-arrow-up text-petros-800"></i>
       <p class="mb-2 text-sm text-gray-500">
         <span class="font-semibold">
           Clique para fazer upload do avatar
         </span>
       </p>
-      <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+      <p class="text-xs text-gray-500">SVG, PNG, JPG ou GIF (MAX. 800x400px)</p>
     </div>
-    {{ control() }}
+    {{ control(value=default) }}
   </label>
 
 </div>
