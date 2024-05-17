@@ -4,6 +4,8 @@ from infra.utils.error import Error
 
 
 class File:
+    path: Path
+
     def __init__(self, folder, filename) -> None:
         self.path = Path(f"{folder}/{filename}")
 
@@ -13,4 +15,12 @@ class File:
         except Exception as exception:
             raise Error(
                 f"Failed to read {self.path.absolute()} file. Error: {exception}"
+            ) from exception
+
+    def delete(self):
+        try:
+            self.path.unlink()
+        except Exception as exception:
+            raise Error(
+                f"Failed to delete {self.path.absolute()} file. Error: {exception}"
             ) from exception
