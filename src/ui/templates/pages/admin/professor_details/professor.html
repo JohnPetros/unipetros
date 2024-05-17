@@ -1,11 +1,26 @@
 {% from "components/avatar.html" import avatar %}
+{% from "components/toast.html" import toast %}
+{% from "components/badge.html" import badge %}
 
 {% set info_class =
 "rounded-md flex items-center gap-2 p-3 bg-gray-200 text-gray-500" %}
 
-<div class="flex items-center justify-center gap-24 mt-24">
-  <div class="flex flex-col items-center space-y-8">
+{% if message %}
 
+{{
+toast(
+id="professor-message",
+message=message,
+category="success",
+onload="trigger click on #close-professor-modal"
+)
+}}
+
+{% endif %}
+
+<div class="flex items-center justify-center gap-24 mt-24">
+  <div
+    class="flex flex-col items-center space-y-8 animate-fade-right animate-duration-1000 animate-delay-[250ms]">
     {{ avatar(src=professor.avatar, alt=professor.name, class="w-48 h-48") }}
 
     <h1 class="font-bold">{{ professor.name }}</h1>
@@ -22,7 +37,7 @@
     </ul>
   </div>
 
-  <div>
+  <div class="animate-fade-left animate-duration-1000 animate-delay-[250ms]">
     <h2 class="font-bold">Disciplinas</h2>
     <ul class="flex flex-wrap gap-2 mt-4">
       {% for subject in professor.subjects %}
@@ -57,7 +72,7 @@
 
     {% if related_professors | length > 0 %}
     <h2 class="font-bold mt-6">Professores das mesmas disciplinas</h2>
-    <ul>
+    <ul class="flex items-center gap-2 flex-wrap">
       {% for professor in related_professors %}
       <li>
         {{ avatar(src=professor.avatar, alt=professor.name, class="w-12 h-12")
