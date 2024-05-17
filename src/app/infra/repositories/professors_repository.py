@@ -13,7 +13,7 @@ from .users_repository import UsersRepository
 
 class ProfessorsRepository(UsersRepository):
     def get_professor_by_id(self, id: str) -> Union[Professor, None]:
-        professor = mysql.query(
+        row = mysql.query(
             sql="""
             SELECT 
                 P.*, 
@@ -28,10 +28,10 @@ class ProfessorsRepository(UsersRepository):
             is_single=True,
         )
 
-        if not professor:
+        if not row:
             return None
 
-        return self.__get_professor_entity(professor)
+        return self.__get_professor_entity(row)
 
     def get_professor_by_email(self, email: str) -> Union[Professor, None]:
         professor = mysql.query(
@@ -172,7 +172,8 @@ class ProfessorsRepository(UsersRepository):
     def create_professor(self, professor: Professor) -> None:
         mysql.mutate(
             sql="""
-                INSERT INTO professors (id, name, email, password, phone, birthdate, gender, avatar) 
+                INSERT INTO professors 
+                (id, name, email, password, phone, birthdate, gender, avatar) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """,
             params=[
@@ -201,6 +202,9 @@ class ProfessorsRepository(UsersRepository):
                 )
 
     def update_professor(self, professor: Professor):
+        print(professor, flush=True)
+        # 123456
+
         mysql.mutate(
             "DELETE FROM professors_subjects WHERE professor_id = %s",
             params=[professor.id],
@@ -235,11 +239,7 @@ class ProfessorsRepository(UsersRepository):
                 professor.phone,
                 professor.birthdate,
                 professor.gender,
-                (
-                    professor.avatar
-                    if professor.avatar is not None
-                    else "default-avatar.png"
-                ),
+                professor.avatar,
                 professor.id,
             ],
         )
@@ -254,7 +254,7 @@ class ProfessorsRepository(UsersRepository):
         subjects_ids = []
         subjects_names = []
 
-        if professor_data["subjects_ids"] and professor_data["subjects_names"]:
+        if "subjects_ids" in professor_data and "subjects_names" in professor_data:
             subjects_ids = professor_data["subjects_ids"].split(",")
             subjects_names = professor_data["subjects_names"].split(",")
 
