@@ -8,7 +8,8 @@
 toast(
 id="professors_table_toast",
 category="success",
-message=success_message
+message=success_message,
+onload="call #create-professor-form.reset() then trigger click on #close-professor-modal"
 )
 }}
 {% endif %}
@@ -50,7 +51,7 @@ message=success_message
       {{ row(professor) }}
       {% endfor %}
 
-      {{ rows_skeleton(5) }}
+      {{ rows_skeleton(6) }}
     </tbody>
 
   </table>
