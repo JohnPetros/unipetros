@@ -22,7 +22,7 @@ class MySQL:
 
         except mysql.connector.Error as error:
             raise Error(
-                error_message=f"Failed to create a database connection. Error: {error}",
+                internal_message=f"Failed to create a database connection. Error: {error}",
                 should_abort=True,
             ) from error
 
@@ -39,7 +39,7 @@ class MySQL:
             self.__close_connection()
 
             raise Error(
-                error_message=f"Failed to execute a query on the database. Error: {error}",
+                internal_message=f"Failed to execute a query on the database. Error: {error}",
                 should_abort=True,
             ) from error
 
