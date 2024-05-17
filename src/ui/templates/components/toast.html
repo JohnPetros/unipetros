@@ -1,4 +1,4 @@
-{% macro toast(id, message, category) %}
+{% macro toast(id, message, category, onload) %}
 
 {% set categories = {
 'success': {
@@ -17,6 +17,10 @@
 'outer_color': 'bg-yellow-100'
 }
 } %}
+
+{% if onload %}
+<div _="on load {{ onload }}"></div>
+{% endif %}
 
 <div id="{{ id }}"
   class="toast-{{ category }} fixed top-12 right-12 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow animate-fade-down animate-once duration-500 animate-fill-forwards"
