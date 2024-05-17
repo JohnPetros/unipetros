@@ -3,10 +3,12 @@ from flask import Blueprint
 from .get_analytics_page_view import get_analytics_page_view
 
 from .create_professors_by_csv_view import create_professors_by_csv_view
+from .create_professor_by_form_view import create_professor_by_form_view
 from .get_professor_details_page_view import get_professor_details_page_view
 from .get_filtered_professors_view import get_filtered_professors_view
 from .handle_professors_page_view import handle_professors_page_view
 from .delete_professors_view import delete_professors_view
+from .update_professor_view import update_professor_view
 
 from .handle_students_page_view import handle_students_page_view
 from .create_students_by_csv_view import create_students_by_csv_view
@@ -26,7 +28,7 @@ route(rule="/dashboard/analytics", view_func=get_analytics_page_view)
 route(
     rule="/dashboard/professors",
     view_func=handle_professors_page_view,
-    methods=["GET", "POST"],
+    methods=["GET"],
 )
 
 route(
@@ -42,9 +44,21 @@ route(
 )
 
 route(
+    rule="/dashboard/professors/form",
+    view_func=create_professor_by_form_view,
+    methods=["POST"],
+)
+
+route(
     rule="/dashboard/professors/delete",
     view_func=delete_professors_view,
     methods=["DELETE"],
+)
+
+route(
+    rule="/dashboard/professors/<id>",
+    view_func=update_professor_view,
+    methods=["PUT"],
 )
 
 route(
