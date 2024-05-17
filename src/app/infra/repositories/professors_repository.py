@@ -200,6 +200,50 @@ class ProfessorsRepository(UsersRepository):
                     ],
                 )
 
+    def update_professor(self, professor: Professor):
+        mysql.mutate(
+            "DELETE FROM professors_subjects WHERE professor_id = %s",
+            params=[professor.id],
+        )
+
+        for subject in professor.subjects:
+            mysql.mutate(
+                sql="""
+                    INSERT INTO professors_subjects 
+                    (professor_id, subject_id) VALUES
+                    (%s, %s)   
+                    """,
+                params=[professor.id, subject.id],
+            )
+
+        mysql.mutate(
+            sql="""
+                UPDATE professors SET 
+                    name = %s,
+                    email = %s,
+                    password = %s,
+                    phone = %s,
+                    birthdate = %s,
+                    gender = %s,
+                    avatar = %s
+                WHERE id = %s
+                """,
+            params=[
+                professor.name,
+                professor.email,
+                professor.password,
+                professor.phone,
+                professor.birthdate,
+                professor.gender,
+                (
+                    professor.avatar
+                    if professor.avatar is not None
+                    else "default-avatar.png"
+                ),
+                professor.id,
+            ],
+        )
+
     def delete_professor_by_id(self, professor_id: str):
         mysql.mutate(
             sql="DELETE FROM professors WHERE id = %s",
@@ -210,7 +254,7 @@ class ProfessorsRepository(UsersRepository):
         subjects_ids = []
         subjects_names = []
 
-        if "subjects_ids" in professor_data and "subjects_names" in professor_data:
+        if professor_data["subjects_ids"] and professor_data["subjects_names"]:
             subjects_ids = professor_data["subjects_ids"].split(",")
             subjects_names = professor_data["subjects_names"].split(",")
 
@@ -219,13 +263,15 @@ class ProfessorsRepository(UsersRepository):
         for index, subject_id in enumerate(subjects_ids):
             subjects.append(Subject(id=subject_id, name=subjects_names[index]))
 
+        avatar = professor_data["avatar"]
+
         professor = Professor(
             id=professor_data["id"],
             email=professor_data["email"],
             name=professor_data["name"],
             password=professor_data["password"],
             phone=professor_data["phone"],
-            avatar=professor_data["avatar"],
+            avatar=avatar if avatar is not None else "default-avatar.png",
             birthdate=professor_data["birthdate"],
             gender=professor_data["gender"],
             subjects=subjects,
