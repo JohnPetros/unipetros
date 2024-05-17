@@ -49,6 +49,11 @@ class UserForm(FlaskForm):
     )
     avatar = FileField(
         "Avatar",
-        validators=[FileAllowed(["jpg", "png"])],
+        validators=[
+            FileAllowed(
+                ["jpg", "jpeg", "png"],
+                message="O arquivo de avatar deve conter a extensão jpg, jpeg e png",
+            )
+        ],
         render_kw={"data-avatar-input": "input"},
     )
