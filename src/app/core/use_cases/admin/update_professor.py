@@ -1,7 +1,9 @@
+from core.commons.email import Email
 from core.entities.professor import Professor
 from core.entities.subject import Subject
-from infra.utils.error import Error
+from core.commons.avatar import Avatar
 
+from infra.utils.error import Error
 from infra.repositories import professors_repository
 from infra.auth import hash_password
 
@@ -16,12 +18,23 @@ class UpdateProfessor:
             if not isinstance(current_professor, Professor):
                 raise Error("Professor não encontrado", 404)
 
+            email = Email(current_professor.email)
+            email.validate(role="professor", exceptions=[current_professor.email])
+
+            avatar = Avatar(
+                request["avatar"], default_image_name=current_professor.avatar
+            )
+            avatar_image_name = avatar.get_image_name()
+
+            if avatar_image_name == current_professor.avatar:
+                avatar_image_name = current_professor.avatar
+
             professor = Professor(
                 id=professor_id,
                 name=request["name"],
-                email=request["email"],
+                email=email.get_value(),
                 password=hash_password(request["password"]),
-                avatar=request["avatar"],
+                avatar=avatar_image_name,
                 phone=request["phone"],
                 gender=request["gender"],
                 birthdate=request["birthdate"],
