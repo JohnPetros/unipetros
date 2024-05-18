@@ -7,12 +7,12 @@ from infra.utils.error import Error
 
 
 class MySQL:
-    def __init__(self) -> None:
+    def __init__(self):
         config = {
-            "user": "unipetros",
-            "password": "unipetros",
-            "database": "unipetros",
-            "host": "localhost",
+            "user": getenv("MYSQL_DATABASE_USER"),
+            "password": getenv("MYSQL_DATABASE_PASSWORD"),
+            "database": getenv("MYSQL_DATABASE_NAME"),
+            "host": getenv("MYSQL_DATABASE_HOST"),
             "raise_on_warnings": True,
         }
 
@@ -23,7 +23,6 @@ class MySQL:
         except mysql.connector.Error as error:
             raise Error(
                 internal_message=f"Failed to create a database connection. Error: {error}",
-                should_abort=True,
             ) from error
 
     def query(self, sql: str, params: List = None, is_single=True) -> Union[Dict, None]:
@@ -40,7 +39,6 @@ class MySQL:
 
             raise Error(
                 internal_message=f"Failed to execute a query on the database. Error: {error}",
-                should_abort=True,
             ) from error
 
     def mutate(self, sql: str, params) -> Dict:
@@ -54,7 +52,6 @@ class MySQL:
 
             raise Error(
                 f"Failed to execute a mutation on the database. Error: {error}",
-                should_abort=True,
             ) from error
 
     def __close_connection(self):
