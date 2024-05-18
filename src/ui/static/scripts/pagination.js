@@ -4,6 +4,7 @@ class Pagination {
 
     if (!container) return
 
+    this.queryParam = new QueryParam()
     this.addEventListeners()
 
     const observer = new MutationObserver((mutations) => {
@@ -26,7 +27,6 @@ class Pagination {
 
     this.pageButtons = pageButtons
     this.input = input
-    this.queryParam = new QueryParam()
 
     let currentPage = this.queryParam.get("page")
 
