@@ -16,8 +16,9 @@ class DeleteProfessors:
                 if not isinstance(professor, Professor):
                     raise Error("Professor não encontrado")
 
-                avatar_file = File(FOLDERS["uploaded_images"], professor.avatar)
-                avatar_file.delete()
+                if professor.avatar != "default-avatar.png":
+                    avatar_file = File(FOLDERS["uploaded_images"], professor.avatar)
+                    avatar_file.delete()
 
                 professors_repository.delete_professor_by_id(id)
         except Error as error:
