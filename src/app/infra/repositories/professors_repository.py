@@ -202,9 +202,6 @@ class ProfessorsRepository(UsersRepository):
                 )
 
     def update_professor(self, professor: Professor):
-        print(professor, flush=True)
-        # 123456
-
         mysql.mutate(
             "DELETE FROM professors_subjects WHERE professor_id = %s",
             params=[professor.id],
@@ -254,7 +251,12 @@ class ProfessorsRepository(UsersRepository):
         subjects_ids = []
         subjects_names = []
 
-        if "subjects_ids" in professor_data and "subjects_names" in professor_data:
+        if (
+            "subjects_ids" in professor_data
+            and professor_data["subjects_ids"] is not None
+            and "subjects_names" in professor_data
+            and professor_data["subjects_names"] is not None
+        ):
             subjects_ids = professor_data["subjects_ids"].split(",")
             subjects_names = professor_data["subjects_names"].split(",")
 
