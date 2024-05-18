@@ -24,7 +24,7 @@ class GetFilteredProfessors:
 
         if name_or_email:
             email = Email(name_or_email)
-            is_email = email.validate()
+            is_email = email.validate("professor", exceptions=[name_or_email])
 
             if is_email:
                 professors = professors_repository.get_filtered_professors(
