@@ -11,7 +11,9 @@ class Email(Common):
         self.value = value
 
     def validate(
-        self, role: Literal["admin", "student", "professor"], exceptions: list[str]
+        self,
+        role: Literal["admin", "student", "professor"],
+        exceptions: list[str] = [],
     ) -> bool:
         regex = compile(
             r"([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+"
@@ -20,7 +22,7 @@ class Email(Common):
         is_email = bool(fullmatch(regex, self.value))
 
         if not is_email:
-            raise Error("E-mail não válido", 400)
+            return False
 
         record = None
 
