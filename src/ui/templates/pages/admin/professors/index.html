@@ -1,12 +1,13 @@
 {% extends "layouts/dashboard/index.html" %}
 
-{% from 'components/modal.html' import modal %}
-{% from 'components/csv_button.html' import csv_button %}
-{% from 'components/search.html' import search %}
-{% from 'components/dropdown.html' import dropdown %}
-{% from 'components/checkbox.html' import checkbox %}
-{% from 'components/select.html' import select %}
-{% from 'components/button.html' import button %}
+{% from "components/modal.html" import modal %}
+{% from "components/csv_button.html" import csv_button %}
+{% from "components/search.html" import search %}
+{% from "components/dropdown.html" import dropdown %}
+{% from "components/checkbox.html" import checkbox %}
+{% from "components/select.html" import select %}
+{% from "components/button.html" import button %}
+{% from "components/alert.html" import alert %}
 
 {% block dashboard_content %}
 
@@ -84,12 +85,24 @@
     }}
 
     {{
+    alert(
+    id="delete-professors-alert",
+    description="Tem certeza que deseja deletar esses registros?",
+    onconfirm="trigger click on #delete-button then trigger submit on #delete-professors-form"
+    )
+    }}
+
+    {{
     button(
-    type="submit",
+    type="button",
     title="Deletar linhas",
     class="hidden bg-red-700 py-1 h-8 animate-pulse",
-    attributes="data-table=delete-button form=delete-professors"
-    )
+    attributes="
+    id=delete-button
+    data-table=delete-button
+    data-modal-target=delete-professors-alert
+    data-modal-toggle=delete-professors-alert
+    ")
     }}
   </div>
 
@@ -98,6 +111,7 @@
     data-pagination="input"
     type="text"
     name="page"
+    class="pointer-events-none"
     hidden>
 </form>
 
