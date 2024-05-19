@@ -46,12 +46,10 @@ class CreateProfessorsByCSV:
             )
 
     def __get_records(self, csv: FileStorage, extension: str):
-        data_analyser_provider.analyse(csv)
-
         if extension == "csv":
-            data_analyser_provider.read_csv()
+            data_analyser_provider.read_csv(csv)
         else:
-            data_analyser_provider.read_excel()
+            data_analyser_provider.read_excel(csv)
 
         records = data_analyser_provider.convert_to_list_of_records()
 
