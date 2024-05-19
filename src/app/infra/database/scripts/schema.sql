@@ -1,44 +1,9 @@
+-- Active: 1716150162783@@127.0.0.1@3306@unipetros
+CREATE DATABASE unipetros;
+
 USE unipetros;
 
-CREATE TABLE IF NOT EXISTS professors (
-  id CHAR(36) DEFAULT(uuid()) PRIMARY KEY, 
-  name VARCHAR(255) NOT NULL, 
-  email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, 
-  phone VARCHAR(255) NOT NULL,
-  birthdate DATE NOT NULL, 
-  avatar VARCHAR(255) DEFAULT 'default-avatar.png', 
-  gender ENUM('male', 'female')
-);
-
-INSERT INTO professors (id, name, email, password, phone, gender, birthdate)
-VALUES 
-(
-    '062ac118-15de-46c8-974e-db33dfc46f38',
-    'Jimmy Pinkman', 
-    'jimmy@unipetros.com',
-    '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', 
-    '12123451234', 
-    'male', 
-    '2002-03-16'
-),
-(
-    'd8e270de-509b-48dd-b485-5ec56cb2e55d',
-    'Jane Doe',
-    'jane@example.com',
-    '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', 
-    '1234567890',
-    'female',
-    '1995-04-20'
-),
-(
-    'de227663-0fa8-4197-8495-e242368e209a',
-    'Bob Smith', 
-    'bob@unipetros.com', 
-    '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', 
-    '0987654321', 
-    'male', 
-    '1980-05-30'
-);
+DROP TABLE IF EXISTS subjects;
 
 CREATE TABLE IF NOT EXISTS subjects (
   id CHAR(36) DEFAULT (uuid()) PRIMARY KEY,
@@ -88,6 +53,8 @@ INSERT INTO subjects (id, name, description) VALUES
   'Este curso introduz os conceitos de algoritmos e estruturas de dados, que são fundamentais para a resolução de problemas de programação. Os alunos aprenderão a projetar e implementar algoritmos eficientes para resolver problemas complexos, além de entender como escolher e aplicar estruturas de dados apropriadas.'
 );
 
+DROP TABLE IF EXISTS courses;
+
 CREATE TABLE IF NOT EXISTS courses (
   id CHAR(36) DEFAULT (uuid()) PRIMARY KEY,
   name VARCHAR(255),
@@ -127,6 +94,8 @@ VALUES
   'O curso de Análise e Desenvolvimento de Sistemas é uma formação de tecnologia que prepara profissionais para implementar, desenvolver, manter e gerenciar sistemas computacionais, abrangendo desde a análise de necessidades até o design, codificação, testes e documentação de softwares. Este curso é voltado para a expansão do mercado de trabalho em Tecnologia da Informação (TI), com disciplinas que incluem Arquitetura de Computadores, Programação, Engenharia de Software, Banco de Dados, Gerenciamento de Projetos e Metodologias Ágeis, entre outras. A duração do curso é de aproximadamente 2 anos e meio, com mensalidades variando de acordo com a instituição de ensino e a modalidade de ensino escolhida'
 );
 
+DROP TABLE IF EXISTS courses_subjects;
+
 CREATE TABLE IF NOT EXISTS courses_subjects (
   course_id CHAR(36) NOT NULL,
   subject_id CHAR(36) NOT NULL,
@@ -134,6 +103,7 @@ CREATE TABLE IF NOT EXISTS courses_subjects (
   FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
   FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
 );
+
 
 INSERT INTO courses_subjects (course_id, subject_id) VALUES
 ('01cbf711-ec80-11ee-8ced-0242ac130002', '3884079f-ec70-11ee-8ced-0242ac130002'),
@@ -143,7 +113,6 @@ INSERT INTO courses_subjects (course_id, subject_id) VALUES
 ('01cdca5b-ec80-11ee-8ced-0242ac130002', '38842e43-ec70-11ee-8ced-0242ac130002');
 
 DROP TABLE IF EXISTS students;
-
 CREATE TABLE IF NOT EXISTS students (
   id CHAR(36) DEFAULT (uuid()) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -158,7 +127,7 @@ CREATE TABLE IF NOT EXISTS students (
   FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
-ALTER TABLE students ADD COLUMN is_active TINYINT DEFAULT 1 NOT NULL;
+ALTER TABLE students ADD COLUMN is_active TINYINT NOT NULL DEFAULT 1;
 
 INSERT INTO students (
   id, 
@@ -344,6 +313,7 @@ VALUES
   '1'
 );
 
+DROP TABLE IF EXISTS students_dismissals;
 
 CREATE TABLE IF NOT EXISTS students_dismissals (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY,
@@ -366,6 +336,8 @@ INSERT INTO students_dismissals (student_id, date) VALUES
 ('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-05'),
 ('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-15'),
 ('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-09');
+
+DROP TABLE IF EXISTS students_absents;
 
 CREATE TABLE IF NOT EXISTS students_absents (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY,
@@ -398,6 +370,8 @@ INSERT INTO students_absents (student_id, date) VALUES
 ('73e3c397-7c5c-406d-a45a-82642bd4b6cb', '2024-03-24'),
 ('73e3c397-7c5c-406d-a45a-82642bd4b6cb', '2024-03-26'),
 ('73e3c397-7c5c-406d-a45a-82642bd4b6cb', '2024-03-21');
+
+DROP TABLE IF EXISTS posts;
 
 CREATE TABLE IF NOT EXISTS posts (
   id CHAR(36) DEFAULT (UUID()) PRIMARY KEY,
@@ -476,6 +450,8 @@ INSERT INTO posts (id, title, content, author_id, category) VALUES
   'study_tip'
 );
 
+DROP TABLE IF EXISTS professors;
+
 CREATE TABLE IF NOT EXISTS professors (
     id CHAR(36) DEFAULT(uuid()) PRIMARY KEY, 
     name VARCHAR(255) NOT NULL, 
@@ -486,6 +462,7 @@ CREATE TABLE IF NOT EXISTS professors (
     avatar VARCHAR(255) DEFAULT 'default-avatar.png', 
     gender ENUM('male', 'female')
 );
+
 
 INSERT INTO professors 
 (id, name, email, password, phone, gender, birthdate)
@@ -518,6 +495,8 @@ VALUES
     '1980-05-30'
 );
 
+DROP TABLE IF EXISTS professors_subjects;
+
 CREATE TABLE IF NOT EXISTS professors_subjects (
   professor_id CHAR(36) NOT NULL,
   subject_id CHAR(36) NOT NULL,
@@ -531,6 +510,8 @@ INSERT INTO professors_subjects (professor_id, subject_id) VALUES
 ('d8e270de-509b-48dd-b485-5ec56cb2e55d', '388430e8-ec70-11ee-8ced-0242ac130002'),
 ('de227663-0fa8-4197-8495-e242368e209a', '38843533-ec70-11ee-8ced-0242ac130002');
 
+DROP TABLE IF EXISTS admin;
+
 CREATE TABLE IF NOT EXISTS admins (
   id CHAR(36) DEFAULT (uuid()) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -539,9 +520,9 @@ CREATE TABLE IF NOT EXISTS admins (
   avatar VARCHAR(255) DEFAULT 'default-avatar.png'
 );
 
-INSERT INTO admins (name, email, password) VALUES
+INSERT INTO admins (id, name, email, password) VALUES
 (
-  '5e557037-e936-11ee-b9aa-0242ac130002',
+  '5e557037-a936-11ee-b9aa-0242ac130002',
   'John Petros', 
   'john@unipetros.com',
   '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.'
