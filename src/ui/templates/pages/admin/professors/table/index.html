@@ -14,8 +14,10 @@ onload="call #create-professor-form.reset() then trigger click on #close-profess
 }}
 {% endif %}
 
+{% if professors | length > 0 %}
+
 <form
-  id="delete-professors"
+  id="delete-professors-form"
   hx-delete="{{ url_for('admin_views.delete_professors_view') }}"
   hx-target="#professors-table"
   hx-target-error="#toast-message"
@@ -57,6 +59,14 @@ onload="call #create-professor-form.reset() then trigger click on #close-profess
   </table>
 
 </form>
+
+{% else %}
+
+<p class="text-center mt-12 font-bold text-gray-700">
+  Nenhum professor cadastrado.
+</p>
+
+{% endif %}
 
 {% if pages_count > 1 %}
 <div class="mt-6">
