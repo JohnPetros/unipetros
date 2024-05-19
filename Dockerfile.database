@@ -1,0 +1,5 @@
+from mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=unipetros
+
+COPY /src/app/infra/database/scripts/schema.sql /docker-entrypoint-initdb.d
