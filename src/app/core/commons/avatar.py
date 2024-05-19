@@ -17,14 +17,20 @@ class Avatar:
         if isinstance(self.value, FileStorage):
             _, extension = self.value.filename.split(".")
 
+            if self.default_image_name != "default-avatar.png":
+                old_avatar_file = File(
+                    FOLDERS["uploaded_images"], self.default_image_name
+                )
+                old_avatar_file.delete()
+
             image_name = f"{generate_random_name()}.{extension}"
 
-            file = File(FOLDERS["uploaded_images"], image_name)
+            avatar_file = File(FOLDERS["uploaded_images"], image_name)
 
-            self.value.save(file.path)
+            self.value.save(avatar_file.path)
 
             image_processor = ImageProcessorProvider()
-            image_processor.register(file.path)
+            image_processor.register(avatar_file.path)
             image_processor.resize(400, 400)
             image_processor.save()
 
