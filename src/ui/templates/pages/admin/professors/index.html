@@ -22,10 +22,11 @@
 
   {{
   csv_button(
-  id="professors_csv",
-  action='import',
-  url=url_for("admin_views.create_professors_by_csv_view"),
-  target="#professors-table"
+  id="get-professors-csv",
+  action="export",
+  url=url_for("admin_views.get_professors_csv_view"),
+  method="get",
+  target=""
   )
   }}
 </div>
