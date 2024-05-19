@@ -4,6 +4,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 from core.use_cases.admin import update_professor
 
 from infra.forms.professor_form import ProfessorForm
+from infra.repositories import professors_repository
 from infra.utils.error import Error
 
 
@@ -19,7 +20,7 @@ def update_professor_view(id: str):
         if not professor_form.validate_on_submit():
             raise Error("Formulário inválido", status_code=400)
 
-        updated_professor = update_professor.execute(
+        result = update_professor.execute(
             {
                 "id": id,
                 "name": professor_form.name.data,
@@ -33,12 +34,20 @@ def update_professor_view(id: str):
             }
         )
 
+        updated_professor = result["updated_professor"]
+        related_professors = result["related_professors"]
+
         return render_template(
             "pages/admin/professor_details/professor.html",
             professor=updated_professor,
+            related_professors=related_professors,
             message="Professor adicionado com sucesso",
         )
     except Error as error:
+        if professor_form.avatar.data is None:
+            professor = professors_repository.get_professor_by_id(id)
+            professor_form.avatar.data = professor.avatar
+
         return (
             render_template(
                 "pages/admin/professor_details/update_professor_form/fields.html",
