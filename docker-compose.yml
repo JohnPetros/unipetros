@@ -1,14 +1,9 @@
-version: '2'
+version: '3'
 
 services:
- database:
-    image: 'bitnami/mysql:latest'
+  database:
+    image: 'joaopetros/unipetros-database:1.0'
     container_name: 'unipetros-database'
-    environment:
-      - MYSQL_ROOT_PASSWORD=unipetros
-      - MYSQL_PASSWORD=unipetros
-      - MYSQL_USER=unipetros
-      - MYSQL_DATABASE=unipetros
     networks:
       - app-tier
     volumes:
@@ -21,18 +16,18 @@ services:
       timeout: 5s
       retries: 5
 
-#  app:
-#     build: .
-#     container_name: 'unipetros'
-#     networks:
-#       - app-tier
-#     volumes: 
-#       - .:/home/pn/unipetros
-#     ports:
-#       - 5000:5000
-#     depends_on:
-#       database:
-#         condition: service_healthy
+  app:
+    image: 'joaopetros/unipetros-app:1.0'
+    container_name: 'unipetros-app'
+    networks:
+      - app-tier
+    volumes: 
+      - .:/home/pn/unipetros
+    ports:
+      - 5002:5000
+    depends_on:
+      database:
+        condition: service_healthy
 
 networks:
  app-tier:
