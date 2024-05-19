@@ -1,5 +1,6 @@
 {% from "components/avatar.html" import avatar %}
 {% from "components/toast.html" import toast %}
+{% from "components/tooltip.html" import tooltip %}
 {% from "components/badge.html" import badge %}
 
 {% set info_class =
@@ -26,11 +27,19 @@ onload="trigger click on #close-professor-modal"
     <h1 class="font-bold">{{ professor.name }}</h1>
 
     <ul class="flex items-center gap-3">
-      <li class="{{ info_class }}">
+      <li
+        data-tooltip-target="phone-tooltip"
+        class="{{ info_class }}">
+        {{ tooltip(id="phone-tooltip", content="Telefone") }}
+
         <i class="ph-bold text-2xl ph-phone"></i>
         <span>{{ professor.phone }}</span>
       </li>
-      <li class="{{ info_class }}">
+      <li
+        data-tooltip-target="email-tooltip"
+        class="{{ info_class }}">
+        {{ tooltip(id="email-tooltip", content="E-mail") }}
+
         <i class="ph-bold text-2xl ph-envelope-simple"></i>
         <span>{{ professor.email }}</span>
       </li>
@@ -72,7 +81,7 @@ onload="trigger click on #close-professor-modal"
 
     {% if related_professors | length > 0 %}
     <h2 class="font-bold mt-6">Professores das mesmas disciplinas</h2>
-    <ul class="flex items-center gap-2 flex-wrap">
+    <ul class="flex items-center gap-2 flex-wrap mt-3">
       {% for professor in related_professors %}
       <li>
         {{ avatar(src=professor.avatar, alt=professor.name, class="w-12 h-12")
