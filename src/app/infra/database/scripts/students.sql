@@ -1,4 +1,4 @@
--- Active: 1712242301041@@127.0.0.1@3306@unipetros
+-- Active: 1715824547022@@127.0.0.1@3306@unipetros
 DROP TABLE IF EXISTS students;
 
 CREATE TABLE IF NOT EXISTS students (
@@ -19,9 +19,126 @@ ALTER TABLE students ADD COLUMN is_active BOOLEAN DEFAULT 1 NOT NULL;
 
 ALTER TABLE students DROP COLUMN is_active;
 
-INSERT INTO students (name, email, password, phone, birthdate, gender, course_id)
-VALUES
-('Jefferson Henrique', 'jefferson@unipetros.com', '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.', '22456789635', '2006-11-12', 'male', '2a0752da-f65d-11ee-b82f-0242ac140002');
+DELETE FROM students;
+
+INSERT INTO students (id, name, email, password, phone, avatar, birthdate, gender, course_id) VALUES
+(
+  '5b23d6aa-2f49-489a-be1d-427ef0b8d023',
+  'Carlos Eduardo', 
+  'carloseduardo@unipetros.com', 
+  '$2b$12$rD0BBdCRlMr6xtlMgzw8K.KDtIcb0JmhA1IXwUkUZmqlpWqdWxOrO',
+  '12987654321',
+  'default-avatar.png',
+  '1997-11-10',
+  'male',
+  '2024-05-18 23:34:20',
+  '01cdc9fe-ec80-11ee-8ced-0242ac130002',
+  '1'
+),
+(
+  '9cf193f7-ec8e-488b-8d0e-3ed9fb144f77',
+  'Maria Fernanda', 
+  'mariafernanda@unipetros.com', 
+  '$2b$12$CNGdUFM2GG86swcD1b6zUuBa554gdonBVjnGeL7JJy9l9lnnKH79.',
+  '12987654321',
+  'default-avatar.png',
+  '1996-10-05',
+  'female',
+  '2024-03-29 23:34:20',
+  '01cdc995-ec80-11ee-8ced-0242ac130002',
+  '0'
+),
+(
+  '9cf193f7-cc8e-488b-8d0e-3ed9fb144f77',
+  'Jessie Kuhn', 
+  'jessie@unipetros.com', 
+  '$2b$12$CNGdUFM2GG86swcD1b6zUuBa554gdonBVjnGeL7JJy9l9lnnKH79.',
+  '12987654321',
+  'default-avatar.png',
+  '1998-10-05',
+  'male',
+  '2024-05-09 23:34:20',
+  '01cdc995-ec80-11ee-8ced-0242ac130002',
+  '0'
+),
+(
+  '9cf193f7-ac8e-488b-8d0e-3ed9fb144f77',
+  'Erika Matthews', 
+  'erika@unipetros.com', 
+  '$2b$12$CNGdUFM2GG86swcD1b6zUuBa554gdonBVjnGeL7JJy9l9lnnKH79.',
+  '12987654321',
+  'default-avatar.png',
+  '1990-10-05',
+  'female',
+  '2024-05-05 23:34:20',
+  '01cdc9fe-ec80-11ee-8ced-0242ac130002',
+  '0'
+),
+(
+  '9cf193f7-ac8e-488b-8d0e-3ed9fb144f77',
+  'Kurt Bishop', 
+  'kurt@unipetros.com', 
+  '$2b$12$CNGdUFM2GG86swcD1b6zUuBa554gdonBVjnGeL7JJy9l9lnnKH79.',
+  '12987654321',
+  'default-avatar.png',
+  '1991-10-05',
+  'male',
+  '2024-05-05 23:34:20',
+  '01cdc995-ec80-11ee-8ced-0242ac130002',
+  '1'
+),
+(
+  '9cf193f7-ac8e-488b-8d0e-3ed9fb144f77',
+  'Tara Soto', 
+  'tara@unipetros.com', 
+  '$2b$12$CNGdUFM2GG86swcD1b6zUuBa554gdonBVjnGeL7JJy9l9lnnKH79.',
+  '12987654321',
+  'default-avatar.png',
+  '1995-10-05',
+  'female',
+  '2024-05-15 23:34:20',
+  '01cd80a7-ec80-11ee-8ced-0242ac130002',
+  '1'
+),
+(
+  '9cf193f7-bc8e-488b-8d0e-3ed9fb144f77',
+  'George Phillips', 
+  'erika@unipetros.com', 
+  '$2b$12$CNGdUFM2GG86swcD1b6zUuBa554gdonBVjnGeL7JJy9l9lnnKH79.',
+  '12987654321',
+  'default-avatar.png',
+  '1990-10-05',
+  'female',
+  '2024-05-05 23:34:20',
+  '01cbf711-ec80-11ee-8ced-0242ac130002',
+  '0'
+),
+(
+  '73e3c397-7c5c-406d-a45a-82642bd4b6cb',
+  'Sofia Martins', 
+  'sofiamartins@unipetros.com',
+  '$2b$12$v/UILFnxM1nq6WCgDCWFNuO1hBDNrVS9wVM0DSDjYki8ozgIhjR0S',
+  '12987654321',
+  'default-avatar.png',
+  '1998-12-15',
+  'female',
+  '2024-03-29 23:34:20',
+  '01cdca5b-ec80-11ee-8ced-0242ac130002',
+  '1'
+),
+(
+  '39bee53f-4d2b-4f11-b861-28c3934a77f7',
+  'Rafael Santos', 
+  'rafaelsantos@unipetros.com',
+  '$2b$12$lFnNvUIvZ7rzUAalD6LsPee9ekugEItfWjmzm0ftG5ALAYFpqjSuq',
+  '12987654321',
+  'default-avatar.png',
+  '1999-01-20',
+  'male',
+  '2024-03-29 23:34:20',
+  '01cbf711-ec80-11ee-8ced-0242ac130002',
+  '1'
+);
 
 DELETE FROM students;
 

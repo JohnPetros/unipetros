@@ -10,9 +10,9 @@ CREATE TABLE IF NOT EXISTS professors_subjects (
 );
 
 INSERT INTO professors_subjects (professor_id, subject_id) VALUES
-('25edf049-f65d-11ee-b82f-0242ac140002', '64f2d2af-f65d-11ee-b82f-0242ac140002'),
-('25edf40d-f65d-11ee-b82f-0242ac140002', '64f2d2af-f65d-11ee-b82f-0242ac140002'),
-('25edf60d-f65d-11ee-b82f-0242ac140002', '64f2d498-f65d-11ee-b82f-0242ac140002');
+('062ac118-15de-46c8-974e-db33dfc46f38', '5b23d6aa-2f49-489a-be1d-427ef0b8d023'),
+('d8e270de-509b-48dd-b485-5ec56cb2e55d', '38843533-ec70-11ee-8ced-0242ac130002'),
+('de227663-0fa8-4197-8495-e242368e209a', '38843484-ec70-11ee-8ced-0242ac130002');
 
 SELECT 
   P.*, 
@@ -31,3 +31,5 @@ LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id
 LEFT JOIN subjects AS S ON PS.subject_id = S.id
 GROUP BY P.gender
 GROUP BY S.name
+
+DELETE FROM professors_subjects;

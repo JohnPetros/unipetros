@@ -10,6 +10,11 @@ CREATE TABLE IF NOT EXISTS admins (
 );
 
 INSERT INTO admins (name, email, password) VALUES
-('John Petros', 'john@unipetros.com', '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.')
+(
+  '5e557037-e936-11ee-b9aa-0242ac130002',
+  'John Petros', 
+  'john@unipetros.com',
+  '$2b$12$WrntejsV/WPVXRfM0EFPy.X6nvy1UCwNTgPDCmayvYfhsVANRxGo.'
+)
 
 SELECT * FROM admins

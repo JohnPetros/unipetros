@@ -1,4 +1,4 @@
--- Active: 1712242301041@@127.0.0.1@3306@unipetros
+-- Active: 1715824547022@@127.0.0.1@3306@unipetros
 DROP TABLE IF EXISTS students_dismissals;
 
 CREATE TABLE IF NOT EXISTS students_dismissals (
@@ -9,19 +9,19 @@ CREATE TABLE IF NOT EXISTS students_dismissals (
 );
 
 INSERT INTO students_dismissals (student_id, date) VALUES
-('9ad10acd-f65f-11ee-b82f-0242ac140002', '2024-03-29'),
-('9ad10acd-f65f-11ee-b82f-0242ac140002', '2024-03-28'),
-('9ad10ec2-f65f-11ee-b82f-0242ac140002', '2024-03-27'),
-('9ad10ec2-f65f-11ee-b82f-0242ac140002', '2024-03-26'),
-('9ad10ec2-f65f-11ee-b82f-0242ac140002', '2024-02-12'),
-('9ad10ec2-f65f-11ee-b82f-0242ac140002', '2024-02-25'),
-('9ad10ec2-f65f-11ee-b82f-0242ac140002', '2024-03-17'),
-('9ad10acd-f65f-11ee-b82f-0242ac140002', '2024-02-17'),
-('9ad10acd-f65f-11ee-b82f-0242ac140002', '2024-03-20'),
-('9ad10acd-f65f-11ee-b82f-0242ac140002', '2024-03-21'),
-('9ad10acd-f65f-11ee-b82f-0242ac140002', '2024-03-03'),
-('9ad10acd-f65f-11ee-b82f-0242ac140002', '2024-03-15'),
-('9ad10acd-f65f-11ee-b82f-0242ac140002', '2024-03-29');
+('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-08'),
+('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-18'),
+('9cf193f7-ec8e-488b-8d0e-3ed9fb144f77', '2024-05-17'),
+('9cf193f7-ec8e-488b-8d0e-3ed9fb144f77', '2024-05-16'),
+('9cf193f7-ec8e-488b-8d0e-3ed9fb144f77', '2024-02-12'),
+('9cf193f7-ec8e-488b-8d0e-3ed9fb144f77', '2024-02-15'),
+('9cf193f7-ec8e-488b-8d0e-3ed9fb144f77', '2024-05-17'),
+('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-02-17'),
+('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-10'),
+('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-11'),
+('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-05'),
+('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-15'),
+('5b23d6aa-2f49-489a-be1d-427ef0b8d023', '2024-05-09');
 
 DELETE FROM students_dismissals;
 

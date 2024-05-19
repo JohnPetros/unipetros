@@ -16,6 +16,8 @@ INSERT INTO courses_subjects (course_id, subject_id) VALUES
 ('01cbf711-ec80-11ee-8ced-0242ac130002', '38843484-ec70-11ee-8ced-0242ac130002'),
 ('01cdca5b-ec80-11ee-8ced-0242ac130002', '38842e43-ec70-11ee-8ced-0242ac130002');
 
+SELECT * FROM courses_subjects;
+
 SELECT 
     C.*, 
     GROUP_CONCAT(S.id) AS subjects_ids, 
