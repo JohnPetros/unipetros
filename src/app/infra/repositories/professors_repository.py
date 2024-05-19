@@ -82,10 +82,10 @@ class ProfessorsRepository(UsersRepository):
         return professors
 
     def get_professors_by_subjects_ids(self, ids: list[str]):
-        subjects_ids = ",".join(ids)
+        subjects_ids = ",".join([f"'{id}'" for id in ids])
 
         professors = mysql.query(
-            sql="""
+            sql=f"""
                 SELECT
                     P.*,
                     GROUP_CONCAT(S.id) AS subjects_ids,
@@ -93,11 +93,10 @@ class ProfessorsRepository(UsersRepository):
                 FROM professors AS P
                 LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id
                 LEFT JOIN subjects AS S ON PS.subject_id = S.id
-                WHERE S.id IN (%s)
+                WHERE S.id IN ({subjects_ids})
                 GROUP BY P.id
                 """,
             is_single=False,
-            params=[subjects_ids],
         )
 
         if len(professors) == 0:
