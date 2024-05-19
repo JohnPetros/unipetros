@@ -15,7 +15,6 @@ class AvatarInput {
 
     if (file) {
       fileReader.onload = (fileReaderEvent) => {
-        console.log(fileReaderEvent.target.result)
         this.avatar.src = fileReaderEvent.target.result
       }
 
