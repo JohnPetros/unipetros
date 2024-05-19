@@ -18,8 +18,13 @@ class UpdateProfessor:
             if not isinstance(current_professor, Professor):
                 raise Error("Professor não encontrado", 404)
 
-            email = Email(current_professor.email)
-            email.validate(role="professor", exceptions=[current_professor.email])
+            email = Email(request["email"])
+            is_email = email.validate(
+                role="professor", exceptions=[current_professor.email]
+            )
+
+            if not is_email:
+                raise Error("E-mail não válido")
 
             avatar = Avatar(
                 request["avatar"], default_image_name=current_professor.avatar
