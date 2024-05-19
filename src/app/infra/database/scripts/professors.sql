@@ -64,14 +64,14 @@ WHERE
 GROUP BY
     P.id
 
-
- SELECT 
-    P.*, 
-    GROUP_CONCAT(S.id) AS subjects_ids, 
+ SELECT
+    P.*,
+    GROUP_CONCAT(S.id) AS subjects_ids,
     GROUP_CONCAT(S.name) AS subjects_names
 FROM professors AS P
-LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id 
+LEFT JOIN professors_subjects AS PS ON PS.professor_id = P.id
 LEFT JOIN subjects AS S ON PS.subject_id = S.id
-WHERE S.id IN ()
+WHERE S.id IN ('38842e43-ec70-11ee-8ced-0242ac130002','388430e8-ec70-11ee-8ced-0242ac130002')
+GROUP BY P.id
 
 SELECT COUNT(*) as total_count FROM professors;
