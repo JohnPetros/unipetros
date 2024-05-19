@@ -72,7 +72,7 @@ onload="trigger click on #close-professor-modal"
         <dd>{{ professor.age }}</dd>
       </div>
       <div>
-        <dt class="font-bold">Idade</dt>
+        <dt class="font-bold">Gênero</dt>
         <dd>
           {{ "masculino" if professor.gender == "male" else "feminino" }}
         </dd>
@@ -80,7 +80,7 @@ onload="trigger click on #close-professor-modal"
     </dl>
 
     {% if related_professors | length > 0 %}
-    <h2 class="font-bold mt-6">Professores das mesmas disciplinas</h2>
+    <h2 class="font-bold mt-6">Professores com as mesmas disciplinas</h2>
     <ul class="flex items-center flex-wrap">
       {% for professor in related_professors %}
 
