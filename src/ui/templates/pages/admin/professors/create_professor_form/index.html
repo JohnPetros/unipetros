@@ -11,9 +11,10 @@
     ou
     {{
     csv_button(
-    id="professor_csv",
+    id="create-professor-by-csv",
     action='import',
     url=url_for("admin_views.create_professors_by_csv_view"),
+    method="post",
     target="#professors-table"
     )
     }}

@@ -9,7 +9,7 @@ toast(
 id="professors_table_toast",
 category="success",
 message=success_message,
-onload="call #create-professor-form.reset() then trigger click on #close-professor-modal"
+onload="call #create-professor-form.reset() then set { src: '/static/uploads/images/default-avatar.png' } on #avatar-input-img then trigger click on #close-professor-modal"
 )
 }}
 {% endif %}

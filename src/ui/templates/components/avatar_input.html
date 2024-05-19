@@ -4,11 +4,12 @@
 
 <div class="flex items-center justify-center gap-3 w-full">
   <img
-    class="rounded-full w-24 h-24 object-cover" id="avatar-preview"
+    id="avatar-input-img"
+    data-avatar-input="avatar"
     src="{{ url_for('static', filename='uploads/images/{}'.format(default)) }}"
     width="64" height="64"
-    alt
-    data-avatar-input="avatar">
+    alt="Preview do seu avatar"
+    class="rounded-full w-24 h-24 object-cover" id="avatar-preview">
   <label for="avatar"
     class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer pt-3 bg-gray-50 hover:bg-gray-100">
     <span class="label">{{ label }}</span>
