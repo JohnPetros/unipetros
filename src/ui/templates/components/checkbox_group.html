@@ -5,20 +5,24 @@
 checkbox_group(label, name, checkboxes, checked_checkboxes_ids, errors, is_form)
 %}
 
-<div class="space-y-3">
-  {% for checkbox in checkboxes %}
-  {{
-  checkbox_field(
-  id=checkbox.value,
-  label=checkbox.label,
-  field=checkbox,
-  attributes={"checked": "true"} if checkbox.data in checked_checkboxes_ids
-  else
-  {}
-  )
-  }}
-  {% endfor %}
-  {{ input_errors(errors) }}
+<div class="flex flex-col space-y-4">
+  <label class="label">Disciplinas</label>
+
+  <div class="space-y-3">
+    {% for checkbox in checkboxes %}
+    {{
+    checkbox_field(
+    id=checkbox.value,
+    label=checkbox.label,
+    field=checkbox,
+    attributes={"checked": "true"} if checkbox.data in checked_checkboxes_ids
+    else
+    {}
+    )
+    }}
+    {% endfor %}
+    {{ input_errors(errors) }}
+  </div>
 </div>
 
 {% endmacro %}
