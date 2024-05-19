@@ -81,11 +81,21 @@ onload="trigger click on #close-professor-modal"
 
     {% if related_professors | length > 0 %}
     <h2 class="font-bold mt-6">Professores das mesmas disciplinas</h2>
-    <ul class="flex items-center gap-2 flex-wrap mt-3">
+    <ul class="flex items-center flex-wrap">
       {% for professor in related_professors %}
+
+      {% set tooltip_id = professor.id ~ "-tooltip" %}
+
       <li>
-        {{ avatar(src=professor.avatar, alt=professor.name, class="w-12 h-12")
-        }}
+        {{ tooltip(id=tooltip_id, content=professor.name) }}
+        <a
+          data-tooltip-target="{{ tooltip_id }}"
+          href="{{ url_for('admin_views.get_professor_details_page_view', professor_id=professor.id) }}"
+          class="block">
+          {{
+          avatar(src=professor.avatar, alt=professor.name, class="w-12 h-12")
+          }}
+        </a>
       </li>
       {% endfor %}
     </ul>
