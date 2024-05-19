@@ -48,9 +48,20 @@ class UpdateProfessor:
                 ],
             )
 
+            professors = professors_repository.get_professors_by_subjects_ids(
+                [subject.id for subject in professor.subjects]
+            )
+
+            related_professors = [
+                professor for professor in professors if professor.id != professor_id
+            ]
+
             professors_repository.update_professor(professor)
             updated_professor = professors_repository.get_professor_by_id(professor_id)
 
-            return updated_professor
+            return {
+                "updated_professor": updated_professor,
+                "related_professors": related_professors,
+            }
         except Error as error:
             raise error
