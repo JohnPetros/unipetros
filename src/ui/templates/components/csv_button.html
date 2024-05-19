@@ -1,6 +1,10 @@
 {% from 'components/loading.html' import loading %}
 
-{% macro csv_button(id, url, target, action='import') %}
+{% macro csv_button(id, url, target, method="post", action="import") %}
+
+{% set button_class =
+"flex items-center gap-1 bg-transparent text-sm text-green-500 font-semibold cursor-pointer rounded-md"
+%}
 
 {% set types = {
 'import': {
@@ -13,19 +17,36 @@
 }
 } %}
 
+{% if method == "post" %}
+
 <form
+  id="{{ id }}-form"
   hx-post="{{ url }}"
   hx-target="{{ target }}"
-  hx-trigger="change"
+  hx-trigger="change from:#{{ id }}-input"
   enctype="multipart/form-data"
   class="flex items-center gap-2">
-  <label for="{{ id }}"
-    class="flex items-center gap-1 bg-transparent text-sm text-green-500 font-semibold cursor-pointer">
+  <label
+    for="{{ id }}-input"
+    class="{{ button_class }}">
     <i class="ph-bold ph-{{ types[action]['icon'] }} text-lg"></i>
     {{ types[action]["title"] }} planilha
-    <input type="file" id="{{ id }}" name="csv" hidden />
+    <input type="file" id="{{ id }}-input" name="csv" hidden />
   </label>
-  {{ loading(class="fill-green-500 w-4 h-4") }}
 </form>
+
+{% elif method == "get" %}
+
+<a
+  href="{{ url }}"
+  download="professores.xlsx"
+  class="{{ button_class }}">
+  <i class="ph-bold ph-{{ types[action]['icon'] }} text-lg"></i>
+  {{ types[action]["title"] }} planilha
+</a>
+
+{% endif %}
+
+{{ loading(class="fill-green-500 w-4 h-4") }}
 
 {% endmacro %}
