@@ -19,10 +19,13 @@ services:
   app:
     image: 'joaopetros/unipetros-app:1.0'
     container_name: 'unipetros-app'
+    environment:
+      - MYSQL_DATABASE_HOST=${MYSQL_DATABASE_HOST}
+      - MYSQL_DATABASE_USER=${MYSQL_DATABASE_USER}
+      - MYSQL_DATABASE_NAME=${MYSQL_DATABASE_NAME}
+      - MYSQL_DATABASE_PASSWORD=${MYSQL_DATABASE_PASSWORD}
     networks:
       - app-tier
-    volumes: 
-      - .:/home/pn/unipetros
     ports:
       - 5002:5000
     depends_on:
