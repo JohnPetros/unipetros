@@ -34,31 +34,37 @@ O objetivo ao realizar esse projeto foi aprender de forma avançanda o desensolv
   <tr>
     <td align="center" width="700">
     <span>Landing page<br/></span>
-    <img alt="Home page" src=".github/images/home.png" alt="Demonstração da landing page" />
+    <img alt="Home page" src="documentation/images/home.png" alt="Demonstração da landing page" />
     </td>
   </tr>
    <tr>
     <td align="center" width="700">
     <span>Página de contato<br/></span>
-    <img alt="Home page" src=".github/images/contact.png" alt="Demonstração da página de contato" />
+    <img alt="Home page" src="documentation/images/contact.png" alt="Demonstração da página de contato" />
     </td>
   </tr>
   <tr>
     <td align="center" width="700">
     <span>Página de sobre<br/></span>
-    <img alt="Home page" src=".github/images/about.png" alt="Demonstração da página de sobre" />
+    <img alt="Home page" src="documentation/images/about.png" alt="Demonstração da página de sobre" />
     </td>
   </tr>
    <tr>
     <td align="center" width="700">
     <span>Página de dashboard<br/></span>
-    <img alt="Home page" src=".github/images/dashboard.png" alt="Demonstração de dashboard" />
+    <img alt="Home page" src="documentation/images/dashboard.png" alt="Demonstração de dashboard" />
     </td>
   </tr>
    <tr>
     <td align="center" width="700">
     <span>Página de tabela<br/></span>
-    <img alt="Home page" src=".github/images/table.png" alt="Demonstração da página de tabela" />
+    <img alt="Home page" src="documentation/images/table.png" alt="Demonstração da página de tabela" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="700">
+    <span>Página de detalhes de professor<br/></span>
+    <img alt="Home page" src="documentation/images/professor-details.jpeg" alt="Demonstração da página que exibe detalhes de um professor específico" />
     </td>
   </tr>
 </table>
