@@ -205,15 +205,6 @@ $ docker compose up
 
 ```
 
-### 🧪 Rodando os testes
-
-```bash
-# Execute os testes
-$ npm run test
-# ou
-$ yarn test
-```
-
 ---
 
 ## 💪 Como contribuir
