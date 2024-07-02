@@ -153,7 +153,7 @@ O objetivo ao realizar esse projeto foi aprender de forma avançanda o desensolv
 
 ## ⚙️ Arquitetura
 
-## 🛠️ Tecnologias, ferramentas e serviços externos
+### 🛠️ Tecnologias, ferramentas e serviços externos
 
 Este projeto foi desenvolvido usando as seguintes tecnologias:
 
